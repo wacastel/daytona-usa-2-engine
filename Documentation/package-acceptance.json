@@ -62,10 +62,10 @@
     ],
     "forbiddenSymbolMatches": [],
     "minimumMacOS": "14.0",
-    "sha256": "04b258c468772b2ff04fab8b61409af12d2018fbda9a44976058e7da474bec63",
-    "symbolInventorySHA256": "5dc118288d912df6b2b20ab589ebe890c82fac3c54189e942daad089e87e0ec5"
+    "sha256": "4e02ee337cc800ae8088584721da2d1dcdfab8aa9fefe2ad6834940ae1bf22e1",
+    "symbolInventorySHA256": "ca4dfa5c68245ecb6dc050be1bd8a9a4929ce09fd489ae010b9e70655388e6a1"
   },
-  "hostSourceFilesVerified": 8,
+  "hostSourceFilesVerified": 9,
   "iconSHA256": "3555eb1845b8ea9c9adaedf0ebd570fb768f311133fd425dcb5dab3653081e86",
   "licenseFilesVerified": 6,
   "mediaFilesVerified": 3,
@@ -94,7 +94,7 @@
     "sha256": "a4c9076800ad09d79c160c1a55480017f9adb1239d7dd37ffd53742e5973deec",
     "symbolInventorySHA256": "564cc428b26ac78067e7d7e51e2ac130f6c00114f323f0cb0551510c4d557f06"
   },
-  "packageManifestSHA256": "52f68e35d138d0e74885bfabdd3828d28e473d6e3a26350bbace94e8c18fd17a",
+  "packageManifestSHA256": "1e1f45f5c1a9a14b2b2b02f8a73bab1d19b86ff52ec2663130e7b9afdb21c272",
   "packagingSourceFilesVerified": 6,
   "passed": true,
   "scope": "Actual packaged artifact and library architecture, dependencies, known decoder/diagnostic symbol boundaries, fixed execution symbol families, build provenance, signature and resources. A symbol audit is not a proof of all execution semantics; CPU fixtures, original-reference replay and live-host observations are separate.",

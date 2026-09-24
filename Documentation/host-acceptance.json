@@ -1,5 +1,5 @@
 {
-  "elapsedSeconds": 138.4057970046997,
+  "elapsedSeconds": 138.5171730518341,
   "exactPictureAudioCountAgreement": true,
   "finalFaultCode": 0,
   "frames": 9500,
@@ -15,8 +15,8 @@
   "inputs": {
     "Configuration/replays/beginner-manual.json": "3e3e48f899f15d2b45649ce117f385bc396bbaff663ee02c5cb60acef058e614",
     "Documentation/integration-acceptance.json": "dd02365c2c69a9ee2d57531fa5c88137f5e4078544861dc741ce88276cf78fd8",
-    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "04b258c468772b2ff04fab8b61409af12d2018fbda9a44976058e7da474bec63",
-    "build/package-manifest.json": "52f68e35d138d0e74885bfabdd3828d28e473d6e3a26350bbace94e8c18fd17a",
+    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "4e02ee337cc800ae8088584721da2d1dcdfab8aa9fefe2ad6834940ae1bf22e1",
+    "build/package-manifest.json": "1e1f45f5c1a9a14b2b2b02f8a73bab1d19b86ff52ec2663130e7b9afdb21c272",
     "scripts/verify_host.py": "76cdc0a299c4974caadf8db396d0f3126d01fc30152ad6660faa758a60c7a868"
   },
   "passed": true,

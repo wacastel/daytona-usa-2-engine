@@ -1,10 +1,11 @@
 # Native target and source boundaries
 
 The selected game is Daytona USA 2: Battle on the Edge, Revision A (`daytona2`).
-The current controller and optional countdown update has passed processor,
-timer, integration, package, host replay, reset and isolated live checks. The
-initial-release clean-reproduction, sound-lifecycle and package-requalification
-records remain historical evidence and do not bind the updated app.
+The controller and optional countdown engine retains its qualified processor,
+timer and integration results. The startup-credit fix changes only the Swift
+host save policy; its package, host replay, reset and startup checks bind the new
+host. Earlier live/UI, clean-reproduction, sound-lifecycle and package-requalification
+records identify their original artifacts and do not bind the updated app.
 
 `Configuration/media.json` records 47 canonical file identities. The importer
 validates the supplied directory and creates a deterministic local ZIP plus a
@@ -105,8 +106,8 @@ libraries, runs CPU fixtures, integration comparisons and bridge validation,
 and prepares source notices. Current native boot and original USA/single-cabinet
 startup pass, and four routes across all three courses agree with the reference
 on every picture, PCM block and sample count over 22,832 frames with assistance
-off. The current packaged host separately passes an 80-second presentation and
-audio-device check. The initial release's separate clean build reproduced its
+off. The earlier controller/timer package separately passed an 80-second
+presentation and audio-device check. The initial release's separate clean build reproduced its
 bounded gameplay and packaged-host results; that older reproduction does not
 claim a fresh reconstruction of this update. The
 [validation record](validation.md) distinguishes these bounded results from
@@ -128,6 +129,18 @@ diagnostic runs default to temporary saves. Focus loss, sleep and assigned-pad
 disconnection pause the host and clear pending driving input. Committed gear
 selection survives pauses. Reset returns the host gear selector to neutral,
 camera selector to view 1 and countdown assistance to off.
+
+On a new interactive launch, after media verification and before native context
+creation, the host parses the existing NVRAM and clears only its unused primary
+credit byte. An exact SHA-named backup is verified first; malformed saves reject
+without modification. EEPROM, records, accounting and the adjacent credit bank
+remain intact. This desktop-session policy prevents restored credits from
+automatically starting selection in the original USA/SINGLE game. In-session
+reset and headless/replay inputs retain their original save semantics. See the
+[startup analysis](startup-credit-analysis.json) and
+[host policy checks](startup-host-acceptance.json). The
+[packaged startup check](startup-ui-acceptance.json) confirms attract mode and
+normal keyboard coin insertion with the affected save copy.
 
 Cross and Square select the next and previous original camera selector across
 all four views. Right-stick up/right/down/left and F1–F4 select views directly;
@@ -170,13 +183,13 @@ throughput require separate evidence from headless replay.
 The current [input qualification](host-input-acceptance.json) passes 149 router
 checks, including held-stick behavior when multiple engine frames occur between
 display polls. The [packaged-host replay](host-acceptance.json) matches the
-9,500-frame manual route and two deterministic 2,400-frame sessions. A separate
-[visible UI check](ui-acceptance.json) observes timer freeze with the lap clock
+9,500-frame manual route and two deterministic 2,400-frame sessions. The earlier
+controller/timer [visible UI check](ui-acceptance.json) observes timer freeze with the lap clock
 advancing, timer release, pause/resume and a mid-race reset followed by 2,672
 fault-free frames with assistance off. That concurrent UI run recorded two
 audio underruns and is excluded from isolated cadence/audio acceptance.
 
-The current [isolated live check](live-acceptance.json) records 4,802 game frames,
+The controller/timer release's [isolated live check](live-acceptance.json) records 4,802 game frames,
 4,777 presented snapshots and 4,804 display updates over 80 seconds: 60.025 game
 frames/s and 59.7125 presented snapshots/s. There are no engine faults, audio-open
 failures, underruns, discarded clock gaps or backlog recoveries; the 48 kHz
@@ -196,8 +209,8 @@ identities, source provenance and ad hoc signature. A symbol audit is not proof
 of all execution semantics. Gameplay and live-host acceptance remain separate.
 The retained [package requalification](package-requalification.json) concerns
 byte-identical initial-release app files after an auditor-only change. It is
-historical; the controller/countdown update has newly bound package, host, UI and
-live reports for its changed executable.
+historical. The startup fix has new package, host, reset and startup reports;
+controller/countdown UI and live reports remain bound to their earlier executable.
 
 `scripts/prepare_licenses.py` preserves the original GPLv3 document and manual,
 embedded copyright/license comments and the original Musashi copyright strings.

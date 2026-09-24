@@ -1,11 +1,26 @@
 # Validation evidence
 
+The startup-credit fix changes only the Swift host. Its current package,
+packaged-host replay, reset, original-credit analysis and 85 synthetic save-policy
+checks are recorded separately from the unchanged engine qualification below.
+The [startup UI check](startup-ui-acceptance.json) used an isolated copy of the
+affected 13-credit save. Attract mode showed INSERT COIN(S) and CREDIT 0; a
+single C key press then entered course selection. The host made an exact backup
+and changed one byte before native creation. After normal game execution and
+coin insertion, EEPROM and score-table bytes remained identical; only expected
+credit, accounting and timing bytes differed. All 3,921 frames were fault-free.
+This concurrent test recorded one audio underrun and does not replace isolated
+audio/performance qualification.
+
+Earlier UI/live, clean-reproduction and sound-lifecycle reports identify their
+original artifacts; they are not fresh tests of the startup fix.
+
 This report records the bounded qualification of Daytona USA 2: Battle on the
 Edge, Revision A (`daytona2`) on arm64 macOS, including the v1.1 race-timer assist
 and controller changes. Current PowerPC, timer, bridge, input and four-route
-reference/native checks, final packaged-host replay, cold-reset qualification
-and visible UI checks have passed. The final isolated 80-second live playback
-check also passed. The retained sound, Z80, helper
+reference/native checks, updated packaged-host replay and cold-reset checks
+have passed. Earlier controller/timer UI and isolated 80-second live playback
+checks also passed for their recorded package. The retained sound, Z80, helper
 capture, sound-lifecycle and clean-reproduction evidence identifies its original
 builds; those historical runs are not presented as fresh v1.1 qualification.
 
@@ -153,8 +168,8 @@ identified there. The v1.1 package has changed executable bytes and receives its
 own package, host, live and UI checks; the old byte-equivalence result is not
 being reused for this release.
 
-The final v1.1 [packaged-host check](host-acceptance.json) passed against
-executable `04b258c468772b2ff04fab8b61409af12d2018fbda9a44976058e7da474bec63`,
+The current startup-fix [packaged-host check](host-acceptance.json) passed against
+executable `4e02ee337cc800ae8088584721da2d1dcdfab8aa9fefe2ad6834940ae1bf22e1`,
 whose package audit also passed. Every picture, PCM block and count in the
 9,500-frame Beginner manual route matches the accepted direct-engine trace,
 covering 6,982,500 stereo sample frames. Two fresh sessions in one process each
@@ -194,8 +209,8 @@ supported by that investigation and the unchanged current integration output;
 new controller routing is covered by the 149 synthetic input checks. Neither
 record claims physical PS5 button actuation.
 
-The final [native UI check](ui-acceptance.json) used synthesized keyboard events
-against the same final executable, an authored Beginner automatic driving route
+The earlier controller/timer [native UI check](ui-acceptance.json) used synthesized keyboard events
+against its recorded executable, an authored Beginner automatic driving route
 and temporary saves. T enabled the yellow indicator; race screenshots showed
 the countdown held at 60 while lap elapsed time advanced from 0.00 to 23.40 and
 the car continued driving. T again removed the indicator; exact next-step
@@ -211,7 +226,7 @@ scope is visible behavior, keyboard routing and reset continuation, separate
 from isolated cadence/audio acceptance and physical PS5 actuation.
 
 The isolated v1.1 [live acceptance](live-acceptance.json) passed an 80-second
-visible Beginner automatic run against the same final executable. It recorded
+visible Beginner automatic run against its recorded executable. It recorded
 4,802 game frames (60.025 per second), 4,804 main-thread display updates and
 4,777 presented frame snapshots (59.7125 per second). Native calls stayed on the
 dedicated engine thread, with zero engine faults, discarded clock gaps, audio
@@ -219,7 +234,7 @@ underruns or backlog recoveries. The audio device opened and ran at 48 kHz with
 the game's 44.1 kHz source; rendered PCM counters advanced and the peak pending
 queue was 3,939 source sample frames.
 
-The report binds the current executable, package, route, checker and captured
+That report binds its earlier executable, package, route, checker and captured
 image. This run had no competing engine workloads. Presentation counters
 describe the host's frame handoff, not physical display scanout; audio-device
 counters do not substitute for subjective listening or physical-board audio

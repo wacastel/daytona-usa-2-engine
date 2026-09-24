@@ -1,0 +1,259 @@
+{
+  "passed": true,
+  "target": "Daytona USA 2 Battle on the Edge Revision A, USA / SINGLE",
+  "upstreamCommit": "24d2ffcfc7f14229337f05f4920fe26b56633d9d",
+  "programMedia": [
+    {
+      "name": "epr-20864a.20",
+      "size": 2097152,
+      "crc32": "5250f3a8",
+      "sha256": "5e773b3441a86881e63c38ecc81a8ede5e063d380c637c58b02c45b011105286"
+    },
+    {
+      "name": "epr-20863a.19",
+      "size": 2097152,
+      "crc32": "1deb4686",
+      "sha256": "3b55ee54945195f95fa6f94398e47e228dcdf1b3f1d15f6610fdad81755d4dc0"
+    },
+    {
+      "name": "epr-20862a.18",
+      "size": 2097152,
+      "crc32": "e1b2ca61",
+      "sha256": "bd73b06059fb223398916acc58d2170b998d7f5475dc0604788a4297984368be"
+    },
+    {
+      "name": "epr-20861a.17",
+      "size": 2097152,
+      "crc32": "89ba8e78",
+      "sha256": "312a5b072e4f6050988b5f6c932de11e33451274ff7ab9862971dd91b266d7b4"
+    }
+  ],
+  "originalModel3SourceSHA256": "c5dc67722fade4a2e2919509bfac216bd6ea9a10bb62b5eaedfb366c2a38f385",
+  "originalPPCSources": {
+    "ppc.cpp": "a3d727393052ffa96d32c04866ea619422625bc67d42315a125df9da502b93e5",
+    "ppc603.c": "4cbbd401843f2a42d7175525bf9d28549a05ae9fb93240c611fd182270726e0b",
+    "ppc_ops.c": "ab40520e6d2428cf943b21d2f290531a02f1c83c8dac46319b70d3139c120d3b",
+    "ppc_ops.h": "81c15dd23a131244bce351d80f8b6efd0d9e20ec50ceaf2eb9c20931afa04f58",
+    "ppc.h": "59ca9af75e3cbc399957cb657eb43845cec4e73a390211f401a71b3acfb228b4"
+  },
+  "referenceLibrarySHA256": "3671f4cb2904daa8468510b396ed3d53b480f929aedc3823f0de547579d4b50a",
+  "probeScriptSHA256": "98f94e42abbce6bbd3ae155199280e2dee4204aeb0cd7bea8af999768fdf8e22",
+  "clockEpoch": 946684800,
+  "diagnosis": "Unused cabinet credits persist in Backup RAM. The original USA/SINGLE game automatically consumes a credit and enters selection on boot; no Start input is necessary. The copied user save contained 13 unused credits.",
+  "creditField": {
+    "block": "Backup RAM",
+    "blockBytes": 131072,
+    "rawByteOffset": "0x1e142",
+    "widthBits": 8,
+    "originalReadWriteSemantics": "Original credit check, increment, and consume paths mask an 8-bit value and update only that byte through the SRAM bus. No paired-copy or checksum write accompanies credit changes.",
+    "supportedCabinetCap": 24,
+    "capProof": "30 actual coin pulses leave 24 banked credits after one credit starts a game.",
+    "adjacentByte": "0x1e143 is an independent alternate credit bank and is preserved."
+  },
+  "preservation": {
+    "copiedUserInitialCredits": 13,
+    "patchedUserInitialCredits": 0,
+    "fileBytesChangedBeforeRun": 1,
+    "backupRAMBytesChangedBeforeRun": 1,
+    "eepromBytesChangedBeforeRun": 0,
+    "allNoncreditFileBytesUnchanged": true,
+    "firstReferenceFrameBackupRAMMatchesPatchedInputExactly": true,
+    "eepromBytesChangedAfterOriginal1500FrameRunAndSave": 0,
+    "backupRAMChangedOffsetsAfterOriginal1500FrameRunAndSave": [
+      "0x8",
+      "0x9",
+      "0xe",
+      "0xf",
+      "0x1e142"
+    ],
+    "originalRunChangesExplanation": "Apart from the deliberately cleared credit, the only changes are the original boot/play timing counter at offsets 0x8/0x9 and its paired bytes 0xe/0xf. Both positive-credit and cleared-credit boots update that counter. No score/table region is reinitialized.",
+    "retainedTableRange": "Every byte in Backup RAM[0x8000:0x1e000] matches the original user save after the original game runs and saves.",
+    "originalUserSaveSHA256": "7990757ff42dbfb43e40ad38b899227edc2b56b02c90e4ffbe9a8ea2bdae630e",
+    "clearedCopySHA256": "19e54536bec6e3469fbf43c8053e704bb935bd1966db3336909ec7038787d5ef"
+  },
+  "experiments": [
+    {
+      "name": "neutral",
+      "frames": 900,
+      "initialCredits": 0,
+      "coinPulses": 0,
+      "coinPulseFrames": [],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "White transition at this exact frame; no selection text",
+      "remainingCredits": 0,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "f2fb1d3bf8c6e3b409192ac2b0e80200c84efcab792702095ca7124730cfc4e2",
+      "savedBackupRAMSHA256": "545eb8378828d5883e709e408b20ca5261c5a13839bf115c1f6af2d4b89a1a70",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/neutral"
+    },
+    {
+      "name": "coin1",
+      "frames": 900,
+      "initialCredits": 0,
+      "coinPulses": 1,
+      "coinPulseFrames": [
+        [
+          610,
+          612
+        ]
+      ],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "course selection",
+      "remainingCredits": 0,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "a2318572226c76166df1e4d887298c5130d8302288007806a19bd8dc8d8ea949",
+      "savedBackupRAMSHA256": "09f9350b88dbe560458cb2991fe1e18c9bf304de06cbf860719f0251c73c356c",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/coin1"
+    },
+    {
+      "name": "coin2",
+      "frames": 900,
+      "initialCredits": 0,
+      "coinPulses": 2,
+      "coinPulseFrames": [
+        [
+          610,
+          612
+        ],
+        [
+          630,
+          632
+        ]
+      ],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "course selection",
+      "remainingCredits": 1,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "a2318572226c76166df1e4d887298c5130d8302288007806a19bd8dc8d8ea949",
+      "savedBackupRAMSHA256": "a373e46df9bbaabd92243b3a38fb1b38392a61638d5b032d1c4f280b6c1540ed",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/coin2"
+    },
+    {
+      "name": "coin3",
+      "frames": 900,
+      "initialCredits": 0,
+      "coinPulses": 3,
+      "coinPulseFrames": [
+        [
+          610,
+          612
+        ],
+        [
+          630,
+          632
+        ],
+        [
+          650,
+          652
+        ]
+      ],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "course selection",
+      "remainingCredits": 2,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "a2318572226c76166df1e4d887298c5130d8302288007806a19bd8dc8d8ea949",
+      "savedBackupRAMSHA256": "a459a2ec0fdf230cff9f7787ab4ea1fb6d60c8877be58c07b0755062fcbb4c24",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/coin3"
+    },
+    {
+      "name": "coin30",
+      "frames": 1400,
+      "initialCredits": 0,
+      "coinPulses": 30,
+      "coinPulseFrames": "30 two-frame pulses starting at 610, then every 20 frames",
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "car selection",
+      "remainingCredits": 24,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "e2cde0b999f707eab0ee02d1e2447f28bebe03bb9b83674716530c58e263313c",
+      "savedBackupRAMSHA256": "9a898bb68c1038444ab08ebe19eebbdedb6168dacd38f89869f7911674ea417b",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/coin30"
+    },
+    {
+      "name": "user-original",
+      "frames": 1500,
+      "initialCredits": 13,
+      "coinPulses": 0,
+      "coinPulseFrames": [],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "car selection",
+      "remainingCredits": 12,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "361fa1846d514bc1c7811d256fd12ce9c2b2bc93c8c28de8fe21586557ea54f9",
+      "savedBackupRAMSHA256": "a9e8e062dc60934e7f9455f6f1712f0266cf436485562e720a6c3b72d9c20558",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/user-original"
+    },
+    {
+      "name": "user-one",
+      "frames": 1500,
+      "initialCredits": 1,
+      "coinPulses": 0,
+      "coinPulseFrames": [],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "car selection",
+      "remainingCredits": 0,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "361fa1846d514bc1c7811d256fd12ce9c2b2bc93c8c28de8fe21586557ea54f9",
+      "savedBackupRAMSHA256": "a91e33890fdb6cc61a9d38f3c993f764ae12114161aa81700f42fc93f488471e",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/user-one"
+    },
+    {
+      "name": "user-max",
+      "frames": 1500,
+      "initialCredits": 24,
+      "coinPulses": 0,
+      "coinPulseFrames": [],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "car selection",
+      "remainingCredits": 23,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "361fa1846d514bc1c7811d256fd12ce9c2b2bc93c8c28de8fe21586557ea54f9",
+      "savedBackupRAMSHA256": "181e28ed9616df9c6702e4bb8873966cf311dd5857e7d6394a2e15a25ca7550a",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/user-max"
+    },
+    {
+      "name": "user-cleared",
+      "frames": 1500,
+      "initialCredits": 0,
+      "coinPulses": 0,
+      "coinPulseFrames": [],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "attract demo, CREDIT 0",
+      "remainingCredits": 0,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "410dfe816a72024043ded8e726c182e4d53a87b17633e6b829db011d46e69d0d",
+      "savedBackupRAMSHA256": "135eabd294e50007c76348402d98735b3f954406a67b815dc16176e287d9bc51",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/user-cleared"
+    },
+    {
+      "name": "user-cleared-coin",
+      "frames": 1500,
+      "initialCredits": 0,
+      "coinPulses": 1,
+      "coinPulseFrames": [
+        [
+          610,
+          612
+        ]
+      ],
+      "startButtonFrames": 0,
+      "allOtherInputsZero": true,
+      "observedScreen": "car selection",
+      "remainingCredits": 0,
+      "otherCreditBank": 0,
+      "finalPictureSHA256": "b5b2cdbd00eca8e9dbdd768c87a7cdaa8f3f804664e97e4b44779e6ba54cc506",
+      "savedBackupRAMSHA256": "6266a9c2bf5d89b645817dac58796a13563749a75dc7d19ca25a8c8551b5fcec",
+      "evidenceDirectory": "build/startup-investigation/credit-lab/user-cleared-coin"
+    }
+  ],
+  "scope": "Original-reference analysis in isolated disposable save copies. No real user save, supplied ROM, pinned upstream source, or product engine was changed. Screen classifications were visually inspected. This establishes the state cause and narrow cleanup field; host startup, native parity, and package acceptance are separate checks."
+}

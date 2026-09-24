@@ -2,10 +2,10 @@
 
 A standalone arm64 macOS port of **Daytona USA 2: Battle on the Edge,
 Revision A** (`daytona2`), using locally supplied game media and original
-USA/single-cabinet settings. The current controller and optional countdown
-update passed all four reference/native gameplay routes with assistance off,
-dedicated timer checks, packaged-host replay, cold-reset comparison and a live
-display/audio check.
+USA/single-cabinet settings. New interactive launches clear unused virtual
+credits so the original attract sequence can play. This startup fix passes
+save-preservation, packaged-host replay, reset and visible startup checks.
+The unchanged engine retains its four-route reference/native and timer results.
 
 The initial release also passed a separate clean-source reproduction, with
 recorded source updates during qualification. That reproduction and the older
@@ -32,13 +32,13 @@ and sample count with countdown assistance off. The packaged app also matched
 the 9,500-frame manual route and
 passed two 2,400-frame fresh-session determinism checks. The four engine routes
 cover all three courses and both transmission modes, with manual transmission
-exercised on Beginner. A separate 80-second
+exercised on Beginner. The earlier controller/timer release's 80-second
 visible run on an Apple M3 Ultra with macOS 27.0 recorded **60.025 game frames/s
 and 59.7125 presented frame snapshots/s**, with no engine faults, audio-open
 failures, underruns or backlog recovery. The GUI uses a dedicated engine thread
 and a main-thread SpriteKit presenter. These measured presentation counters are
 not a physical display scanout measurement. See the
-[current update record](Documentation/controls-update-acceptance.json) and
+[controller/timer update record](Documentation/controls-update-acceptance.json) and
 [validation record](Documentation/validation.md) for identities, methods and
 the precise coverage and limits.
 
@@ -59,6 +59,7 @@ scripts/build.sh --skip-engine
 python3 scripts/verify_package.py
 python3 scripts/verify_host.py
 python3 scripts/verify_host_reset.py
+python3 scripts/verify_startup.py
 python3 scripts/verify_live.py --seconds 80
 ```
 
@@ -70,15 +71,23 @@ trace and checks two fresh sessions in one process. These checks serve different
 purposes and do not replace one another.
 
 Double-click `Play.command` to open `build/Daytona USA 2.app`; it builds the app
-first if absent. Insert coins, press Start, then steer through the original
-selection screens and press the accelerator to confirm.
+first if absent. The original USA/SINGLE game enters selection as soon as a
+coin is inserted; Start is not required. Steer through the selection screens
+and press the accelerator to confirm.
 Without `--skip-engine`, `scripts/build.sh` performs the preparation pipeline
 using `Daytona USA 2 ROMs/daytona2` as its local media directory.
 
 The application has independent preferences and saves under
 `local.william.daytonausa2`. A fresh save directory receives the authenticated
-USA/single-cabinet seed made by the original service-menu replay. Existing saves
-are preserved. See [cabinet settings](Documentation/cabinet-settings.md).
+USA/single-cabinet seed made by the original service-menu replay. Each new
+interactive launch clears the single primary credit byte so unused virtual
+coins from the previous session do not skip attract mode. Before changing an
+existing save, the host keeps an exact copy in its `Backups` folder. Scores,
+EEPROM settings, accounting and the secondary credit bank are preserved;
+in-session Reset and replay saves retain their original behavior. See
+[cabinet settings](Documentation/cabinet-settings.md), the
+[credit analysis](Documentation/startup-credit-analysis.json) and
+[startup host checks](Documentation/startup-host-acceptance.json).
 
 | Action | DualSense | Keyboard |
 | --- | --- | --- |
@@ -116,10 +125,10 @@ passed 149 cases using actual routing code and Apple synthetic gamepads, with
 typecheck and four negative link checks. They include camera cycling, held-stick
 behavior across independent engine frames, Create pause/resume and timer-toggle
 edges. The current [packaged-host check](Documentation/host-acceptance.json)
-matched all 9,500 manual-route frames and two fresh 2,400-frame sessions. The
-[UI record](Documentation/ui-acceptance.json) separately verifies synthesized
+matched all 9,500 manual-route frames and two fresh 2,400-frame sessions. The earlier
+[controller/timer UI record](Documentation/ui-acceptance.json) separately verifies synthesized
 keyboard timer toggles, the visible indicator, pause/resume and mid-race reset
-in the final package. Its concurrent run is excluded from live cadence/audio
+in its recorded package. Its concurrent run is excluded from live cadence/audio
 acceptance and does not establish physical controller actuation.
 Focus loss, sleep or assigned-controller disconnection pauses the game and
 clears pending driving input. Controls must return to neutral before resuming;

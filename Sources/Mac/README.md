@@ -29,6 +29,15 @@ Diagnostic runs default to temporary saves. `--assets` and `--save-dir` provide
 explicit overrides; equivalent environment variables are
 `DAYTONA_USA_2_ASSET_DIR` and `DAYTONA_USA_2_SAVE_DIR`.
 
+Before a new interactive launch of the app bundle, `DaytonaCabinetSave` clears
+only the primary unused-credit byte in an existing save. It validates the save
+structure and retains an exact original copy under `saves/Backups` before the
+atomic update. Scores, EEPROM settings, accounting, the secondary credit bank
+and every other byte are preserved. This preparation is not applied to
+headless/diagnostic replays or in-session Reset. See the
+[credit analysis](../../Documentation/startup-credit-analysis.json) and
+[startup host checks](../../Documentation/startup-host-acceptance.json).
+
 Headless replay and self-test modes execute the real linked engine, recording
 picture and PCM digests. The framed audio digest includes every block length.
 Use `--help` for replay, capture, bounded GUI and audio telemetry options.
@@ -54,6 +63,8 @@ tail after the last event; events must fit within that declared duration.
 Right stick up / right selects view 1 / 2. Cross and Square include both
 exterior chase views in their cycle. Clicking either stick has no assigned action;
 Options remains the original Start button and also resumes a paused app.
+In the original USA/SINGLE cabinet mode, inserting a coin alone enters the
+selection screens; pressing Start is not required.
 
 Focus loss, sleep and active-controller disconnection pause the app and clear
 driving input. Connected controls must return to neutral before resuming.

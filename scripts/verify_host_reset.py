@@ -95,7 +95,7 @@ def main():
     engine = json.loads(manifest.read_text())
     if not engine['shippingNative'] or engine['diagnostics'] or engine['staticArchiveSHA256'] != sha(archive):
         raise RuntimeError('A current shipping native archive is required')
-    sources = [ROOT/name for name in ['Sources/Mac/Input.swift', 'Sources/Mac/Media.swift', 'Sources/Mac/NativeGame.swift']]
+    sources = [ROOT/name for name in ['Sources/Mac/Input.swift', 'Sources/Mac/Media.swift', 'Sources/Mac/CabinetSave.swift', 'Sources/Mac/NativeGame.swift']]
     route = ROOT/'Configuration/replays/beginner-auto.json'
     inputs = {str(p.relative_to(ROOT)): sha(p) for p in [*sources, archive, manifest, route, Path(__file__).resolve()]}
     harness = output/'main.swift'

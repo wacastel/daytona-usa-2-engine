@@ -1,7 +1,7 @@
 {
   "baselineUsesCopiedCabinetNVRAMOnly": true,
   "exactPostResetRGBA_PCM_CountAgreement": true,
-  "executableSHA256": "69d2e4de5372b25734f91841fcc2144e85435793edde618d368c58082d677860",
+  "executableSHA256": "0a97a50bf059db180b64dc25d368d0011344e1dfd1584150aa7f4e07d6165261",
   "framesAfterReset": 3000,
   "framesBeforeReset": 3060,
   "framesInIndependentFreshBoot": 3000,
@@ -29,12 +29,13 @@
   "harnessSHA256": "ba5bfbb55649a548d6524dc1268d11d7fe8b975db7e096d36b970c86816fd5d3",
   "inputs": {
     "Configuration/replays/beginner-auto.json": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
+    "Sources/Mac/CabinetSave.swift": "a9eb426f426125d6c869a0f366f990adfa55d4f83bef0c3639950c7b6c9deb2b",
     "Sources/Mac/Input.swift": "309116807f847cf96908a646690be78df598c62f62cfe3fed7c507266ea033ea",
     "Sources/Mac/Media.swift": "69c580d58f4394427f8c8fe7a3f3f11266b4696797be39fb5c2eef72ccdf0971",
-    "Sources/Mac/NativeGame.swift": "d9c592e1d99ca581915896f121d159402796b78422dbaa268db3129acc9a02aa",
+    "Sources/Mac/NativeGame.swift": "fe65e0cedb746fe96048a5056165efc56e919e656a607dcb91091c91fccd3f1c",
     "build/native/engine-build-manifest.json": "706e2aab431af9bacf1e85680bbe45b52bb548da7a844c8dea1ea1621c1f27ea",
     "build/native/libdaytona2.a": "2fd359ae2e7be5493731922e242696d18ec6e4457516f1b3be4f33a63585c494",
-    "scripts/verify_host_reset.py": "9217738c2325510e6fb7ce0c1a560a5c6eff149875df2811517a53459946598c"
+    "scripts/verify_host_reset.py": "60776f348efcb84300b413cc24966356d5bfe8d111eec370f3b01521c2084adc"
   },
   "passed": true,
   "postResetTraceSHA256": "8325e133a6a5c95a0e4cf373ba138953ab57ba638c5aa9e52ceeeaaed4c5d14c",

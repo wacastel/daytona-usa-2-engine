@@ -51,6 +51,9 @@ Documentation/reproduction-acceptance.json
 Documentation/sound-acceptance.json
 Documentation/sound-lifecycle-acceptance.json
 Documentation/timer-acceptance.json
+Documentation/startup-credit-analysis.json
+Documentation/startup-host-acceptance.json
+Documentation/startup-ui-acceptance.json
 Documentation/z80-acceptance.json
 Documentation/ui-acceptance.json
 Documentation/validation.md
@@ -67,6 +70,7 @@ Sources/Bridge/daytona2.cpp
 Sources/Bridge/daytona2.h
 Sources/Mac/AudioOutput.swift
 Sources/Mac/Controls.swift
+Sources/Mac/CabinetSave.swift
 Sources/Mac/EngineWorker.swift
 Sources/Mac/GameScene.swift
 Sources/Mac/Input.swift
@@ -111,6 +115,7 @@ scripts/verify_host.py
 scripts/verify_host_reset.py
 scripts/verify_live.py
 scripts/verify_timer.py
+scripts/verify_startup.py
 '''.split()
 SOURCE_TREES = {'Assets', 'Sources', 'Tools', 'scripts', 'Configuration', 'Documentation', 'Licenses', 'Resources'}
 TEXT_SUFFIXES = {'.py', '.sh', '.command', '.c', '.cpp', '.h', '.hpp', '.inc', '.swift', '.xml', '.md', '.json', '.txt', '.plist'}

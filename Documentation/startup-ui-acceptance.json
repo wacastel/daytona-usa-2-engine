@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "inputs": {
+    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "4e02ee337cc800ae8088584721da2d1dcdfab8aa9fefe2ad6834940ae1bf22e1",
+    "build/package-manifest.json": "1e1f45f5c1a9a14b2b2b02f8a73bab1d19b86ff52ec2663130e7b9afdb21c272",
+    "Documentation/startup-host-acceptance.json": "ace6056aec5e816c2ccadc6078e322473d817c68b5866d396313dfeab52d9dfa",
+    "Documentation/startup-credit-analysis.json": "ae42b13e025a6c427e3341a1aaf8312468e365c011cff139deab597c3e74c96c"
+  },
+  "savePreparation": {
+    "passed": true,
+    "exactOriginalBackup": true,
+    "changesBeforeNativeShutdown": [
+      123613
+    ],
+    "clearedCredits": 13,
+    "originalSHA256": "7990757ff42dbfb43e40ad38b899227edc2b56b02c90e4ffbe9a8ea2bdae630e",
+    "preparedSHA256": "19e54536bec6e3469fbf43c8053e704bb935bd1966db3336909ec7038787d5ef"
+  },
+  "observations": [
+    "Normal interactive bundle launched with an isolated copy of the affected 13-credit save; no replay, headless or injected startup input.",
+    "At 22 seconds the captured game picture shows the original attract demonstration, INSERT COIN(S), and CREDIT 0.",
+    "One ordinary C key press via native app control enters COURSE SELECT without pressing Start.",
+    "Command-Q closes normally and writes telemetry and cabinet state."
+  ],
+  "attractCaptureSHA256": "a7fcd3fac1211c7c03dee4e431fdc7af1f7715cf92ee04c534369abac6bb04f3",
+  "telemetrySHA256": "fa968febee84a48bc8a101565d896d0399ecb29110ae932ad03d3495c6fe5f65",
+  "gameFrames": 3921,
+  "finalFaultCode": 0,
+  "engineCallsOnDedicatedThread": true,
+  "eepromByteIdentical": true,
+  "savedScoreTableRegionByteIdentical": true,
+  "saveAfterGameRun": {
+    "changedBackupRAMOffsets": [
+      "0x8",
+      "0x9",
+      "0xe",
+      "0xf",
+      "0x1e121",
+      "0x1e127",
+      "0x1e131",
+      "0x1e137",
+      "0x1e142"
+    ],
+    "explanation": "Four normal boot/timing bytes, four coin-accounting bytes following the deliberate C key press, and the cleared primary credit byte; no other Backup RAM bytes changed."
+  },
+  "scope": "Actual packaged interactive startup, exact backup and one-byte preparation, visible attract screen and normal keyboard coin behavior. Disposable save only. This run overlapped headless checks and recorded one audio underrun; it is not an isolated performance/audio acceptance or physical-controller test. Engine and CPU proofs remain separate."
+}

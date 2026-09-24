@@ -56,6 +56,10 @@ final class DaytonaGame {
 
     init() throws {
         let media = try DaytonaMedia.resolve()
+        if DaytonaCabinetSave.shouldClearCredits(bundleIdentifier: Bundle.main.bundleIdentifier,
+                                                arguments: CommandLine.arguments) {
+            try DaytonaCabinetSave.prepareInteractiveLaunch(in: media.saves)
+        }
         let pointer = media.assets.path.withCString { assets in media.saves.path.withCString { nativeCreate(assets, $0) } }
         guard let pointer else {
             media.removeTemporarySaves()
