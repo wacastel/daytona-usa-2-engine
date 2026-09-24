@@ -1,0 +1,36 @@
+{
+  "engineCallsOnDedicatedThread": true,
+  "executableSHA256": "5f52398a4200f3d8dd5d3b9d2862d66a43e7e57c56cfe625ca4f72b28ebc9f7a",
+  "finalFaultCode": 0,
+  "method": "Bound native-app accessibility and screenshot observations with synthesized key events; temporary saves and muted output.",
+  "observations": [
+    {
+      "action": "P",
+      "result": "Paused overlay and release-controls hint appeared."
+    },
+    {
+      "action": "Return",
+      "result": "Pause overlay disappeared and original startup animation resumed."
+    },
+    {
+      "action": "Command-R",
+      "result": "Picture cleared; original attract sequence returned; final game frame count is below total executed timing samples."
+    },
+    {
+      "action": "C",
+      "result": "Original game entered selection flow from attract mode."
+    },
+    {
+      "action": "Up",
+      "result": "Original screen displayed CAR SELECTION COMPLETE; subsequent Beginner race rendered lap 1/8, car, scenery and readable HUD."
+    },
+    {
+      "action": "Command-Q",
+      "result": "Native app quit; process exited 0 and wrote telemetry."
+    }
+  ],
+  "passed": true,
+  "processExitCode": 0,
+  "scope": "Automated native keyboard routing, observed presentation and pause/resume/reset/quit lifecycle. This run competed with headless qualification workloads and had 5 audio underruns plus 1 backlog recovery; it is not a cadence or audio-quality acceptance test. Use live-acceptance.json for isolated 80-second playback evidence. Physical controller actuation was not tested.",
+  "telemetrySHA256": "ddb359d29cfd1b74b4f53115fb43c0a7b40ef3aa94284629a1cedbb65f410c4f"
+}

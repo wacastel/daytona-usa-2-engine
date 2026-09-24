@@ -1,0 +1,180 @@
+{
+  "captureSHA256": "4c9351ea8a6ad1850e0ffbd725788fce90c478d209136af42979aaf1cf90d975",
+  "captureSources": [
+    {
+      "kinds": {
+        "m68k": 2976,
+        "scspdsp": 145
+      },
+      "path": "build/observer/sound-game.jsonl",
+      "records": 3121,
+      "sha256": "82486325c7e0d8204e58ee149267afb3edc9ad3eca5c2d0538a3f36b35587a3a"
+    },
+    {
+      "kinds": {
+        "m68k": 3016,
+        "scspdsp": 144
+      },
+      "path": "build/observer/sound-manual.jsonl",
+      "records": 3160,
+      "sha256": "d765285d838f3b6fc8769a5f336ee97d194edcfb612baa5eb131cb7b81bcb499"
+    },
+    {
+      "kinds": {
+        "m68k": 3016,
+        "scspdsp": 144
+      },
+      "path": "build/observer/sound-manual2.jsonl",
+      "records": 3160,
+      "sha256": "c026ee8de9cb45377976100c94b84052c8f356df2e6af912620e7e28e673f159"
+    },
+    {
+      "kinds": {
+        "m68k": 3057,
+        "scspdsp": 144
+      },
+      "path": "build/observer/sound-manual-final.jsonl",
+      "records": 3201,
+      "sha256": "a859c9c1db11fdbb90c23eb9ea40da227add56177fc2c89e3e16d7f7b3e5119b"
+    },
+    {
+      "kinds": {
+        "m68k": 2987,
+        "scspdsp": 144
+      },
+      "path": "build/routes/advanced/sound.jsonl",
+      "records": 3131,
+      "sha256": "a7cc396d66e7dc7a6ab558a15132f353493d50d2378a5435882c897931eba5ca"
+    },
+    {
+      "kinds": {
+        "m68k": 2989,
+        "scspdsp": 146
+      },
+      "path": "build/routes/expert/sound.jsonl",
+      "records": 3135,
+      "sha256": "d6b6ae14e872560c2758c2695062e97c78ac66e44590933ef8be0e5b193ac09f"
+    },
+    {
+      "kinds": {
+        "m68k": 1186,
+        "scspdsp": 1
+      },
+      "path": "build/settings/prepare-0nz2c7_s/sound.jsonl",
+      "records": 1187,
+      "sha256": "476dc2e02dc66fd34c9cd8fb14eee914708ebafcaeb7169dab9fbdf4a75da5a0"
+    }
+  ],
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "cpus": [
+    "SCSP sound-board 68000",
+    "DSB2 MPEG-board 68000",
+    "two SCSP DSPs"
+  ],
+  "differential": {
+    "m68k_compared": [
+      "registers",
+      "flags",
+      "pc",
+      "cycles",
+      "ordered_bus_reads",
+      "ordered_bus_writes",
+      "stop_state"
+    ],
+    "m68k_instruction_trials": 15526,
+    "manifest_sha256": "ec9821adfb6c677c01eea0ed26c852076c2d6637d83946fe087fea820a3a8fda",
+    "negative_guards": [
+      "changed opcode rejected",
+      "changed extension rejected",
+      "unknown PC rejected",
+      "unknown DSP program rejected"
+    ],
+    "passed": true,
+    "scspdsp_compared": [
+      "entire_dsp_state",
+      "entire_512K_word_sample_ram"
+    ],
+    "scspdsp_latched_limit_trials": 1256,
+    "scspdsp_programs": 253,
+    "scspdsp_synthetic_trials": 48,
+    "scspdsp_trials": 4048
+  },
+  "fixtures": {
+    "sound68k_probe.c": "07313cd81f02838df4cd35e75a2bec89a5eb23243ca5ce7784804c1f4b62bdb1",
+    "sound_dsp_probe.cpp": "2a5ff48ef0f95c486f00f3c9552aa1fef07dc5746913b625b2eb30b0acc900c8"
+  },
+  "flags": [
+    "-O2",
+    "-arch",
+    "arm64",
+    "-mmacosx-version-min=14.0",
+    "-fexceptions",
+    "-fno-strict-aliasing",
+    "-ffp-contract=off",
+    "-DSUPERMODEL_OSX"
+  ],
+  "format": 1,
+  "generation": {
+    "m68k": {
+      "aligned_rom_entries": 131072,
+      "fallback": false,
+      "ram_word_entries": 0,
+      "roms": [
+        {
+          "bytes": 131072,
+          "name": "epr-20865.21",
+          "sha256": "86432fee7e1b7b2d9b2d8475cc2f36a5bcf64bfaa3fb2bfe2e818631cb614bdd"
+        },
+        {
+          "bytes": 131072,
+          "name": "epr-20886.ic2",
+          "sha256": "3d6b04bf8e0a1527f7f7dc4888d0d409745fe4acd8acc09e195079ffce54a64c"
+        }
+      ],
+      "runtime_opcode_decoder": false,
+      "specialized_operation_bodies": 5611
+    },
+    "scspdsp": {
+      "fallback": false,
+      "fixed_programs": 253,
+      "original_execution_limit_preserved": true,
+      "runtime_instruction_decoder": false,
+      "zero_length_uploads_execute_no_instructions": true
+    }
+  },
+  "generatorSHA256": "b9150a921c832df8a060d8a16bbe84e7d0a07cb4e1bfb3b0a7a8d57b02584e55",
+  "limitations": [
+    "68000 comparison covers every distinct opcode from both verified ROMs at a representative ROM address in two register/flag states; it does not enumerate every address or machine state.",
+    "DSP comparison covers captured complete and transient program images plus three synthetic programs; unsupported executing images fail explicitly.",
+    "A zero LastStep executes no DSP instructions during program upload. Nonzero limits select only guarded offline-specialized operations.",
+    "Full-game frame/audio replay and physical audio/controller acceptance are separate integration requirements."
+  ],
+  "media": [
+    {
+      "bytes": 131072,
+      "name": "epr-20865.21",
+      "sha256": "86432fee7e1b7b2d9b2d8475cc2f36a5bcf64bfaa3fb2bfe2e818631cb614bdd"
+    },
+    {
+      "bytes": 131072,
+      "name": "epr-20886.ic2",
+      "sha256": "3d6b04bf8e0a1527f7f7dc4888d0d409745fe4acd8acc09e195079ffce54a64c"
+    }
+  ],
+  "originalSources": {
+    "Src/CPU/68K/Musashi/m68k.h": "5d1b2b2e350a12406744025fe5fb619768295a6ffd5814daeaf8f9ad921e5e83",
+    "Src/CPU/68K/Musashi/m68k_in.c": "a3700dadaceb14b1a480abd889ec632cdd66220ba49c854f54207d12b37a1d33",
+    "Src/CPU/68K/Musashi/m68kconf.h": "862c1df5841c7c37d2cb6646f11b4bf684656379e9ece5426974846cfbb9ce2f",
+    "Src/CPU/68K/Musashi/m68kcpu.c": "4cd333e010a76597bb8ed8444f3de814bf4915771d069c222f01f0fd0ef4d12f",
+    "Src/CPU/68K/Musashi/m68kcpu.h": "a2b9c832567f4c085adf74ebe8b989a1dd7c192760c8106cac31ca81d8985bb5",
+    "Src/CPU/68K/Musashi/m68kctx.h": "2f7f7c7383fb8ded4cbde5f762a5ae2f1ca37263422e92fac6fe068af8750fa7",
+    "Src/CPU/68K/Musashi/m68kdasm.c": "24321039c439f3846988508713e5a3edc9b54cb4cb857314ecc4c5c7a1a4c259",
+    "Src/CPU/68K/Musashi/m68kmake.c": "b30b3644adc9cc89bb07fbfba74ef1ce8d05e5f5d86edd902051c0e7669684b9",
+    "Src/Sound/SCSPDSP.cpp": "d184c8cd283ffab51922c38e19b2ebb371fd32d3f1c15dafcada1602d7ca27e5"
+  },
+  "passed": true,
+  "productTranslationManifestSHA256": "ec9821adfb6c677c01eea0ed26c852076c2d6637d83946fe087fea820a3a8fda",
+  "target": "arm64-apple-macosx",
+  "upstreamCommit": "24d2ffcfc7f14229337f05f4920fe26b56633d9d",
+  "verifierSHA256": "414559146834fe92cb0a3f9d3a80d67f7a45471d530a0ac0e05639369051a79f"
+}

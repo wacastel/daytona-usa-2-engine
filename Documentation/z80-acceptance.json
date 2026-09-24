@@ -1,0 +1,62 @@
+{
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "cpu": "wheel-board Z80",
+  "differential": {
+    "comparisons": 147456,
+    "faultChecks": 2,
+    "fixedStarts": 36864,
+    "nativeSourceSHA256": "3bbc2758b2f76a9d5ab1f1828c23ab5ff939c50dfa8daea323a5e8cd43596e14",
+    "passed": true,
+    "registerInterruptStates": 4,
+    "results": {
+      "native": {
+        "bytes": 24772608,
+        "sha256": "32c9d0ba432b0373f6977157b2b70276c131700f9708532f3c22bdde0f31d3a8"
+      },
+      "reference": {
+        "bytes": 24772608,
+        "sha256": "32c9d0ba432b0373f6977157b2b70276c131700f9708532f3c22bdde0f31d3a8"
+      }
+    },
+    "scope": "One instruction including its immediate interrupt boundary at every admitted ROM byte start; changed byte and unknown PC reject; no full-game claim."
+  },
+  "fixtureSHA256": "0ef49ae53a25e0a86f12b80176f778f2fe45a700aabc69a9c05434b291405917",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-fno-strict-aliasing",
+    "-ffp-contract=off",
+    "-DSUPERMODEL_OSX"
+  ],
+  "format": 1,
+  "generation": {
+    "fixedStarts": 36864,
+    "fixedVariants": 10302,
+    "guardBytesPerStart": 4,
+    "interpreterFallback": false,
+    "programRange": "0x0000..0x8fff",
+    "runtimeCompilation": false,
+    "runtimeOpcodeDecoder": false
+  },
+  "generatorSHA256": "ccc14850e9486aec3576e829f6b5eb91351cc6ce7972f9121051626504ad0492",
+  "limitations": [
+    "The test forces a single instruction boundary at every admitted ROM start and compares four register/interrupt states. It does not enumerate every possible machine state.",
+    "The pinned Z80 core retains its documented interrupt and HALT limitations.",
+    "Full frame/audio replay and physical controller or wheel force-feedback acceptance are separate requirements."
+  ],
+  "media": {
+    "bytes": 65536,
+    "name": "epr-20985.bin",
+    "sha256": "15e6267a1c225f46ab5270c09e85aefa707efd7d110b90ab3c46dd71cd997ab9"
+  },
+  "originalSources": {
+    "Z80.cpp": "a567409c47dad5acbf22b6b8f9b11f64ea1cd3d61e64ca94d517f73bd0fe0594",
+    "Z80.h": "46d94063c1113a7dd912b72fcfc18fc8afd15fb2de28b38eee36f532d845d64c"
+  },
+  "passed": true,
+  "productGeneratedSourceSHA256": "3bbc2758b2f76a9d5ab1f1828c23ab5ff939c50dfa8daea323a5e8cd43596e14",
+  "productTranslationManifestSHA256": "844febe6359de57938d453fd44aef6526e5ef3240f8d3d1a6422065405da74d9",
+  "target": "arm64-apple-macosx",
+  "upstreamCommit": "24d2ffcfc7f14229337f05f4920fe26b56633d9d",
+  "verifierSHA256": "d64cc9d9644192a803ecadb63e9fa2b98f474e2e2957a4ffe87c3ffbde8af8ab"
+}

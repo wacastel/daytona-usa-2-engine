@@ -1,0 +1,387 @@
+{
+  "cleanStart": {
+    "generatedSourcesReused": false,
+    "mediaFilesVerified": 47,
+    "notes": "The ignored media directory symlink was read only. The archive was re-extracted and its complete file inventory checked. Any incremental objects used after a recorded source fix were produced in this new workspace; no main-workspace generated code, settings, objects, libraries or captures were imported.",
+    "objectsOrLibrariesReused": false,
+    "originalSourceTreeReused": false,
+    "reusedInputs": [
+      "verified pinned original source archive",
+      "supplied local media via read-only use of ignored directory symlink"
+    ],
+    "reviewedSourceFilesAtLastInputSnapshot": 75,
+    "sourceInputManifestSHA256": "71e0157ed24797992c65769279763f975cb569a9ad3a69e5255f7edffea4f441",
+    "upstreamArchiveSHA256": "027c544e0eb223831c3a702fe326f7ac7c9b120c036133f05b52ccf3ca0feb95",
+    "upstreamFilesVerified": 315,
+    "upstreamRevision": "24d2ffcfc7f14229337f05f4920fe26b56633d9d"
+  },
+  "engines": {
+    "native": {
+      "archiveSHA256": "5ae4e9b1c16d9300091c65a657b4caec0ce1b7a748ce8d6aa727df6ac1943c87",
+      "cpuReplacements": {
+        "Musashi-SCSP": {
+          "path": "build/generated/sound/manifest.json",
+          "sha256": "d7612bf0d200f8530f31c26666a41f8b033e3f05b5e9e5b4857d5b1ef035a8b4"
+        },
+        "PowerPC": {
+          "path": "build/generated/ppc/translation-manifest.json",
+          "sha256": "cdfcdd93cdeeda9019d2fca2faee60091b5ecbf553e11c31257d1b084f0e7982"
+        },
+        "Z80": {
+          "path": "build/generated/z80/translation-manifest.json",
+          "sha256": "409e6667f98798dffc2dcce61888b27beb816916ccdbf3f4f86d33ed0697b696"
+        }
+      },
+      "librarySHA256": "e72f44f18f271c38bbf744a81548c1ef0e5b9dd449126106485425d99591fbdc",
+      "manifestSHA256": "6063dcc5c5d8d0f4b4a8860317c601c4058084608273f7c562a4256269392ba7"
+    },
+    "reference": {
+      "librarySHA256": "da3a243a94c01f82c29470af46c0e8cdbc9bda5c3a4f10e49819c01d87573f08",
+      "manifestSHA256": "ee161a85d5d9675d312f841774ca5eb22d782bf46952aae9799340caea4f35fb"
+    }
+  },
+  "finalCodeAndRouteIdentitiesMatchMain": {
+    "Configuration/Games.xml": "5cf305785199fb3d3eabfcbef62526671003ed79ef33ae728d8db5bac48a55b3",
+    "Configuration/replays/advanced-auto.json": "5d9f93c8918a75316d918b9f9ae4a621c4302518987dbeb57c07c0489d3164fc",
+    "Configuration/replays/beginner-auto.json": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
+    "Configuration/replays/beginner-manual.json": "3e3e48f899f15d2b45649ce117f385bc396bbaff663ee02c5cb60acef058e614",
+    "Configuration/replays/boot-start.json": "2b5320ce9c9e9f73ea1a547a69dab706e99a8340cd48db136dee1adb80bf03f6",
+    "Configuration/replays/cabinet-setup.json": "086aca7f6e4ce16e4ac7fa844bb49dca2a009c1e82fde9eed588b4d4c1ad8bb0",
+    "Configuration/replays/expert-auto.json": "4c1cebd993a163889059d7a574660cda6c7bea2f21a4cc3f98f38c92eb0b3b81",
+    "Sources/Bridge/DetachedNetwork.h": "f10d87016433195533a76c482b7baea7a33b97c749178f6f2f2bbc25b9d6690b",
+    "Sources/Bridge/Platform.cpp": "62bae322acc2f3445d4644544ecfe300172e3051e69c3957122b0ee8d2cf5b4d",
+    "Sources/Bridge/daytona2.cpp": "a08aaaf574aa2ebf5ada458e304d8909d0d0b7092c206bb14b1dcd5cb843288a",
+    "Sources/Bridge/daytona2.h": "21dcd505552fd4e94e42afe41a4a55598693c8a54b6e664f60bd86498083aceb",
+    "Sources/Mac/AudioOutput.swift": "d47d867f931deba4bcb45edcb55ad6892cb1073ebddd1d1afc69a60e2426d238",
+    "Sources/Mac/Controls.swift": "4d4035a5ab1effde60f309c56247c421f4d16f772a16c1d521271d515a137a79",
+    "Sources/Mac/EngineWorker.swift": "7f253aca5a82d04076b7713a3a3f9974b975e05af2f749d516568f846a58f977",
+    "Sources/Mac/GameScene.swift": "977bbad734bd0be1fffd1932f19dd9f68846a796205e566748807ed7be728158",
+    "Sources/Mac/Input.swift": "f6daedc4b1a17e49b4167d4cc4a4ba003a3a80a769545f56f7387a429b96096c",
+    "Sources/Mac/Media.swift": "69c580d58f4394427f8c8fe7a3f3f11266b4696797be39fb5c2eef72ccdf0971",
+    "Sources/Mac/NativeGame.swift": "27ed88aed287a58aebd283dffaedddc747eb220f6f6d8a55e7c5118ef2ba6f97",
+    "Sources/Mac/Tests/main.swift": "b62cd2fbb3701c98b6dbc3216d9e5aa50f84564e27503c851750b42c7e0b9f19",
+    "Sources/Mac/main.swift": "6927cffe82d5389bd45054d0f509e1e06afa13e724b250a9260e2585586f9035",
+    "Tools/ReferenceLab/control.py": "da776a774b88ba14f1d056c1ba9916b765a94ca027a56e065c650145927407ef",
+    "Tools/ReferenceLab/ppc_observer.inc": "5c27533203f3eb8d83d937aad23cfd513d2b6a9557c213924689d3d0f6e87580",
+    "Tools/ReferenceLab/ppc_operation_fixture.cpp": "0141a40b2dd57f9bfa23b1068ee4d61d5261cc9be4ca201d4b67cbcd7adeda14",
+    "Tools/ReferenceLab/ppc_z80_fixture.cpp": "0ef49ae53a25e0a86f12b80176f778f2fe45a700aabc69a9c05434b291405917",
+    "Tools/ReferenceLab/replay.py": "13a2cc13286cb6a535aab2ea1a31c4dae41db4f46eae7780dd29bc40cd554e26",
+    "Tools/ReferenceLab/sound68k_probe.c": "07313cd81f02838df4cd35e75a2bec89a5eb23243ca5ce7784804c1f4b62bdb1",
+    "Tools/ReferenceLab/sound_dsp_probe.cpp": "2a5ff48ef0f95c486f00f3c9552aa1fef07dc5746913b625b2eb30b0acc900c8",
+    "Tools/ReferenceLab/sound_lifecycle.py": "d7a3a440eb5def0123237e1bd57d5fea6db6526a0bc969954716dc0a581be9cf",
+    "Tools/ReferenceLab/sound_observe.cpp": "9b255f3470813efd13599c06393f14c58b26d7cde5e3ccf3e5fbe7404503e6e3",
+    "Tools/ReferenceLab/sound_observe.h": "8d23d34a42c6f1212a192ff6cd411a17bf8cca121bd3319c1d37de55bb78e563",
+    "scripts/build.sh": "b7a58e08890eabe5a08c25ac2c9fe4be8cc3b54ef02ffc2cc59ae0ff4c954160",
+    "scripts/build_engine.py": "03c84ffec6584b76a942a1f1cf355b73a7220e3212fb775dfda4d20104004a37",
+    "scripts/build_host.sh": "17882d3734e406c80a3c6d05227d8dfedcf7ebb9266549c92521bf6e5380f350",
+    "scripts/build_icon.sh": "11d9434404e6504970bf4a0fa0f8dcee03ad768bf484e616efa9b1d4936e22f5",
+    "scripts/build_icon.swift": "77680e632ab96186e68fd0af8d359e9861557a9ad1885456a2d970e45589a13a",
+    "scripts/compile_ppc.py": "83b2b549852b7aed0a901b1cd64e1939c6b7493713c41fe387c545ecda9d61b9",
+    "scripts/compile_sound.py": "b9150a921c832df8a060d8a16bbe84e7d0a07cb4e1bfb3b0a7a8d57b02584e55",
+    "scripts/compile_z80.py": "ccc14850e9486aec3576e829f6b5eb91351cc6ce7972f9121051626504ad0492",
+    "scripts/import_assets.py": "04555d5d6f21af6650eb4682df4728309a89876bcb967c95f50c43c52387aa73",
+    "scripts/prepare_licenses.py": "ee1e2ed37276f53fac1caef61dee8b715a35edf009fc0074443c497bade4aa2b",
+    "scripts/prepare_native.py": "f222b34ab2f71afb19dce72241e00dce20e7a38d0447d854a5634228d7be1662",
+    "scripts/prepare_settings.py": "7ecb51745404751f76e74e5758b2a3a5b0145db14d3f33d4f314c12fd8f0b79f",
+    "scripts/prepare_source.py": "a6d278780dee974301285851def87bdcb144e6a0ba2c4c53524d46ff2ee1b63e",
+    "scripts/verify_bridge.py": "6986b2183d53c81b68d139992f3b08ed36627842993a75d6337cb685e13b8699",
+    "scripts/verify_host.py": "76cdc0a299c4974caadf8db396d0f3126d01fc30152ad6660faa758a60c7a868",
+    "scripts/verify_integration.py": "bb7e372b6f99cd6daa9e7e5fe9d84a31350b8e9b0fb1680ee9e8c44beebccd79",
+    "scripts/verify_live.py": "092c778ca0d37371734c5ecc01753c6203828bd09b13d82a47ef2329d282c4e2",
+    "scripts/verify_package.py": "7c40c2b6e1272c529c294c2484f84815523351968557804370b148df4c120e55",
+    "scripts/verify_ppc.py": "6382f0f8258102a6c7e8b5086c5aeedaa1a8378d9f3ebde6c3319b500200343d",
+    "scripts/verify_sound.py": "414559146834fe92cb0a3f9d3a80d67f7a45471d530a0ac0e05639369051a79f",
+    "scripts/verify_z80.py": "d64cc9d9644192a803ecadb63e9fa2b98f474e2e2957a4ffe87c3ffbde8af8ab"
+  },
+  "freshEvidence": {
+    "bridge": {
+      "passed": true,
+      "path": "build/reproduction/source/Documentation/bridge-acceptance.json",
+      "sha256": "20709cfb0ba1e27f1ca2b26710de32c8ce27dbee17f5bb5dd88eaf25e9d989bd"
+    },
+    "host": {
+      "passed": true,
+      "path": "build/reproduction/source/Documentation/host-acceptance.json",
+      "sha256": "3676025306f0c1d746b6780bc200cf4681926547e97c1a0c29fc1cc6377365f4"
+    },
+    "input": {
+      "passed": true,
+      "path": "build/reproduction/source/build/host-tests/input-tests.json",
+      "sha256": "d83f9cac81d6a7af487365dd08a6a2ad3e364cc834769843e5216f4ee9db0741"
+    },
+    "integration": {
+      "passed": true,
+      "path": "build/reproduction/source/Documentation/integration-acceptance.json",
+      "sha256": "ac3e6e9f0a64bdfa3e00018cbadd053fee269fda819bfd574c9ae76effd0bf92"
+    },
+    "linkGuard": {
+      "passed": true,
+      "path": "build/reproduction/source/build/host-tests/link-guard/acceptance.json",
+      "sha256": "9e35d0a804e2378014e9682f04749e95cb23e66d2525879a8b932c82cbf64f7b"
+    },
+    "media": {
+      "passed": true,
+      "path": "build/reproduction/source/Documentation/media-acceptance.json",
+      "sha256": "301d1487865ca78d4ea09322c862e706d6929be1c212f1c6dce8a190d8544643"
+    },
+    "package": {
+      "passed": true,
+      "path": "build/reproduction/source/build/verification/package-acceptance.json",
+      "sha256": "6adc54cd84aba57f432d4b05fb9419979fa0bc3d3cec2a4d7e84d3eacd9bce80"
+    },
+    "ppc": {
+      "passed": true,
+      "path": "build/reproduction/source/build/validation/ppc/report.json",
+      "sha256": "57823947e086f890e1a371281f013954c9bed84234c2c4310a177cf35563bb8a"
+    },
+    "sound": {
+      "passed": true,
+      "path": "build/reproduction/source/build/verification/sound/report.json",
+      "sha256": "c1b659924a416b5d00dc5c018aa46c8ae4468d9c0e08d607b2de0308c809f22d"
+    },
+    "source": {
+      "passed": true,
+      "path": "build/reproduction/source/build/source/source-acceptance.json",
+      "sha256": "6b1812e0b3157a4bdad89b8bc55bfec36f50733e0c6603266d6db1ae045167a3"
+    },
+    "typecheck": {
+      "passed": true,
+      "path": "build/reproduction/source/build/host-tests/typecheck.json",
+      "sha256": "bd7fdf21ab2e05caf406a2e855d988bd7deb4095d7a19a41b979c4d0c40226a9"
+    },
+    "z80": {
+      "passed": true,
+      "path": "build/reproduction/source/build/validation/z80/report.json",
+      "sha256": "ed5bb0641fe2452e0167fd837277a747cb89eccbb85dc661141a041e6efb2469"
+    }
+  },
+  "host": {
+    "exactPictureAudioCountAgreement": true,
+    "frames": 9500,
+    "freshSessions": {
+      "audioSHA256": "d95e0279046ad56183dd04380fe70cbbcef33861895e6d2720c8f2c19f4f2c76",
+      "deterministic": true,
+      "framesEach": 2400,
+      "pictureSHA256": "285c98a9a906855ff0f404ef2b34cc9fadc42bf2dc09c456ba020e1eb67f21b3",
+      "runs": 2,
+      "sameProcess": true,
+      "sampleFramesEach": 1764000
+    },
+    "inputChecks": 123,
+    "linkGuardRejections": 4,
+    "route": "Configuration/replays/beginner-manual.json",
+    "sampleFrames": 6982500,
+    "typecheckPassed": true
+  },
+  "integration": {
+    "allRouteRowsEqualMain": true,
+    "mainIntegrationReportSHA256": "6099f9d3b91a4922da75bbd36b34b697f6b6c79b4f2d1a133896e336bf6ff1fd",
+    "routes": [
+      {
+        "distinctPictures": 3586,
+        "exactPictureAudioCountAgreement": true,
+        "frames": 4332,
+        "nonzeroPCMBytes": 11142868,
+        "pcmSHA256": "360da6e6621dcd107be7c26bc1aa1784c52c35aa18a50db0a457965d403f6774",
+        "perFrameTraceSHA256": "1b8127bed386e9f0bdd24e93fc176d54e74dd8d3e34ac5fb0e3f7556c798e205",
+        "rgbaSHA256": "dbeb55511cf419b426d68817eab74dc1d9264c86d70a5b04075ab6e17858b6fc",
+        "route": "Configuration/replays/beginner-auto.json",
+        "routeSHA256": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
+        "sampleFrames": 3184020
+      },
+      {
+        "distinctPictures": 8129,
+        "exactPictureAudioCountAgreement": true,
+        "frames": 9500,
+        "nonzeroPCMBytes": 25321862,
+        "pcmSHA256": "186ff03f6ccaee7aa570f0a3c45c4ca7fb80b1f8372ea8d0c73e24500f702463",
+        "perFrameTraceSHA256": "b4ad6be67fe30abe04690b87cb3064e814f521cda22ac7a4b50a232618924021",
+        "rgbaSHA256": "7ee0d759fbeb15973e14ca139ccd33a445504fab1e672e10c23e7ada0da9643b",
+        "route": "Configuration/replays/beginner-manual.json",
+        "routeSHA256": "3e3e48f899f15d2b45649ce117f385bc396bbaff663ee02c5cb60acef058e614",
+        "sampleFrames": 6982500
+      },
+      {
+        "distinctPictures": 3754,
+        "exactPictureAudioCountAgreement": true,
+        "frames": 4500,
+        "nonzeroPCMBytes": 11636014,
+        "pcmSHA256": "3e55dbd7122dd13690ce405195aa8d2f2cea1fdac1ebd743b4709ea3f4fa12e0",
+        "perFrameTraceSHA256": "44765127d681b9ca86ed2bb4dc21f1a2224491ba45430e72a8ca7124c2b54ab0",
+        "rgbaSHA256": "d46fd947a4a67ddac4e04ab7bd7b6c93517a7102e54b413d11c836892a71b297",
+        "route": "Configuration/replays/advanced-auto.json",
+        "routeSHA256": "5d9f93c8918a75316d918b9f9ae4a621c4302518987dbeb57c07c0489d3164fc",
+        "sampleFrames": 3307500
+      },
+      {
+        "distinctPictures": 3753,
+        "exactPictureAudioCountAgreement": true,
+        "frames": 4500,
+        "nonzeroPCMBytes": 11624959,
+        "pcmSHA256": "eba1f98b818d809dff7b69ed98661c9220e58befcc12b3de6b75a9d0ee01e8c6",
+        "perFrameTraceSHA256": "e701dcaae903799007c5644f720d06ec17378575719a142e349c985a9581603e",
+        "rgbaSHA256": "785650b97d9fdca2d644ba42301cb530bce26cf0fe318f27d52090724ab51895",
+        "route": "Configuration/replays/expert-auto.json",
+        "routeSHA256": "4c1cebd993a163889059d7a574660cda6c7bea2f21a4cc3f98f38c92eb0b3b81",
+        "sampleFrames": 3307500
+      }
+    ],
+    "totalFrames": 22832,
+    "totalStereoFrames": 16781520
+  },
+  "limitations": [
+    "Recorded source deltas mean this was not a single untouched final-source snapshot. Bootstrap, cabinet setup and initial observations began from the original snapshot. The shared cold-init repair was applied before the final native/reference builds, and all host changes before host compilation. Earlier observations used fresh processes and remain consistent with the unchanged first-session behavior; every final comparison and artifact above binds the final source.",
+    "Binary hashes differ from the development build because the build path and its fresh generated input set differ. No byte-identical build claim is made.",
+    "The independently regenerated settings file includes workspace-specific container metadata; every listed route nevertheless matches the development behavior exactly.",
+    "Clean packaged-host checks are headless. Presentation cadence, audio-device telemetry and visible UI checks were performed separately on the main packaged app.",
+    "Replay coverage includes startup, all three courses, automatic and manual selection, and the extended manual route through timeout/menu transitions. It does not establish every race outcome, physical-board accuracy or physical controller operation."
+  ],
+  "package": {
+    "adHocSignatureVerified": true,
+    "architecture": "arm64",
+    "executableSHA256": "a1f98dc66238919193f3194ddc28d27866dff8fd9800afe2ef8ac8a1fd5d7763",
+    "hostSourceFilesVerified": 8,
+    "knownDecoderAndDiagnosticSymbolsAbsent": true,
+    "licenseFilesVerified": 6,
+    "manifestSHA256": "305db671b4cdd1061fc441d0d3e61756e1a3d7cb454fef9d5612d05ce0e452e1",
+    "mediaFilesVerified": 3,
+    "minimumMacOS": "14.0"
+  },
+  "passed": true,
+  "postRecipeCommands": [
+    [
+      "scripts/build_host.sh",
+      "--self-test"
+    ],
+    [
+      "scripts/build_host.sh",
+      "--typecheck"
+    ],
+    [
+      "scripts/build_host.sh",
+      "--test-link-guard"
+    ],
+    [
+      "scripts/build.sh",
+      "--skip-engine"
+    ],
+    [
+      "python3",
+      "scripts/verify_package.py"
+    ],
+    [
+      "python3",
+      "scripts/verify_host.py"
+    ]
+  ],
+  "processorChecks": {
+    "DSPLatchedLimitTrials": 1245,
+    "DSPRandomizedTrials": 4016,
+    "DSPSyntheticTrials": 48,
+    "fixedDSPImages": 251,
+    "m68kInstructionTrials": 15526,
+    "ppcComparisons": 16760,
+    "scope": "The clean four-route capture admitted 251 fixed DSP images. The development build admitted 253 because it also retained exploratory captures. Each build is qualified against its own exact manifests; all four clean final routes also match the development build on every picture, PCM block and sample count.",
+    "z80Comparisons": 147456
+  },
+  "recipe": [
+    "python3",
+    "scripts/prepare_native.py",
+    "--jobs",
+    "4"
+  ],
+  "scope": "Independent rebuild from reviewed source, a verified upstream archive and locally supplied media, with recorded source fixes during the run. Fresh generated processors, libraries and app pass bounded CPU, original-reference route, bridge, input and packaged-host checks. This is behavioral reproduction, not a byte-identical build or a second live GUI performance run.",
+  "sourceDeltasDuringRun": [
+    {
+      "initialSHA256": "73d2f93f0c993961ee8dda43cd0be4b7e2f8d115bdc017dfe51263136233bcf2",
+      "newSHA256": "4b93fb1f1c22e6a48f8a9c1020e3e69b090c22813f52bc359e493fc03b2b5944",
+      "path": "Sources/Mac/GameScene.swift",
+      "reason": "Fatal engine fault overlay must direct quit/reopen because faulted bridge rejects reset; host-only text fix applied before host compilation."
+    },
+    {
+      "initialSHA256": null,
+      "newSHA256": "350cff27f72859361d16243b2efa57b3968691df964c9c0664cbc0ef7dcfa4a2",
+      "path": "scripts/verify_live.py",
+      "reason": "Added bounded visible AppKit/SpriteKit and AVFoundation telemetry verifier before any reproduced host compilation."
+    },
+    {
+      "initialSHA256": "4b84ee58dd3aeda44b17926d7d97e936fc48503c2bbea582d0247bc1cc0e2bbc",
+      "newSHA256": "03c84ffec6584b76a942a1f1cf355b73a7220e3212fb775dfda4d20104004a37",
+      "path": "scripts/build_engine.py",
+      "reason": "Shared cold initialization resets inherited SCSP cycle remainder across destroy/create; original first-process scheduling retained."
+    },
+    {
+      "initialSHA256": "82c49806dec1699d9b703aebea48b19a67c9669720a73d138aacc1c7bb1a7548",
+      "newSHA256": "76cdc0a299c4974caadf8db396d0f3126d01fc30152ad6660faa758a60c7a868",
+      "path": "scripts/verify_host.py",
+      "reason": "Add same-process two-session 2400-frame picture/PCM/count determinism check after accepted packaged route replay."
+    },
+    {
+      "initialSHA256": null,
+      "newSHA256": "d7a3a440eb5def0123237e1bd57d5fea6db6526a0bc969954716dc0a581be9cf",
+      "path": "Tools/ReferenceLab/sound_lifecycle.py",
+      "reason": "Add reviewed real C ABI lifecycle fixture; compares two fresh sessions against preserved first-process frame/PCM/count trace without state patching."
+    },
+    {
+      "initialSHA256": null,
+      "newSHA256": "7f253aca5a82d04076b7713a3a3f9974b975e05af2f749d516568f846a58f977",
+      "path": "Sources/Mac/EngineWorker.swift",
+      "reason": "Measured native GUI performance fix: dedicated engine thread preserves CGL ownership, audio cadence and reserved inputs; new texture and display telemetry with bounded timing arrays. Host-only change before reproduced host compilation."
+    },
+    {
+      "initialSHA256": "4b93fb1f1c22e6a48f8a9c1020e3e69b090c22813f52bc359e493fc03b2b5944",
+      "newSHA256": "977bbad734bd0be1fffd1932f19dd9f68846a796205e566748807ed7be728158",
+      "path": "Sources/Mac/GameScene.swift",
+      "reason": "Measured native GUI performance fix: dedicated engine thread preserves CGL ownership, audio cadence and reserved inputs; new texture and display telemetry with bounded timing arrays. Host-only change before reproduced host compilation."
+    },
+    {
+      "initialSHA256": "50a15f6d1bf2874761c3f3bcd22dfbb9ea857e9080bc9883c6f03404933bd610",
+      "newSHA256": "4d4035a5ab1effde60f309c56247c421f4d16f772a16c1d521271d515a137a79",
+      "path": "Sources/Mac/Controls.swift",
+      "reason": "Measured native GUI performance fix: dedicated engine thread preserves CGL ownership, audio cadence and reserved inputs; new texture and display telemetry with bounded timing arrays. Host-only change before reproduced host compilation."
+    },
+    {
+      "initialSHA256": "25b9a105a524a517bbfdef5b3ba08f973553856d87f4d0e86c90458d00e70202",
+      "newSHA256": "b62cd2fbb3701c98b6dbc3216d9e5aa50f84564e27503c851750b42c7e0b9f19",
+      "path": "Sources/Mac/Tests/main.swift",
+      "reason": "Measured native GUI performance fix: dedicated engine thread preserves CGL ownership, audio cadence and reserved inputs; new texture and display telemetry with bounded timing arrays. Host-only change before reproduced host compilation."
+    },
+    {
+      "initialSHA256": "f8642d871d78c9b725c7a4233f36c535751a10fa13a038ec6825805775675e77",
+      "newSHA256": "8d20fd79eeaaedd9c2d96b4b3697972e3a6e9910aa29a6f03b32632da928ffd3",
+      "path": "Sources/Mac/README.md",
+      "reason": "Measured native GUI performance fix: dedicated engine thread preserves CGL ownership, audio cadence and reserved inputs; new texture and display telemetry with bounded timing arrays. Host-only change before reproduced host compilation."
+    },
+    {
+      "initialSHA256": "bea1ef935d00da8407712709c8bd1e1b31cd40ddb5ec0a223f39075b46d28bad",
+      "newSHA256": "bfd44836d76378c10e4fa4da4a3f0f0355c8922037bde3f45d35254eff516c04",
+      "path": "Documentation/architecture.md",
+      "reason": "Measured native GUI performance fix: dedicated engine thread preserves CGL ownership, audio cadence and reserved inputs; new texture and display telemetry with bounded timing arrays. Host-only change before reproduced host compilation."
+    },
+    {
+      "initialSHA256": "350cff27f72859361d16243b2efa57b3968691df964c9c0664cbc0ef7dcfa4a2",
+      "newSHA256": "d296738a2ae8f915077603bf98e3f9aace9fe252ec072f218df0a5a495631b18",
+      "path": "scripts/verify_live.py",
+      "reason": "Measured native GUI performance fix: dedicated engine thread preserves CGL ownership, audio cadence and reserved inputs; new texture and display telemetry with bounded timing arrays. Host-only change before reproduced host compilation."
+    },
+    {
+      "initialSHA256": "d296738a2ae8f915077603bf98e3f9aace9fe252ec072f218df0a5a495631b18",
+      "newSHA256": "092c778ca0d37371734c5ecc01753c6203828bd09b13d82a47ef2329d282c4e2",
+      "path": "scripts/verify_live.py",
+      "reason": "Reviewed final lifecycle documentation and live validator dedicated-thread/cadence requirements; no engine input or host code changed."
+    },
+    {
+      "initialSHA256": "388eb232d4a884b9add199142be9f0b0589956507caeb37e03a45d1b7fbf90aa",
+      "newSHA256": "79859e14850b44bdfbc285fef978bb6fa142526bb96aa774d5efa2e9dfdd2af7",
+      "path": "Sources/Translated/sound/README.md",
+      "reason": "Reviewed final lifecycle documentation and live validator dedicated-thread/cadence requirements; no engine input or host code changed."
+    },
+    {
+      "initialSHA256": "ef659f2f8e9101b7493c0d4a40ab7c2961d250bd02b7b381f5675081403faab4",
+      "newSHA256": "7c40c2b6e1272c529c294c2484f84815523351968557804370b148df4c120e55",
+      "path": "scripts/verify_package.py",
+      "reason": "Explicitly bind the audited native dylib bytes to the engine manifest, in addition to the existing archive and executable guards. Applied before reproduced packaging; no compiled source changes."
+    }
+  ],
+  "workspace": "build/reproduction/source"
+}

@@ -1,0 +1,109 @@
+{
+  "frames": 4332,
+  "events": [
+    {
+      "start": 0,
+      "end": 600
+    },
+    {
+      "start": 600,
+      "end": 602,
+      "buttons": 1
+    },
+    {
+      "start": 602,
+      "end": 622
+    },
+    {
+      "start": 622,
+      "end": 624,
+      "buttons": 1
+    },
+    {
+      "start": 624,
+      "end": 644
+    },
+    {
+      "start": 644,
+      "end": 646,
+      "buttons": 2
+    },
+    {
+      "start": 646,
+      "end": 746
+    },
+    {
+      "start": 746,
+      "end": 748,
+      "accelerator": 1
+    },
+    {
+      "start": 748,
+      "end": 828
+    },
+    {
+      "start": 828,
+      "end": 1008
+    },
+    {
+      "start": 1008,
+      "end": 1010,
+      "accelerator": 1
+    },
+    {
+      "start": 1010,
+      "end": 1230
+    },
+    {
+      "start": 1230,
+      "end": 1232,
+      "accelerator": 1
+    },
+    {
+      "start": 1232,
+      "end": 1472
+    },
+    {
+      "start": 1472,
+      "end": 2072,
+      "accelerator": 1
+    },
+    {
+      "start": 2072,
+      "end": 2772,
+      "steering": -0.15,
+      "accelerator": 1
+    },
+    {
+      "start": 2772,
+      "end": 3072,
+      "accelerator": 1,
+      "buttons": 4
+    },
+    {
+      "start": 3072,
+      "end": 3372,
+      "accelerator": 1,
+      "buttons": 8
+    },
+    {
+      "start": 3372,
+      "end": 3672,
+      "accelerator": 1,
+      "buttons": 16
+    },
+    {
+      "start": 3672,
+      "end": 3732,
+      "brake": 1,
+      "buttons": 32
+    },
+    {
+      "start": 3732,
+      "end": 4332,
+      "steering": -0.04,
+      "accelerator": 1
+    }
+  ],
+  "description": "Beginner, Normal car, automatic transmission; all four views, steering, braking and second-lap checkpoint."
+}

@@ -1,0 +1,38 @@
+{
+  "allAppFilesByteIdentical": true,
+  "appFileCount": 14,
+  "appFilesSHA256": {
+    "Contents/Info.plist": "95f32c216ab4d40f6bc01b2e9b0f3b319eb6609606124fdb52a69284bcdf7347",
+    "Contents/MacOS/DaytonaUSA2": "5f52398a4200f3d8dd5d3b9d2862d66a43e7e57c56cfe625ca4f72b28ebc9f7a",
+    "Contents/Resources/AppIcon.icns": "3555eb1845b8ea9c9adaedf0ebd570fb768f311133fd425dcb5dab3653081e86",
+    "Contents/Resources/Licenses/Crypto-BSD-3-Clause.txt": "852b73da105436d7f291be15b93b4991bb57508aa8c6edd1a64c4f2b59ef1725",
+    "Contents/Resources/Licenses/README.md": "db48644848db4ef7d7b2e163855d9989a5dc40a4d9a07be3e818b1e061a9dc0f",
+    "Contents/Resources/Licenses/SourceNotices.txt": "a754196b1325134c9081f91d302f9ff15759133d70c03308dabbe8934b56b062",
+    "Contents/Resources/Licenses/Supermodel-LICENSE.txt": "38029eb83f299d3baeed6440e3a992e16d235f818346e54eb8f7ff79d251775f",
+    "Contents/Resources/Licenses/Supermodel-README.txt": "32684f5fbee9d7d9f72b05e6722670d99d5d6c8c94455569c66231a601da933a",
+    "Contents/Resources/Licenses/manifest.json": "b0c3d29c9007e0e651f0a509032ea6eb4c953d76b6ad66646f95805bf2df2e95",
+    "Contents/Resources/Media/Games.xml": "5cf305785199fb3d3eabfcbef62526671003ed79ef33ae728d8db5bac48a55b3",
+    "Contents/Resources/Media/daytona2.zip": "79453c15cb9baf6b9b0acfa6dde8756653c41b77136eacebee168c44dd022ed1",
+    "Contents/Resources/Media/default.nv": "7b975663dfded27bd6ed6ac2172258dd47b70cbd08afa22a7e7c044ace52fef0",
+    "Contents/Resources/Media/media-identity.json": "3578989b82d546200e9a3d1a467b0cd8157ff394aa3017d2f5bc5b554d8c97d5",
+    "Contents/_CodeSignature/CodeResources": "029791af01e591b58cf5416f2176efa93eb73faa34f2868197bb9f16868f444d"
+  },
+  "currentPackageManifestSHA256": "0bf219a99f1e38e56cef6394eeb246985b3d991adfc30b04330414ed5c91befe",
+  "executableSHA256": "5f52398a4200f3d8dd5d3b9d2862d66a43e7e57c56cfe625ca4f72b28ebc9f7a",
+  "manifestDifferences": {
+    "packagingSources/scripts/verify_package.py": {
+      "after": "7c40c2b6e1272c529c294c2484f84815523351968557804370b148df4c120e55",
+      "before": "ef659f2f8e9101b7493c0d4a40ab7c2961d250bd02b7b381f5675081403faab4"
+    }
+  },
+  "passed": true,
+  "priorPackageManifestSHA256": "d88f4f3727e040f6c3e81eb01a9834cd0f582673d89ef1afd75bba67684fa05b",
+  "reason": "The packaging auditor gained an explicit native-dylib versus engine-manifest hash guard. No engine, host, media or packaging logic changed. The app was rebuilt and every bundled file was compared to the preserved pre-audit-change inventory.",
+  "retainedAcceptanceReports": {
+    "host-acceptance.json": "0f2150e48b24b4c0cff5cb0f06a07ec1a1de98b2c15e5c0055960a65f1f44c1c",
+    "live-acceptance.json": "f9a301ec5b8dac1dc94fd31fad240c71cc26f2c127ea8c62ce385a279344e7c3",
+    "ui-acceptance.json": "b6eb8de93f0d5d7df8105cc156f4c761a3a237feb4d5a1ef883f825658321968"
+  },
+  "scope": "Exact artifact equivalence after an audit-only source change. Existing gameplay/live/UI evidence remains evidence for the identical application bytes; those tests were not rerun. The current package audit uses the strengthened verifier.",
+  "updatedPackageAuditSHA256": "13b6b5a6256aa857e4011f586fb9bd4795de51736a6b960bf6520fcf64475a30"
+}

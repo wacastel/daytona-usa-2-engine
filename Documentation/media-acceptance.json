@@ -1,0 +1,20 @@
+{
+  "bytes": 210042880,
+  "fileCount": 47,
+  "identity": {
+    "files": [
+      {
+        "bytes": 210047612,
+        "path": "daytona2.zip",
+        "sha256": "79453c15cb9baf6b9b0acfa6dde8756653c41b77136eacebee168c44dd022ed1"
+      },
+      {
+        "bytes": 4815,
+        "path": "Games.xml",
+        "sha256": "5cf305785199fb3d3eabfcbef62526671003ed79ef33ae728d8db5bac48a55b3"
+      }
+    ]
+  },
+  "passed": true,
+  "scope": "Exact supplied media lengths, CRC32, SHA1 and SHA256. Other sets remain untouched."
+}

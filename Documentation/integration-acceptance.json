@@ -1,0 +1,73 @@
+{
+  "clockEpoch": 946684800,
+  "engineManifestSHA256": "ac6869a21df21523c379ce3f4f76860eb0c6393e154f0a2343f390299ab4d5ce",
+  "evidenceInputs": {
+    "Configuration/replays/advanced-auto.json": "5d9f93c8918a75316d918b9f9ae4a621c4302518987dbeb57c07c0489d3164fc",
+    "Configuration/replays/beginner-auto.json": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
+    "Configuration/replays/beginner-manual.json": "3e3e48f899f15d2b45649ce117f385bc396bbaff663ee02c5cb60acef058e614",
+    "Configuration/replays/expert-auto.json": "4c1cebd993a163889059d7a574660cda6c7bea2f21a4cc3f98f38c92eb0b3b81",
+    "Tools/ReferenceLab/replay.py": "13a2cc13286cb6a535aab2ea1a31c4dae41db4f46eae7780dd29bc40cd554e26",
+    "build/assets/media-identity.json": "3578989b82d546200e9a3d1a467b0cd8157ff394aa3017d2f5bc5b554d8c97d5",
+    "build/native/engine-build-manifest.json": "ac6869a21df21523c379ce3f4f76860eb0c6393e154f0a2343f390299ab4d5ce",
+    "scripts/verify_integration.py": "bb7e372b6f99cd6daa9e7e5fe9d84a31350b8e9b0fb1680ee9e8c44beebccd79"
+  },
+  "mediaManifestSHA256": "3578989b82d546200e9a3d1a467b0cd8157ff394aa3017d2f5bc5b554d8c97d5",
+  "nativeArchiveSHA256": "42e72ee917f1279fc7acc0808e6b7e76d4958bfe81e949532f79958f450f0c2d",
+  "nativeLibrarySHA256": "944067c3c20a86fd0b88a690b6799d1ec6d108de882186cd27d3021a263acb13",
+  "passed": true,
+  "referenceLibrarySHA256": "3249bb9a6a73a919b0bd62d2d8a0a5ab64b1074967c0cd0094b3792edc379161",
+  "routes": [
+    {
+      "distinctPictures": 3586,
+      "exactPictureAudioCountAgreement": true,
+      "frames": 4332,
+      "nonzeroPCMBytes": 11142868,
+      "pcmSHA256": "360da6e6621dcd107be7c26bc1aa1784c52c35aa18a50db0a457965d403f6774",
+      "perFrameTraceSHA256": "1b8127bed386e9f0bdd24e93fc176d54e74dd8d3e34ac5fb0e3f7556c798e205",
+      "rgbaSHA256": "dbeb55511cf419b426d68817eab74dc1d9264c86d70a5b04075ab6e17858b6fc",
+      "route": "Configuration/replays/beginner-auto.json",
+      "routeSHA256": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
+      "sampleFrames": 3184020
+    },
+    {
+      "distinctPictures": 8129,
+      "exactPictureAudioCountAgreement": true,
+      "frames": 9500,
+      "nonzeroPCMBytes": 25321862,
+      "pcmSHA256": "186ff03f6ccaee7aa570f0a3c45c4ca7fb80b1f8372ea8d0c73e24500f702463",
+      "perFrameTraceSHA256": "b4ad6be67fe30abe04690b87cb3064e814f521cda22ac7a4b50a232618924021",
+      "rgbaSHA256": "7ee0d759fbeb15973e14ca139ccd33a445504fab1e672e10c23e7ada0da9643b",
+      "route": "Configuration/replays/beginner-manual.json",
+      "routeSHA256": "3e3e48f899f15d2b45649ce117f385bc396bbaff663ee02c5cb60acef058e614",
+      "sampleFrames": 6982500
+    },
+    {
+      "distinctPictures": 3754,
+      "exactPictureAudioCountAgreement": true,
+      "frames": 4500,
+      "nonzeroPCMBytes": 11636014,
+      "pcmSHA256": "3e55dbd7122dd13690ce405195aa8d2f2cea1fdac1ebd743b4709ea3f4fa12e0",
+      "perFrameTraceSHA256": "44765127d681b9ca86ed2bb4dc21f1a2224491ba45430e72a8ca7124c2b54ab0",
+      "rgbaSHA256": "d46fd947a4a67ddac4e04ab7bd7b6c93517a7102e54b413d11c836892a71b297",
+      "route": "Configuration/replays/advanced-auto.json",
+      "routeSHA256": "5d9f93c8918a75316d918b9f9ae4a621c4302518987dbeb57c07c0489d3164fc",
+      "sampleFrames": 3307500
+    },
+    {
+      "distinctPictures": 3753,
+      "exactPictureAudioCountAgreement": true,
+      "frames": 4500,
+      "nonzeroPCMBytes": 11624959,
+      "pcmSHA256": "eba1f98b818d809dff7b69ed98661c9220e58befcc12b3de6b75a9d0ee01e8c6",
+      "perFrameTraceSHA256": "e701dcaae903799007c5644f720d06ec17378575719a142e349c985a9581603e",
+      "rgbaSHA256": "785650b97d9fdca2d644ba42301cb530bce26cf0fe318f27d52090724ab51895",
+      "route": "Configuration/replays/expert-auto.json",
+      "routeSHA256": "4c1cebd993a163889059d7a574660cda6c7bea2f21a4cc3f98f38c92eb0b3b81",
+      "sampleFrames": 3307500
+    }
+  ],
+  "scope": "Every RGBA picture, stereo PCM block and block sample count on listed fresh-save routes. Independent processes share a GPU while checking, so elapsed replay time is not a live GUI performance measurement. No physical board or exhaustive gameplay claim.",
+  "scriptSHA256": "bb7e372b6f99cd6daa9e7e5fe9d84a31350b8e9b0fb1680ee9e8c44beebccd79",
+  "totalFrames": 22832,
+  "totalStereoFrames": 16781520
+}

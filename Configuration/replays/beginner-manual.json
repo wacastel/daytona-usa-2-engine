@@ -1,0 +1,107 @@
+{
+  "frames": 9500,
+  "events": [
+    {
+      "start": 0,
+      "end": 600
+    },
+    {
+      "start": 600,
+      "end": 602,
+      "buttons": 1
+    },
+    {
+      "start": 602,
+      "end": 622
+    },
+    {
+      "start": 622,
+      "end": 624,
+      "buttons": 1
+    },
+    {
+      "start": 624,
+      "end": 644
+    },
+    {
+      "start": 644,
+      "end": 646,
+      "buttons": 2
+    },
+    {
+      "start": 646,
+      "end": 746
+    },
+    {
+      "start": 746,
+      "end": 748,
+      "accelerator": 1
+    },
+    {
+      "start": 748,
+      "end": 828
+    },
+    {
+      "start": 828,
+      "end": 1008
+    },
+    {
+      "start": 1008,
+      "end": 1010,
+      "accelerator": 1
+    },
+    {
+      "start": 1010,
+      "end": 1230
+    },
+    {
+      "start": 1230,
+      "end": 1262,
+      "steering": 1
+    },
+    {
+      "start": 1260,
+      "end": 1262,
+      "accelerator": 1
+    },
+    {
+      "start": 1500,
+      "end": 2100,
+      "accelerator": 1,
+      "buttons": 128
+    },
+    {
+      "start": 2100,
+      "end": 2350,
+      "accelerator": 1,
+      "buttons": 256
+    },
+    {
+      "start": 2350,
+      "end": 2600,
+      "accelerator": 1,
+      "buttons": 512
+    },
+    {
+      "start": 2600,
+      "end": 3150,
+      "accelerator": 1,
+      "buttons": 1024
+    },
+    {
+      "start": 3150,
+      "end": 3300,
+      "accelerator": 0.2,
+      "brake": 0.5,
+      "buttons": 256
+    },
+    {
+      "start": 3300,
+      "end": 4300,
+      "accelerator": 1,
+      "buttons": 1024,
+      "steering": -0.03
+    }
+  ],
+  "description": "Beginner, Normal car, manual transmission; individual gears and driving controls, then neutral controls through time expiry and subsequent original selection screens."
+}

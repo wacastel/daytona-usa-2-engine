@@ -1,0 +1,59 @@
+{
+  "baseline": "build/validation/integration-before-lifecycle/beginner-auto-native-trace.jsonl",
+  "baselineSHA256": "1b8127bed386e9f0bdd24e93fc176d54e74dd8d3e34ac5fb0e3f7556c798e205",
+  "builderSHA256": "03c84ffec6584b76a942a1f1cf355b73a7220e3212fb775dfda4d20104004a37",
+  "clockEpoch": 946684800,
+  "command": "python3 Tools/ReferenceLab/sound_lifecycle.py --baseline build/validation/integration-before-lifecycle/beginner-auto-native-trace.jsonl",
+  "derivedSCSP_SHA256": "b996eeb068b2cc05b7d1f0f85818e3f4ac1115e1839b79040cccacfa8bc04b0f",
+  "elapsedSeconds": 69.327,
+  "evidence": "build/audio-lifecycle/verified/report.json",
+  "fix": "The shared derived SCSP source moves the original function-static sound 68000 cycle remainder to file scope and initializes it to zero in SCSP_Init. Original first-process timing and LFO initialization remain unchanged.",
+  "fixture": "Tools/ReferenceLab/sound_lifecycle.py",
+  "fixtureSHA256": "d7a3a440eb5def0123237e1bd57d5fea6db6526a0bc969954716dc0a581be9cf",
+  "framesPerSession": 2400,
+  "globalStatePatching": false,
+  "isolation": {
+    "diagnosticNote": "Fault-isolation trials modified private globals only in the disposable diagnostic process. The accepted verification does not patch globals.",
+    "framesPerSession": 1500,
+    "resetOnlyCycleRemainder": {
+      "differingFrames": 0,
+      "firstMismatch": null
+    },
+    "resetOnlyLibcRandSeed": {
+      "differingFrames": 429,
+      "firstMismatch": 604
+    }
+  },
+  "librarySHA256": "944067c3c20a86fd0b88a690b6799d1ec6d108de882186cd27d3021a263acb13",
+  "method": "The fixture uses only the public game C ABI and fresh save directories. Every PCM hash, picture hash, and sample count is compared across sessions and against the first 2400 frames of the preserved pre-fix first-process trace.",
+  "passed": true,
+  "processRestartBetweenSessions": false,
+  "results": {
+    "firstSessionVsBaseline": {
+      "differingFrames": 0,
+      "firstMismatch": null
+    },
+    "freshSessions": {
+      "differingFrames": 0,
+      "firstMismatch": null
+    },
+    "secondSessionVsBaseline": {
+      "differingFrames": 0,
+      "firstMismatch": null
+    }
+  },
+  "routeSHA256": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
+  "scope": "This checks the selected 2400-frame beginner route. Full reference/native game-route and operation-level differential checks are reported separately.",
+  "sessionHashes": [
+    {
+      "pcmSHA256": "0dd4ceb839d16c46d6cd2ea60049bd80d86922b7d0cc59bdb4b4382b26b3069a",
+      "rgbaSHA256": "e6370ec61d86c8ea7957f515e9c595ce96959e397ea789222b5eb51046e2a555"
+    },
+    {
+      "pcmSHA256": "0dd4ceb839d16c46d6cd2ea60049bd80d86922b7d0cc59bdb4b4382b26b3069a",
+      "rgbaSHA256": "e6370ec61d86c8ea7957f515e9c595ce96959e397ea789222b5eb51046e2a555"
+    }
+  ],
+  "sessions": 2,
+  "test": "Two fresh native game contexts after destroy/create in one process, with the beginner automatic route."
+}

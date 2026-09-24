@@ -1,0 +1,95 @@
+{
+  "checks": {
+    "audioDeviceRunning": true,
+    "audioOpenedWithoutFailure": true,
+    "audioRendered": true,
+    "boundedAudioQueue": true,
+    "frameCaptureWritten": true,
+    "mainThreadUpdates": true,
+    "nativeCallsOnDedicatedThread": true,
+    "near60FramesPerSecond": true,
+    "near60PresentedFramesPerSecond": true,
+    "noAudioBacklogRecovery": true,
+    "noEngineFault": true,
+    "unpaused": true,
+    "visibleWindow": true
+  },
+  "frameCaptureSHA256": "54f0f13b91e7694e9c511a1b8f56e9a8919f7a8c3d8dba959cc2e1aea41bcc67",
+  "inputs": {
+    "Configuration/replays/beginner-auto.json": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
+    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "5f52398a4200f3d8dd5d3b9d2862d66a43e7e57c56cfe625ca4f72b28ebc9f7a",
+    "build/package-manifest.json": "d88f4f3727e040f6c3e81eb01a9834cd0f582673d89ef1afd75bba67684fa05b",
+    "scripts/verify_live.py": "092c778ca0d37371734c5ecc01753c6203828bd09b13d82a47ef2329d282c4e2"
+  },
+  "observedFramesPerSecond": 60.0375,
+  "passed": true,
+  "presentedFramesPerSecond": 58.4375,
+  "scope": "Visible AppKit/SpriteKit race and AVFoundation output-device counters. Keep the app focused and run without competing engine workloads. No subjective listening, physical button actuation or physical arcade-board accuracy claim.",
+  "seconds": 80,
+  "telemetry": {
+    "automaticRecoveryCount": 0,
+    "backlogRecoveryCount": 0,
+    "discardedClockGaps": 0,
+    "displayUpdates": 4805,
+    "engineCallsOnDedicatedThread": true,
+    "engineFailureCount": 0,
+    "engineStartCount": 1,
+    "engineTiming": {
+      "audioSeconds": 0.055275708276894875,
+      "engineMilliseconds": {
+        "maximum": 24.845749998348765,
+        "p50": 14.265041667385958,
+        "p95": 15.665791666833684
+      },
+      "engineSeconds": 65.50948466683622,
+      "timingSamples": 4803
+    },
+    "flushCounts": {
+      "host": 1
+    },
+    "gameFrames": 4803,
+    "gameState": {
+      "closed": false,
+      "faultCode": 0,
+      "frame": 4803,
+      "framesPerSecond": 60,
+      "height": 384,
+      "sampleRate": 44100,
+      "width": 496
+    },
+    "isPlaying": true,
+    "isRunning": true,
+    "lastInput": {
+      "accelerator": 0,
+      "brake": 0,
+      "buttons": 0,
+      "steering": 0
+    },
+    "minPendingFrames": 2175,
+    "outputLatencySeconds": 0.059604166666666666,
+    "outputSampleRate": 48000,
+    "pausedByHost": false,
+    "peakPendingFrames": 3998,
+    "pendingFrames": 2881,
+    "preferredDisplayFramesPerSecond": 60,
+    "presentationTiming": {
+      "textureSeconds": 2.8040476251771906,
+      "timingSamples": 4805,
+      "updateMilliseconds": {
+        "maximum": 8.410166672547348,
+        "p50": 0.6071250099921599,
+        "p95": 0.6528333324240521
+      },
+      "updateSeconds": 2.854062165992218
+    },
+    "presentedFrames": 4675,
+    "renderedFrames": 3526589,
+    "scheduledFrames": 3529470,
+    "selectedGear": 0,
+    "sourceSampleRate": 44100,
+    "underrunCount": 0,
+    "updatesOnMainThread": true,
+    "windowOccluded": false,
+    "windowVisible": true
+  }
+}

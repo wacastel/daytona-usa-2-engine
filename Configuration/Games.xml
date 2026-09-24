@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<games>
+  <game name="daytona2">
+    <identity>
+      <title>Daytona USA 2 - Battle on the Edge</title>
+      <version>Japan, Revision A</version>
+      <manufacturer>Sega</manufacturer>
+      <year>1998</year>
+    </identity>
+    <hardware>
+      <platform>Sega Model 3</platform>
+      <stepping>2.1</stepping>
+      <mpeg_board>DSB2</mpeg_board>
+      <drive_board>Wheel</drive_board>
+      <netboard>true</netboard>
+      <audio>QuadFrontRear</audio>
+      <inputs>
+        <input type="common" />
+        <input type="vehicle" />
+        <input type="shift4" />
+        <input type="vr4" />
+      </inputs>
+      <encryption_key>0x29250e16</encryption_key>
+    </hardware>
+    <roms>
+      <region name="crom" stride="8" chunk_size="2" byte_swap="true">
+        <file offset="0" name="epr-20864a.20" crc32="0x5250F3A8" />
+        <file offset="2" name="epr-20863a.19" crc32="0x1DEB4686" />
+        <file offset="4" name="epr-20862a.18" crc32="0xE1B2CA61" />
+        <file offset="6" name="epr-20861a.17" crc32="0x89BA8E78" />
+      </region>
+      <region name="banked_crom" stride="8" chunk_size="2" byte_swap="true">
+        <file offset="0x0000000" name="mpr-20848.4" crc32="0x5B6C8B7D" />
+        <file offset="0x0000002" name="mpr-20847.3" crc32="0xEDA966EE" />
+        <file offset="0x0000004" name="mpr-20846.2" crc32="0xF44C5C7A" />
+        <file offset="0x0000006" name="mpr-20845.1" crc32="0x6037712C" />
+        <file offset="0x2000000" name="mpr-20852.8" crc32="0xD606AD38" />
+        <file offset="0x2000002" name="mpr-20851.7" crc32="0x6E7A64B7" />
+        <file offset="0x2000004" name="mpr-20850.6" crc32="0xCB73758A" />
+        <file offset="0x2000006" name="mpr-20849.5" crc32="0x50DEE4AF" />
+        <file offset="0x4000000" name="mpr-20856.12" crc32="0x0367A242" />
+        <file offset="0x4000002" name="mpr-20855.11" crc32="0xF1FF0794" />
+        <file offset="0x4000004" name="mpr-20854.10" crc32="0x68D94CDF" />
+        <file offset="0x4000006" name="mpr-20853.9" crc32="0x3245EE68" />
+        <file offset="0x6000000" name="mpr-20860.16" crc32="0xE5CE2939" />
+        <file offset="0x6000002" name="mpr-20859.15" crc32="0xE14F5C46" />
+        <file offset="0x6000004" name="mpr-20858.14" crc32="0x407FBAD5" />
+        <file offset="0x6000006" name="mpr-20857.13" crc32="0x1EAB9C62" />
+      </region>
+      <region name="vrom" stride="32" chunk_size="2">
+        <file offset="0" name="mpr-20870.26" crc32="0x7C9E573D" />
+        <file offset="2" name="mpr-20871.27" crc32="0x47A1B789" />
+        <file offset="4" name="mpr-20872.28" crc32="0x2F55B423" />
+        <file offset="6" name="mpr-20873.29" crc32="0xC9000E48" />
+        <file offset="8" name="mpr-20874.30" crc32="0x26A9CCA2" />
+        <file offset="10" name="mpr-20875.31" crc32="0xBFEFD21E" />
+        <file offset="12" name="mpr-20876.32" crc32="0xFA701B87" />
+        <file offset="14" name="mpr-20877.33" crc32="0x2CD072F1" />
+        <file offset="16" name="mpr-20878.34" crc32="0xE6D5BC01" />
+        <file offset="18" name="mpr-20879.35" crc32="0xF1D727EC" />
+        <file offset="20" name="mpr-20880.36" crc32="0x8B370602" />
+        <file offset="22" name="mpr-20881.37" crc32="0x397322E7" />
+        <file offset="24" name="mpr-20882.38" crc32="0x9185BE51" />
+        <file offset="26" name="mpr-20883.39" crc32="0xD1E39E83" />
+        <file offset="28" name="mpr-20884.40" crc32="0x63C4639A" />
+        <file offset="30" name="mpr-20885.41" crc32="0x61C292CA" />
+      </region>
+      <region name="sound_program" stride="1" chunk_size="1" byte_swap="true">
+        <file offset="0" name="epr-20865.21" crc32="0xB70C2699" />
+      </region>
+      <region name="sound_samples" stride="1" chunk_size="1" byte_swap="true">
+        <file offset="0x000000" name="mpr-20866.22" crc32="0x91F40C1C" />
+        <file offset="0x400000" name="mpr-20868.24" crc32="0xFA0C7EC0" />
+        <file offset="0x800000" name="mpr-20867.23" crc32="0xA579C884" />
+        <file offset="0xC00000" name="mpr-20869.25" crc32="0x1F338832" />
+      </region>
+      <region name="mpeg_program" stride="1" chunk_size="1" byte_swap="true">
+        <file offset="0" name="epr-20886.ic2" crc32="0x65B05F98" />
+      </region>
+      <region name="mpeg_music" stride="1" chunk_size="1">
+        <file offset="0x000000" name="mpr-20887.ic18" crc32="0xA0757684" />
+        <file offset="0x400000" name="mpr-20888.ic20" crc32="0xB495FE65" />
+        <file offset="0x800000" name="mpr-20889.ic22" crc32="0x18EEC79E" />
+        <file offset="0xC00000" name="mpr-20890.ic24" crc32="0xAAC96FA2" />
+      </region>
+      <region name="driveboard_program" stride="1" chunk_size="1" required="false">
+        <file offset="0" name="epr-20985.bin" crc32="0xB139481D" />
+      </region>
+    </roms>
+  </game>
+</games>

@@ -1,0 +1,295 @@
+{
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "correction": "The three inherited rotate expressions mask the complementary shift count to avoid shifting a 32-bit operand by 32 when the compiled rotate count is zero; differential comparison confirms the original dynamic arm64 result.",
+  "cpu": "PowerPC 603R",
+  "differential": {
+    "comparisons": 16760,
+    "faultChecks": 2,
+    "fixedUploadVariants": 203,
+    "handlerFamilies": 157,
+    "instructionVariants": 2095,
+    "passed": true,
+    "ramImageObservationChecks": [
+      {
+        "allMatch": true,
+        "base": "0x0063d000",
+        "bytes": 2396,
+        "imageSHA256": "3bd6fff06dcd518bd318da33436311156d48bb9d8070b3b570cdc76a5119dd74",
+        "observedAddresses": 189,
+        "observedIdentities": 189
+      }
+    ],
+    "registerStates": 8,
+    "results": {
+      "native": {
+        "bytes": 11128640,
+        "sha256": "62cbf5b01ae6e3b2349a84fc753fcb796ce9fbbd9598c014b06885abfbbd3c3e"
+      },
+      "reference": {
+        "bytes": 11128640,
+        "sha256": "62cbf5b01ae6e3b2349a84fc753fcb796ce9fbbd9598c014b06885abfbbd3c3e"
+      }
+    },
+    "scope": "Fixed arithmetic, branches, flags, floating point and bus writes compared with the unchanged instruction implementation; all supplied fixed upload variants are included; changed opcode and unknown PC reject; separate full frame comparison still required.",
+    "staticSampleVariants": 1892
+  },
+  "fixtureCasesSHA256": "06586357730b28417b6cd3600081df29e33713b94cf3b7248eba10d69039eb2c",
+  "fixtureNativeTranslationManifestSHA256": "79c59786d3e2ea3acc84b1831ec2225c8f4c39daa82ecdb50871181cf783a1f7",
+  "fixtureSHA256": "0141a40b2dd57f9bfa23b1068ee4d61d5261cc9be4ca201d4b67cbcd7adeda14",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-fno-strict-aliasing",
+    "-ffp-contract=off",
+    "-DSUPERMODEL_OSX"
+  ],
+  "format": 1,
+  "generation": {
+    "admittedHelperAlignedStarts": 203,
+    "examinedAlignedStartsPerStaticRange": 524288,
+    "fixedOperations": 71344,
+    "interpreterFallback": false,
+    "runtimeCompilation": false,
+    "runtimeOpcodeDecoder": false,
+    "staticRanges": [
+      "0xffe00000..0xffffffff",
+      "0x00000000..0x001fffff guarded ROM upload alias"
+    ],
+    "supportedAlignedStartsPerStaticRange": 437258
+  },
+  "generatorInputConsistency": {
+    "changedObservedWordRejected": true,
+    "checks": [
+      {
+        "allMatch": true,
+        "base": "0x0063d000",
+        "bytes": 2396,
+        "imageSHA256": "3bd6fff06dcd518bd318da33436311156d48bb9d8070b3b570cdc76a5119dd74",
+        "observedAddresses": 189,
+        "observedIdentities": 189
+      }
+    ],
+    "imageObservationsMustMatch": true
+  },
+  "generatorSHA256": "83b2b549852b7aed0a901b1cd64e1939c6b7493713c41fe387c545ecda9d61b9",
+  "helperImage": {
+    "allCapturedExecutionsMatch": true,
+    "base": "0x0063d000",
+    "boundary": "The final instruction at 0x0063d958 is blr; following words are helper data and are excluded from the native image.",
+    "bytes": 2396,
+    "captureScriptSHA256": "13a2cc13286cb6a535aab2ea1a31c4dae41db4f46eae7780dd29bc40cd554e26",
+    "captures": [
+      {
+        "diagnosticPageSHA256": "f0f4039fee48ffc8c388fc8c31fea2ab495982f6ba61ccdbf07e94e6ed35b6a4",
+        "frames": 4500,
+        "helperSHA256": "3bd6fff06dcd518bd318da33436311156d48bb9d8070b3b570cdc76a5119dd74",
+        "label": "advanced",
+        "referenceLibrarySHA256": "7bae628a67a36f6e7e1b987a5365eea03e633e03469d4baf45180e479208ca4a",
+        "reportSHA256": "4e3cbeacfad133b64683473557bfadcb5847fd7d43d11594d3fd12666f16bac4"
+      },
+      {
+        "diagnosticPageSHA256": "f0f4039fee48ffc8c388fc8c31fea2ab495982f6ba61ccdbf07e94e6ed35b6a4",
+        "frames": 4500,
+        "helperSHA256": "3bd6fff06dcd518bd318da33436311156d48bb9d8070b3b570cdc76a5119dd74",
+        "label": "expert",
+        "referenceLibrarySHA256": "7bae628a67a36f6e7e1b987a5365eea03e633e03469d4baf45180e479208ca4a",
+        "reportSHA256": "6270347df0056a5bcbf4cf0981d87977c2c08f1d1bb1c0ea7231e9a223d071b6"
+      },
+      {
+        "diagnosticPageSHA256": "f0f4039fee48ffc8c388fc8c31fea2ab495982f6ba61ccdbf07e94e6ed35b6a4",
+        "frames": 9500,
+        "helperSHA256": "3bd6fff06dcd518bd318da33436311156d48bb9d8070b3b570cdc76a5119dd74",
+        "label": "manual-final",
+        "referenceLibrarySHA256": "7bae628a67a36f6e7e1b987a5365eea03e633e03469d4baf45180e479208ca4a",
+        "reportSHA256": "467dec026ba7690a33de4e0c7f9c3802f29672d511dfc1397cd020768b546776"
+      }
+    ],
+    "diagnosticPageBytes": 4096,
+    "endExclusive": "0x0063d95c",
+    "first2KiBMatchesEarlierCaptures": true,
+    "independentCapturesMatch": true,
+    "sha256": "3bd6fff06dcd518bd318da33436311156d48bb9d8070b3b570cdc76a5119dd74",
+    "traceChecks": [
+      {
+        "distinctAddressWordIdentities": 9971,
+        "distinctAddresses": 9971,
+        "matchingHelperImage": 109,
+        "matchingStaticROMOrLowRAMAlias": 9862,
+        "sha256": "f0d8fda5f721b7265d088abf7457af364ecaf2818c2b42fe630be1284abf4a94",
+        "trace": "observer/ppc-boot.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 62524,
+        "distinctAddresses": 62524,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 62335,
+        "sha256": "2074ecb783f821408d68c3122587f621bcff6aeb3a44519add15de2ab3bc6507",
+        "trace": "observer/ppc-game.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 9971,
+        "distinctAddresses": 9971,
+        "matchingHelperImage": 109,
+        "matchingStaticROMOrLowRAMAlias": 9862,
+        "sha256": "f94544251073cc5ca3b88996ec3addb05aa72b0b77b29fc0d2916466c23547b3",
+        "trace": "observer/ppc-longboot.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 65326,
+        "distinctAddresses": 65326,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 65137,
+        "sha256": "b7dcc4d84c30ce14abe1c1a50f28d3616e4b8853918ca9774e3120d40317f15e",
+        "trace": "observer/ppc-manual-final.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 61638,
+        "distinctAddresses": 61638,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 61449,
+        "sha256": "9be53495e6392fded9bae89eddaa920b90887a1c4b7554add09f6db5bc1eb0ec",
+        "trace": "observer/ppc-manual.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 61860,
+        "distinctAddresses": 61860,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 61671,
+        "sha256": "5f874b02f597884f1d400db6f93895175acc591c0ac74ba642367ac7722c88d8",
+        "trace": "observer/ppc-manual2.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 10207,
+        "distinctAddresses": 10207,
+        "matchingHelperImage": 109,
+        "matchingStaticROMOrLowRAMAlias": 10098,
+        "sha256": "a14d65ae41e374b074a5fb805bd69107a77bf5fcb727dd437519fc41c8de7149",
+        "trace": "observer/ppc-start.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 10207,
+        "distinctAddresses": 10207,
+        "matchingHelperImage": 109,
+        "matchingStaticROMOrLowRAMAlias": 10098,
+        "sha256": "7a1daa20a919106e7aa2c83791973b2c38f864c8364a7f7268cbe9297b8cf4b3",
+        "trace": "observer/ppc-visible.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 63930,
+        "distinctAddresses": 63930,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 63741,
+        "sha256": "5b23141897fe9d32a316468d16fa9ca3afd841163f5432c8879a58aef102c3e0",
+        "trace": "routes/advanced/ppc.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 60296,
+        "distinctAddresses": 60296,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 60107,
+        "sha256": "85e024fd5b59974653c472807c40e48dadb9271ea8db5249b84de4b49b308e91",
+        "trace": "routes/expert/ppc.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 41722,
+        "distinctAddresses": 41722,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 41533,
+        "sha256": "b22789e6fd057b5d72ecc07f8ed92e30b73c4eb554c14db5d6e35b565181f6c9",
+        "trace": "settings/ppc.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 41534,
+        "distinctAddresses": 41534,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 41345,
+        "sha256": "f9b179ff1b5c7044ea788b10d05a7cd2db46910e8730f7c5b3ef8292b2d70f38",
+        "trace": "settings/prepare-0nz2c7_s/ppc.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 41490,
+        "distinctAddresses": 41490,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 41301,
+        "sha256": "241c56a9eb325b1d5843c3fa4e611f970161f48f727c32afc25a7bc5f72f7df1",
+        "trace": "settings/prepare-mkvcoggh/ppc.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 63716,
+        "distinctAddresses": 63716,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 63527,
+        "sha256": "ca1343853701dd341a85b15999502df28db2da9995462b72b6180eed7e383394",
+        "trace": "validation/helper-advanced/ppc.tsv",
+        "uncoveredIdentities": 0
+      },
+      {
+        "distinctAddressWordIdentities": 60083,
+        "distinctAddresses": 60083,
+        "matchingHelperImage": 189,
+        "matchingStaticROMOrLowRAMAlias": 59894,
+        "sha256": "476d2a8250de14571aa15b224190c393225bfc442eddc66b83052b9d804feee2",
+        "trace": "validation/helper-expert/ppc.tsv",
+        "uncoveredIdentities": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Differential operation fixtures test 1,892 ROM samples across 157 handler families plus every one of the 203 admitted helper starts; they do not enumerate every state of all 71,344 product operations.",
+    "Negative CPU fault checks exercise the generated dispatcher in a bounded laboratory fixture; live product corruption checks are separate.",
+    "Matching helper images from Advanced, Expert and manual gameplay, plus matching words in all 15 traces, establish the exercised upload identity; they do not establish complete-game or physical-board equivalence.",
+    "Full frame/audio replay, real-time performance and host input/display acceptance are separate requirements."
+  ],
+  "media": [
+    {
+      "crc32": "5250f3a8",
+      "name": "epr-20864a.20",
+      "sha256": "5e773b3441a86881e63c38ecc81a8ede5e063d380c637c58b02c45b011105286",
+      "size": 2097152
+    },
+    {
+      "crc32": "1deb4686",
+      "name": "epr-20863a.19",
+      "sha256": "3b55ee54945195f95fa6f94398e47e228dcdf1b3f1d15f6610fdad81755d4dc0",
+      "size": 2097152
+    },
+    {
+      "crc32": "e1b2ca61",
+      "name": "epr-20862a.18",
+      "sha256": "bd73b06059fb223398916acc58d2170b998d7f5475dc0604788a4297984368be",
+      "size": 2097152
+    },
+    {
+      "crc32": "89ba8e78",
+      "name": "epr-20861a.17",
+      "sha256": "312a5b072e4f6050988b5f6c932de11e33451274ff7ab9862971dd91b266d7b4",
+      "size": 2097152
+    }
+  ],
+  "originalSources": {
+    "ppc.cpp": "a3d727393052ffa96d32c04866ea619422625bc67d42315a125df9da502b93e5",
+    "ppc.h": "59ca9af75e3cbc399957cb657eb43845cec4e73a390211f401a71b3acfb228b4",
+    "ppc603.c": "4cbbd401843f2a42d7175525bf9d28549a05ae9fb93240c611fd182270726e0b",
+    "ppc_ops.c": "ab40520e6d2428cf943b21d2f290531a02f1c83c8dac46319b70d3139c120d3b",
+    "ppc_ops.h": "81c15dd23a131244bce351d80f8b6efd0d9e20ec50ceaf2eb9c20931afa04f58"
+  },
+  "passed": true,
+  "productGeneratedSourceSHA256": "1196656e144f137e682be4cbd10f286265e7c544e660854d3c658648d09191bc",
+  "productTranslationManifestSHA256": "69537ca0ba765f74a12d8e866bd1813ac2b29c1edd934950e297ccbbe176e915",
+  "target": "arm64-apple-macosx",
+  "upstreamCommit": "24d2ffcfc7f14229337f05f4920fe26b56633d9d",
+  "verifierSHA256": "6382f0f8258102a6c7e8b5086c5aeedaa1a8378d9f3ebde6c3319b500200343d"
+}

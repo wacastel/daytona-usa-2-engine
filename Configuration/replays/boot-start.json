@@ -1,0 +1,29 @@
+{
+  "events": [
+    {
+      "start": 600,
+      "end": 602,
+      "buttons": 1
+    },
+    {
+      "start": 620,
+      "end": 622,
+      "buttons": 1
+    },
+    {
+      "start": 660,
+      "end": 662,
+      "buttons": 2
+    },
+    {
+      "start": 850,
+      "end": 852,
+      "buttons": 2
+    },
+    {
+      "start": 1000,
+      "end": 3500,
+      "accelerator": 1
+    }
+  ]
+}

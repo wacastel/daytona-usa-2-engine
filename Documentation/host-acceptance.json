@@ -1,0 +1,26 @@
+{
+  "elapsedSeconds": 139.76622605323792,
+  "exactPictureAudioCountAgreement": true,
+  "finalFaultCode": 0,
+  "frames": 9500,
+  "freshSessions": {
+    "audioSHA256": "d95e0279046ad56183dd04380fe70cbbcef33861895e6d2720c8f2c19f4f2c76",
+    "deterministic": true,
+    "framesEach": 2400,
+    "pictureSHA256": "285c98a9a906855ff0f404ef2b34cc9fadc42bf2dc09c456ba020e1eb67f21b3",
+    "runs": 2,
+    "sameProcess": true,
+    "sampleFramesEach": 1764000
+  },
+  "inputs": {
+    "Configuration/replays/beginner-manual.json": "3e3e48f899f15d2b45649ce117f385bc396bbaff663ee02c5cb60acef058e614",
+    "Documentation/integration-acceptance.json": "6099f9d3b91a4922da75bbd36b34b697f6b6c79b4f2d1a133896e336bf6ff1fd",
+    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "5f52398a4200f3d8dd5d3b9d2862d66a43e7e57c56cfe625ca4f72b28ebc9f7a",
+    "build/package-manifest.json": "d88f4f3727e040f6c3e81eb01a9834cd0f582673d89ef1afd75bba67684fa05b",
+    "scripts/verify_host.py": "76cdc0a299c4974caadf8db396d0f3126d01fc30152ad6660faa758a60c7a868"
+  },
+  "passed": true,
+  "route": "Configuration/replays/beginner-manual.json",
+  "sampleFrames": 6982500,
+  "scope": "Real packaged Swift executable and bundled media match every accepted direct-engine RGBA/PCM/count frame; two additional fresh sessions in one process agree on picture, PCM and count. These headless runs do not exercise the display or audio device."
+}
