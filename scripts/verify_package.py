@@ -16,6 +16,7 @@ FORBIDDEN = ('daytona2_reference_probe_marker', 'daytona2_diagnostic_engine_mark
              'm68k_op_', 'm68k_disassemble', 'PPCDisasm', 'optable19', 'optable31',
              'optable59', 'optable63', 'SDL_')
 FIXED_SYMBOLS = ('daytona2_ppc_program', 'daytona2_ppc_operations',
+                 'daytona2_ppc_race_countdown', 'daytona2_set_timer_frozen', 'daytona2_timer_frozen',
                  'daytona2_sound_entry_at', 'daytona2_sound_op_',
                  'fixed_dsp_program_', 'daytona2_z80_program')
 
@@ -43,6 +44,8 @@ def verify_engine_sources(engine):
         relative = Path(entry['path'])
         if relative.is_absolute() or '..' in relative.parts or sha(ROOT / relative) != entry['sha256']:
             raise RuntimeError('CPU manifest changed: ' + cpu)
+        if cpu == 'PowerPC' and json.loads((ROOT / relative).read_text()).get('timerFreeze', {}).get('implemented') is not True:
+            raise RuntimeError('The native product requires the authenticated race-countdown hook')
         replacement_hashes[cpu] = entry['sha256']
     return replacement_hashes
 

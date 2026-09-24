@@ -36,9 +36,12 @@ Configuration/replays/expert-auto.json
 Documentation/architecture.md
 Documentation/bridge-acceptance.json
 Documentation/cabinet-settings.md
+Documentation/camera-acceptance.json
+Documentation/controls-update-acceptance.json
 Documentation/integration-acceptance.json
 Documentation/host-acceptance.json
 Documentation/host-input-acceptance.json
+Documentation/host-reset-acceptance.json
 Documentation/live-acceptance.json
 Documentation/media-acceptance.json
 Documentation/package-acceptance.json
@@ -47,6 +50,7 @@ Documentation/ppc-acceptance.json
 Documentation/reproduction-acceptance.json
 Documentation/sound-acceptance.json
 Documentation/sound-lifecycle-acceptance.json
+Documentation/timer-acceptance.json
 Documentation/z80-acceptance.json
 Documentation/ui-acceptance.json
 Documentation/validation.md
@@ -104,7 +108,9 @@ scripts/verify_package.py
 scripts/verify_bridge.py
 scripts/verify_integration.py
 scripts/verify_host.py
+scripts/verify_host_reset.py
 scripts/verify_live.py
+scripts/verify_timer.py
 '''.split()
 SOURCE_TREES = {'Assets', 'Sources', 'Tools', 'scripts', 'Configuration', 'Documentation', 'Licenses', 'Resources'}
 TEXT_SUFFIXES = {'.py', '.sh', '.command', '.c', '.cpp', '.h', '.hpp', '.inc', '.swift', '.xml', '.md', '.json', '.txt', '.plist'}

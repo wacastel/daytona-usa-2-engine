@@ -11,6 +11,7 @@ final class DaytonaScene: SKScene {
     private let shade = SKShapeNode(rectOf: CGSize(width: 512, height: 384))
     private let title = SKLabelNode(fontNamed: "AvenirNext-DemiBold")
     private let hint = SKLabelNode(fontNamed: "AvenirNext-Regular")
+    private let timerIndicator = SKLabelNode(fontNamed: "AvenirNext-DemiBold")
     private var failed = false
     private var updateCount = 0, presentedFrames = 0
     private var lastPresentedSerial: UInt64?
@@ -23,6 +24,7 @@ final class DaytonaScene: SKScene {
     var diagnosticReplay: DaytonaReplay? { didSet { worker.setReplay(diagnosticReplay) } }
     var savesPreferences = true
     var frameCount: Int { worker.frameCount }
+    var timerFrozen: Bool { worker.timerFrozen }
     var muted: Bool {
         get { audio.muted }
         set { audio.muted = newValue; if savesPreferences { DaytonaPreferences.defaults.set(newValue, forKey: DaytonaPreferences.mutedKey) } }
@@ -45,8 +47,13 @@ final class DaytonaScene: SKScene {
         shade.strokeColor = .clear; shade.zPosition = 10; shade.isHidden = true; addChild(shade)
         title.fontSize = 24; title.position = CGPoint(x: 0, y: 9); shade.addChild(title)
         hint.fontSize = 12; hint.position = CGPoint(x: 0, y: -20); shade.addChild(hint)
+        timerIndicator.text = "TIMER FROZEN"; timerIndicator.fontSize = 11
+        timerIndicator.fontColor = .yellow; timerIndicator.horizontalAlignmentMode = .left
+        timerIndicator.position = CGPoint(x: 9, y: 8); timerIndicator.zPosition = 5
+        timerIndicator.isHidden = true; addChild(timerIndicator)
         controls.onTogglePause = { [weak self] in self?.togglePause() }
         controls.onResume = { [weak self] in self?.setPaused(false) }
+        controls.onToggleTimerFreeze = { [weak self] in self?.toggleTimerFreeze() }
         _ = routed { controls.refreshControllers(GCController.controllers()) }
         observe(.GCControllerDidConnect) { [weak self] _ in self?.refreshControllers() }
         observe(.GCControllerDidDisconnect) { [weak self] _ in self?.refreshControllers() }
@@ -73,13 +80,17 @@ final class DaytonaScene: SKScene {
     func setInputActive(_ active: Bool) { routed { controls.setActive(active) }; if !active { setPaused(true) } }
     func setPaused(_ paused: Bool) {
         pausedByHost = paused; routed { controls.setPaused(paused) }; worker.setPaused(paused)
-        shade.isHidden = !paused; title.text = "Paused"; hint.text = "Release controls, then press Return / Options"
+        shade.isHidden = !paused; title.text = "Paused"; hint.text = "Release controls, then press Return / Create / Options"
     }
     func togglePause() { setPaused(!pausedByHost) }
+    func toggleTimerFreeze() {
+        guard !failed else { return }
+        worker.toggleTimerFrozen(); timerIndicator.isHidden = !worker.timerFrozen
+    }
     func resetGame() {
         do {
             try worker.reset(); routed { controls.resetGearSelector() }; failed = false
-            picture.texture = nil; lastPresentedSerial = nil; setPaused(false)
+            picture.texture = nil; lastPresentedSerial = nil; timerIndicator.isHidden = true; setPaused(false)
         } catch { showFailure(error) }
     }
     override func update(_ time: TimeInterval) {

@@ -6,7 +6,8 @@ import UniformTypeIdentifiers
 
 @_silgen_name("daytona2_create") private func nativeCreate(_ assets: UnsafePointer<CChar>, _ saves: UnsafePointer<CChar>) -> UnsafeMutableRawPointer?
 @_silgen_name("daytona2_destroy") private func nativeDestroy(_ context: UnsafeMutableRawPointer)
-@_silgen_name("daytona2_reset") private func nativeReset(_ context: UnsafeMutableRawPointer) -> Int32
+@_silgen_name("daytona2_set_timer_frozen") private func nativeSetTimerFrozen(_ context: UnsafeMutableRawPointer, _ frozen: Int32) -> Int32
+@_silgen_name("daytona2_timer_frozen") private func nativeTimerFrozen(_ context: UnsafeMutableRawPointer) -> Int32
 @_silgen_name("daytona2_error") private func nativeError(_ context: UnsafeMutableRawPointer?) -> UnsafePointer<CChar>?
 @_silgen_name("daytona2_fault_code") private func nativeFaultCode(_ context: UnsafeMutableRawPointer) -> UInt32
 @_silgen_name("daytona2_step") private func nativeStep(_ context: UnsafeMutableRawPointer, _ steering: Float, _ accelerator: Float, _ brake: Float, _ buttons: UInt32) -> Int32
@@ -44,7 +45,7 @@ final class DaytonaGame {
             guard CGImageDestinationFinalize(destination) else { throw DaytonaUSA2Error.message("Could not save the frame capture.") }
         }
     }
-    private let context: UnsafeMutableRawPointer
+    private var context: UnsafeMutableRawPointer
     private let media: DaytonaMedia
     private var closed = false
     let width: Int, height: Int, sampleRate: Int
@@ -83,8 +84,28 @@ final class DaytonaGame {
     }
     func reset() throws {
         try requireOpen()
-        guard nativeReset(context) == 1 else { throw failure }
+        guard nativeFaultCode(context) == 0 else { throw failure }
+        // A cabinet restart needs fresh sound/DSP state as well as a CPU reset.
+        // Destroy saves NVRAM; recreate reloads it from this same directory.
+        // Both calls remain on the owning engine thread, including CGL teardown.
+        closed = true
+        nativeDestroy(context)
+        let pointer = media.assets.path.withCString { assets in media.saves.path.withCString { nativeCreate(assets, $0) } }
+        guard let pointer else {
+            media.removeTemporarySaves()
+            throw DaytonaUSA2Error.message(nativeError(nil).map { String(cString: $0) } ?? "The Daytona USA 2 native engine could not restart.")
+        }
+        guard Int(nativeWidth(pointer)) == width, Int(nativeHeight(pointer)) == height,
+              nativeFrameRate(pointer) == framesPerSecond, Int(nativeSampleRate(pointer)) == sampleRate else {
+            nativeDestroy(pointer); media.removeTemporarySaves()
+            throw DaytonaUSA2Error.message("The restarted engine returned a different video or audio format.")
+        }
+        context = pointer; closed = false
         frameCount = 0; sampleFrames = 0; latestFrame = nil
+    }
+    func setTimerFrozen(_ frozen: Bool) throws {
+        try requireOpen()
+        guard nativeSetTimerFrozen(context, frozen ? 1 : 0) == 1 else { throw failure }
     }
     func advance(_ input: DaytonaInput) throws -> [Int16] {
         try requireOpen(); try input.validate()
@@ -106,7 +127,8 @@ final class DaytonaGame {
     }
     func diagnostics() -> [String: Any] {
         ["frame": frameCount, "closed": closed,
-         "faultCode": closed ? 0 : nativeFaultCode(context), "framesPerSecond": framesPerSecond,
+         "faultCode": closed ? 0 : nativeFaultCode(context), "timerFrozen": !closed && nativeTimerFrozen(context) != 0,
+         "framesPerSecond": framesPerSecond,
          "sampleRate": sampleRate, "width": width, "height": height]
     }
 }

@@ -3,39 +3,94 @@
   "correction": "The three inherited rotate expressions mask the complementary shift count to avoid shifting a 32-bit operand by 32 when the compiled rotate count is zero; differential comparison confirms the original dynamic arm64 result.",
   "cpu": "PowerPC 603R",
   "differential": {
-    "comparisons": 16760,
-    "faultChecks": 2,
+    "passed": true,
+    "instructionVariants": 2097,
+    "staticSampleVariants": 1894,
     "fixedUploadVariants": 203,
     "handlerFamilies": 157,
-    "instructionVariants": 2095,
-    "passed": true,
+    "registerStates": 8,
+    "comparisons": 16776,
+    "faultChecks": 2,
     "ramImageObservationChecks": [
       {
-        "allMatch": true,
         "base": "0x0063d000",
         "bytes": 2396,
         "imageSHA256": "3bd6fff06dcd518bd318da33436311156d48bb9d8070b3b570cdc76a5119dd74",
         "observedAddresses": 189,
-        "observedIdentities": 189
+        "observedIdentities": 189,
+        "allMatch": true
       }
     ],
-    "registerStates": 8,
     "results": {
-      "native": {
-        "bytes": 11128640,
-        "sha256": "62cbf5b01ae6e3b2349a84fc753fcb796ce9fbbd9598c014b06885abfbbd3c3e"
-      },
       "reference": {
-        "bytes": 11128640,
-        "sha256": "62cbf5b01ae6e3b2349a84fc753fcb796ce9fbbd9598c014b06885abfbbd3c3e"
+        "sha256": "92aa145f11ed03402200447e678e362388294b1d2b36ff894f2a6286dd6dda5e",
+        "bytes": 11139264
+      },
+      "native": {
+        "sha256": "92aa145f11ed03402200447e678e362388294b1d2b36ff894f2a6286dd6dda5e",
+        "bytes": 11139264
       }
     },
+    "timerAssist": {
+      "stateComparisons": 84,
+      "changedOpcodeRejections": 2,
+      "changedContextRejections": 4,
+      "contexts": [
+        {
+          "pc": "0x0001b000",
+          "bytes": 116,
+          "sha256": "9ed98e3e1f2d0196c4c562c7f8a9cd7b562f5ce7e44d6931fd9c6337f1288d01"
+        },
+        {
+          "pc": "0x0001adfc",
+          "bytes": 60,
+          "sha256": "b08517f0a8b0e8cf37d9c156b12029a7fbaf685bde3fc6e7dd9c63aa79cbd140"
+        },
+        {
+          "pc": "0x000aeca4",
+          "bytes": 4,
+          "sha256": "45648092981b9ffabc28467afc359d8d32005633086d6dc8bfa0cdbff0000e8b"
+        },
+        {
+          "pc": "0x0001afb8",
+          "bytes": 20,
+          "sha256": "63c6996ac714b1e1ce702c1c3a920df664a9e7bce41db52dc15285537e097afc"
+        }
+      ],
+      "scope": "Whole CPU state equals original addic, except held positive r0 only when enabled at exact PC/base/current race phase/caller state. Checks positive/zero/negative counters, both carry inputs, disabled, other-PC/base/phases and changed instruction rejection."
+    },
     "scope": "Fixed arithmetic, branches, flags, floating point and bus writes compared with the unchanged instruction implementation; all supplied fixed upload variants are included; changed opcode and unknown PC reject; separate full frame comparison still required.",
-    "staticSampleVariants": 1892
+    "provenance": {
+      "inputs": {
+        "scripts/verify_ppc.py": "70a3fe1243844829aa9b58617e9c3e7e4283ca1a03715d1bc3a52b300000ab95",
+        "scripts/compile_ppc.py": "a7659525411974d60439abeb515592365be97a07977c22bb2ec426885e3331de",
+        "Tools/ReferenceLab/ppc_operation_fixture.cpp": "9d6d8a2c76e26264c81a8c9a83abf62d45409e5de0120659a07cd2a6a6422dbb",
+        "build/upstream/supermodel/Src/CPU/PowerPC/ppc.cpp": "a3d727393052ffa96d32c04866ea619422625bc67d42315a125df9da502b93e5",
+        "build/upstream/supermodel/Src/CPU/PowerPC/ppc603.c": "4cbbd401843f2a42d7175525bf9d28549a05ae9fb93240c611fd182270726e0b",
+        "build/upstream/supermodel/Src/CPU/PowerPC/ppc_ops.c": "ab40520e6d2428cf943b21d2f290531a02f1c83c8dac46319b70d3139c120d3b",
+        "build/upstream/supermodel/Src/CPU/PowerPC/ppc_ops.h": "81c15dd23a131244bce351d80f8b6efd0d9e20ec50ceaf2eb9c20931afa04f58",
+        "build/upstream/supermodel/Src/CPU/PowerPC/ppc.h": "59ca9af75e3cbc399957cb657eb43845cec4e73a390211f401a71b3acfb228b4"
+      },
+      "fixtureCasesSHA256": "99cab0c9eda8eeb06349c8788a493ef71f08d479b01b1d156f4e2c45e8f065b5",
+      "generatedFixtureSHA256": "ac76e9ac92a33c850a2678832a63b1e2b8ac84f320a5bcfa4521b5ab40a66ad8",
+      "fixtureTranslationManifestSHA256": "1e4fca32f6696bb1a3473bb9a3f84255ef2826132bb56815fa213f5a94a7612a",
+      "harnesses": {
+        "reference": "57b4b62ef8660a4495b5d4604d607b1275f3e7c48adca5129cc5f865c2ebede6",
+        "native": "1624a249c191711d5dd23b3c900affd1c5cddca5c6e276bfa5578b15014d723b"
+      },
+      "binaries": {
+        "reference": "06f515167448404303bec1d7ed3cd5162c27547c29240c2e227493769d0bce2c",
+        "native": "84ba818f470ac2df0acb8625607c954d01d2158729e2c4bb1145fe9977fed20e"
+      },
+      "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+      "productTranslationManifestSHA256": "35f3bab46738e18358c5d4a72c25ff4aaf8d597edb98eeb71294aec33dab747f",
+      "productGeneratedSourceSHA256": "c9cd20c74960cf97f3a64d2f5ad30aaf3ebf463a0b5edbf1aaa455ef07cf367c",
+      "metadataRefresh": "Added provenance after fixture completion; exact generated inputs, compiled harness source and captured result hashes reverified. No execution inputs changed."
+    }
   },
-  "fixtureCasesSHA256": "06586357730b28417b6cd3600081df29e33713b94cf3b7248eba10d69039eb2c",
-  "fixtureNativeTranslationManifestSHA256": "79c59786d3e2ea3acc84b1831ec2225c8f4c39daa82ecdb50871181cf783a1f7",
-  "fixtureSHA256": "0141a40b2dd57f9bfa23b1068ee4d61d5261cc9be4ca201d4b67cbcd7adeda14",
+  "fixtureCasesSHA256": "99cab0c9eda8eeb06349c8788a493ef71f08d479b01b1d156f4e2c45e8f065b5",
+  "fixtureNativeTranslationManifestSHA256": "1e4fca32f6696bb1a3473bb9a3f84255ef2826132bb56815fa213f5a94a7612a",
+  "fixtureSHA256": "9d6d8a2c76e26264c81a8c9a83abf62d45409e5de0120659a07cd2a6a6422dbb",
   "flags": [
     "-std=c++17",
     "-O2",
@@ -71,7 +126,7 @@
     ],
     "imageObservationsMustMatch": true
   },
-  "generatorSHA256": "83b2b549852b7aed0a901b1cd64e1939c6b7493713c41fe387c545ecda9d61b9",
+  "generatorSHA256": "a7659525411974d60439abeb515592365be97a07977c22bb2ec426885e3331de",
   "helperImage": {
     "allCapturedExecutionsMatch": true,
     "base": "0x0063d000",
@@ -248,7 +303,7 @@
     ]
   },
   "limitations": [
-    "Differential operation fixtures test 1,892 ROM samples across 157 handler families plus every one of the 203 admitted helper starts; they do not enumerate every state of all 71,344 product operations.",
+    "Differential operation fixtures test 1,894 ROM samples across 157 handler families plus every one of the 203 admitted helper starts; they do not enumerate every state of all 71,344 product operations.",
     "Negative CPU fault checks exercise the generated dispatcher in a bounded laboratory fixture; live product corruption checks are separate.",
     "Matching helper images from Advanced, Expert and manual gameplay, plus matching words in all 15 traces, establish the exercised upload identity; they do not establish complete-game or physical-board equivalence.",
     "Full frame/audio replay, real-time performance and host input/display acceptance are separate requirements."
@@ -287,9 +342,43 @@
     "ppc_ops.h": "81c15dd23a131244bce351d80f8b6efd0d9e20ec50ceaf2eb9c20931afa04f58"
   },
   "passed": true,
-  "productGeneratedSourceSHA256": "1196656e144f137e682be4cbd10f286265e7c544e660854d3c658648d09191bc",
-  "productTranslationManifestSHA256": "69537ca0ba765f74a12d8e866bd1813ac2b29c1edd934950e297ccbbe176e915",
+  "productGeneratedSourceSHA256": "c9cd20c74960cf97f3a64d2f5ad30aaf3ebf463a0b5edbf1aaa455ef07cf367c",
+  "productTranslationManifestSHA256": "35f3bab46738e18358c5d4a72c25ff4aaf8d597edb98eeb71294aec33dab747f",
   "target": "arm64-apple-macosx",
   "upstreamCommit": "24d2ffcfc7f14229337f05f4920fe26b56633d9d",
-  "verifierSHA256": "6382f0f8258102a6c7e8b5086c5aeedaa1a8378d9f3ebde6c3319b500200343d"
+  "verifierSHA256": "70a3fe1243844829aa9b58617e9c3e7e4283ca1a03715d1bc3a52b300000ab95",
+  "timerAssist": {
+    "implemented": true,
+    "pc": "0x0001b060",
+    "originalOpcode": "0x3000ffff",
+    "contexts": [
+      {
+        "pc": "0x0001b000",
+        "bytes": 116,
+        "sha256": "9ed98e3e1f2d0196c4c562c7f8a9cd7b562f5ce7e44d6931fd9c6337f1288d01"
+      },
+      {
+        "pc": "0x0001adfc",
+        "bytes": 60,
+        "sha256": "b08517f0a8b0e8cf37d9c156b12029a7fbaf685bde3fc6e7dd9c63aa79cbd140"
+      },
+      {
+        "pc": "0x000aeca4",
+        "bytes": 4,
+        "sha256": "45648092981b9ffabc28467afc359d8d32005633086d6dc8bfa0cdbff0000e8b"
+      },
+      {
+        "pc": "0x0001afb8",
+        "bytes": 20,
+        "sha256": "63c6996ac714b1e1ce702c1c3a920df664a9e7bce41db52dc15285537e097afc"
+      }
+    ],
+    "countdownAddress": "0x00105010",
+    "elapsedAddress": "0x0010500c",
+    "currentPhaseAddress": "0x00105004",
+    "currentPhase": 17,
+    "callerStateAddress": "0x007350ee",
+    "callerState": 13,
+    "scope": "Optional positive active-race decrement only. Execute original addic, preserving carry and timing; restore only positive r0 when enabled at the authenticated PC, base register and original phase. No game RAM or ROM patches."
+  }
 }

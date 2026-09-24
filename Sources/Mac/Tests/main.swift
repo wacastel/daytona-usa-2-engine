@@ -66,9 +66,10 @@ do {
     ] { try rejectedReplay(json, reason) }
 
     let c = DaytonaControls()
-    var pauses = 0, resumes = 0
+    var pauses = 0, resumes = 0, freezes = 0
     c.onTogglePause = { pauses += 1; c.setPaused(!c.paused) }
     c.onResume = { resumes += 1; c.setPaused(false) }
+    c.onToggleTimerFreeze = { freezes += 1 }
     tap(c, 34)
     try check(c.input() == DaytonaInput(), "Unassigned I does not alter original arcade controls")
     for (key, mask): (UInt16, UInt32) in [(8,1),(36,2),(76,2),(122,4),(120,8),(99,16),(118,32)] {
@@ -76,6 +77,12 @@ do {
         try check(c.input().buttons == mask, "Keyboard \(key) maps to bit \(mask), retaining short taps")
         c.consumedFrame(); try check(c.input().buttons == 0, "Keyboard tap \(key) clears after a consumed frame")
     }
+    c.key(17, down: true); c.key(17, down: true); c.key(17, down: true, repeated: true)
+    try check(freezes == 1 && c.input() == DaytonaInput(), "T toggles timer once without sending an arcade button")
+    c.key(17, down: false); tap(c, 17)
+    try check(freezes == 2, "A fresh T press toggles timer again")
+    c.setActive(false); tap(c, 17); c.setActive(true)
+    try check(freezes == 2, "Inactive keyboard cannot toggle the timer")
     c.key(124, down: true); c.key(13, down: true); c.key(1, down: true)
     try check(c.input().steering == 1 && c.input().accelerator == 1 && c.input().brake == 1, "Keyboard steering and independent pedals")
     c.key(123, down: true); try check(c.input().steering == 0, "Opposite keyboard steering cancels")
@@ -105,7 +112,8 @@ do {
     try check(c.selectedGear == 3 && c.input() == DaytonaInput(), "Focus loss discards only unconsumed gear and retains committed latch")
     c.setActive(true); tap(c, 35)
     try check(c.paused && pauses == 1 && c.selectedGear == 3, "P pauses without changing committed gear")
-    tap(c, 18); tap(c, 14)
+    tap(c, 18); tap(c, 14); tap(c, 17)
+    try check(freezes == 2, "Paused keyboard cannot toggle the timer")
     try check(c.selectedGear == 3 && c.input() == DaytonaInput(), "Paused gear controls do not queue changes")
     tap(c, 36)
     try check(!c.paused && resumes == 1 && c.input().buttons == 0 && c.selectedGear == 3, "Return resumes without delivering Start or changing gear")
@@ -130,16 +138,46 @@ do {
     c.key(124, down: true); try check(c.input().steering == 1, "Keyboard steering overrides controller")
     c.clearKeyboard(); pad.dpad.xAxis.setValue(0); pad.leftThumbstick.xAxis.setValue(0)
     pad.rightTrigger.setValue(0); pad.leftTrigger.setValue(0); c.pollController()
-    for (button, mask) in [(pad.buttonB,UInt32(1)),(pad.buttonMenu,2),(pad.buttonA,4),(pad.buttonX,8)] {
+    for (button, mask) in [(pad.buttonB,UInt32(1)),(pad.buttonMenu,2)] {
         c.consumedFrame(); button.setValue(1); c.pollController(); button.setValue(0); c.pollController()
         try check(c.input().buttons == mask, "Controller bit \(mask) survives a press/release without a frame")
         c.consumedFrame(); try check(c.input().buttons == 0, "Consumed controller bit \(mask) clears")
     }
+    for expected in [2,3,4,1] {
+        pad.buttonA.setValue(1); c.pollController(); c.pollController()
+        try check(c.selectedView == expected && c.input().buttons == DaytonaButton.view(expected), "Cross advances to original view \(expected) only once when held")
+        pad.buttonA.setValue(0); c.pollController(); c.consumedFrame()
+        try check(c.input().buttons == 0, "Consumed Cross selector \(expected) clears")
+    }
+    for expected in [4,3,2,1] {
+        pad.buttonX.setValue(1); c.pollController(); pad.buttonX.setValue(0); c.pollController()
+        try check(c.input().buttons == DaytonaButton.view(expected), "Square reverses to original view \(expected)")
+        c.consumedFrame()
+    }
+    pad.buttonA.setValue(1); c.pollController(); pad.buttonA.setValue(0); c.pollController()
+    pad.buttonA.setValue(1); c.pollController(); pad.buttonA.setValue(0); c.pollController()
+    try check(c.input().buttons == DaytonaButton.view3, "Two unconsumed Cross taps select VR3 without combining cabinet view buttons")
+    c.consumedFrame(); tap(c, 118); c.consumedFrame()
+    pad.buttonA.setValue(1); c.pollController(); pad.buttonA.setValue(0); c.pollController()
+    try check(c.input().buttons == DaytonaButton.view1, "Cross continues from the last committed keyboard view")
+    c.consumedFrame()
     for (x,y,mask): (Float,Float,UInt32) in [(0,1,4),(1,0,8),(0,-1,16),(-1,0,32)] {
         pad.rightThumbstick.xAxis.setValue(x); pad.rightThumbstick.yAxis.setValue(y); c.pollController()
         try check(c.input().buttons == mask, "Right-stick view selector \(mask)")
         pad.rightThumbstick.xAxis.setValue(0); pad.rightThumbstick.yAxis.setValue(0); c.pollController(); c.consumedFrame()
     }
+    pad.rightThumbstick.xAxis.setValue(1); c.pollController()
+    try check(c.reserveFrame().buttons == DaytonaButton.view2 && c.reserveFrame().buttons == 0,
+              "Direct right-stick selection is reserved once across multiple engine frames")
+    c.pollController(); c.pollController()
+    try check(c.reserveFrame().buttons == 0,
+              "Held right-stick VR2 cannot reassert and toggle hood/cockpit when display polling is slower than the engine")
+    pad.rightThumbstick.xAxis.setValue(0); c.pollController()
+    pad.rightThumbstick.xAxis.setValue(1); c.pollController()
+    try check(c.reserveFrame().buttons == DaytonaButton.view2, "Releasing and reselecting VR2 intentionally sends a new press")
+    pad.rightThumbstick.xAxis.setValue(0); pad.rightThumbstick.yAxis.setValue(-1); c.pollController()
+    try check(c.reserveFrame().buttons == DaytonaButton.view3, "Changing right-stick direction selects the new view without requiring neutral")
+    pad.rightThumbstick.yAxis.setValue(0); c.pollController()
     c.resetGearSelector(); c.pollController()
     pad.rightShoulder.setValue(1); c.pollController(); c.pollController()
     try check(c.selectedGear == 1 && c.input().requestedGear == 1, "Held R1 requests gear one only once")
@@ -161,8 +199,9 @@ do {
     tap(c, 18); try check(c.input().buttons == DaytonaButton.gear1, "Later keyboard selector replaces controller pending gear")
     pad.leftShoulder.setValue(0); c.pollController(); c.consumedFrame()
     pad.buttonY.setValue(1); c.pollController(); c.pollController()
-    try check(c.input().buttons == 0, "Unassigned Triangle does not alter original arcade controls")
+    try check(freezes == 3 && c.input().buttons == 0, "Held Triangle toggles once without sending an arcade button")
     pad.buttonY.setValue(0); c.pollController(); pad.buttonY.setValue(1); c.pollController()
+    try check(freezes == 4, "A fresh Triangle press toggles timer again")
     pad.buttonY.setValue(0); c.pollController(); pad.leftThumbstick.xAxis.setValue(1); c.pollController()
     try check(!c.refreshControllers([extra,primary]) && c.activeController === primary, "Extra controller preserves primary assignment")
     c.pollController(); try check(c.input().steering == 1, "Ignored controller connect does not gate active steering")
@@ -172,22 +211,35 @@ do {
     replacement.buttonY.setValue(1); replacement.rightShoulder.setValue(1)
     try check(c.refreshControllers([extra]), "Assigned disconnect is reported")
     c.pollController()
-    try check(c.input() == DaytonaInput(), "Replacement held shoulder requires neutral")
+    try check(c.input() == DaytonaInput() && freezes == 4, "Replacement held shoulder and Triangle require neutral")
     replacement.buttonY.setValue(0); c.pollController(); replacement.buttonY.setValue(1); c.pollController()
-    try check(c.input() == DaytonaInput(), "Unassigned Triangle does not release the held-shoulder neutral gate")
+    try check(c.input() == DaytonaInput() && freezes == 4, "Triangle cannot toggle while a held shoulder keeps the neutral gate closed")
     replacement.buttonY.setValue(0); replacement.rightShoulder.setValue(0); c.pollController()
     replacement.buttonY.setValue(0); c.pollController()
     replacement.buttonA.setValue(1); c.pollController(); replacement.buttonA.setValue(0)
     c.setActive(false); c.setActive(true); c.pollController()
     try check(c.input().buttons == 0, "Focus transition discards unconsumed controller taps")
-    if let pause = replacement.leftThumbstickButton {
+    if let stickClick = replacement.leftThumbstickButton {
+        replacement.leftThumbstick.xAxis.setValue(1)
+        stickClick.setValue(1); c.pollController(); c.pollController()
+        try check(!c.paused && pauses == 1 && c.input().steering == 1, "L3 does not pause while steering")
+        stickClick.setValue(0); replacement.leftThumbstick.xAxis.setValue(0); c.pollController()
+    }
+    if let pause = replacement.buttonOptions {
         pause.setValue(1); c.pollController(); c.pollController()
-        try check(c.paused && pauses == 2, "L3 pauses once when held")
-        pause.setValue(0); c.pollController(); replacement.buttonMenu.setValue(1); c.pollController()
+        try check(c.paused && pauses == 2, "Create pauses once when held")
+        pause.setValue(0); c.pollController()
+        replacement.buttonY.setValue(1); c.pollController(); replacement.buttonY.setValue(0); c.pollController()
+        try check(freezes == 4, "Paused Triangle cannot toggle the timer")
+        pause.setValue(1); c.pollController(); pause.setValue(0); c.pollController()
+        try check(!c.paused && pauses == 3 && c.input().buttons == 0, "Create resumes without delivering arcade Start")
+        pause.setValue(1); c.pollController(); pause.setValue(0); c.pollController()
+        try check(c.paused && pauses == 4, "A fresh Create press pauses again")
+        replacement.buttonMenu.setValue(1); c.pollController()
         try check(!c.paused && resumes == 2 && c.input().buttons == 0, "Options resumes without arcade Start")
         replacement.buttonMenu.setValue(0); c.pollController()
     }
-    c.onTogglePause = nil; c.onResume = nil
+    c.onTogglePause = nil; c.onResume = nil; c.onToggleTimerFreeze = nil
     let reserved = DaytonaControls()
     tap(reserved, 8); tap(reserved, 18)
     let inFlight = reserved.reserveFrame()
@@ -208,6 +260,14 @@ do {
     try check(reserved.reserveFrame().requestedGear == 3, "Replay reservation updates the gear used by later live shifting")
     tap(reserved, 8); reserved.resetGearSelector()
     try check(reserved.reserveFrame() == DaytonaInput() && reserved.selectedGear == 0, "Reset clears future reservations and the gear selector")
+    tap(reserved, 99)
+    let reservedView = reserved.reserveFrame()
+    tap(reserved, 118)
+    try check(reservedView.buttons == DaytonaButton.view3 && reserved.reserveFrame().buttons == DaytonaButton.view4, "A camera selection arriving during a frame survives its reservation")
+    tap(reserved, 120); reserved.setPaused(true); reserved.setPaused(false)
+    try check(reserved.selectedView == 4 && reserved.reserveFrame() == DaytonaInput(), "Pause discards an unconsumed view and retains the committed selector")
+    reserved.resetGearSelector()
+    try check(reserved.selectedView == 1, "Reset returns camera cycling to its initial selector")
     let result: [String:Any] = ["passed":true,"checks":checks,"checkCount":checks.count,
         "engineLinked":false,"engineStubUsed":false,"physicalControllerActuationTested":false,
         "scope":"Actual input router plus synthetic Apple GameController values. No game, ROM, engine stub, GUI presentation or audio engine is executed."]

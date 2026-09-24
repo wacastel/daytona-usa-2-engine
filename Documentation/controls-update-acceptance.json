@@ -1,0 +1,57 @@
+{
+  "build": "2",
+  "controls": {
+    "camera": "Cross/Square cycle all four original VR selectors; right stick down selects close exterior VR3, left far exterior VR4",
+    "pause": "Create toggles pause/resume; L3 unassigned; Options remains Start/resume",
+    "timer": "Triangle / T toggles; defaults off; host reset turns off"
+  },
+  "engineManifestSHA256": "706e2aab431af9bacf1e85680bbe45b52bb548da7a844c8dea1ea1621c1f27ea",
+  "evidence": {
+    "Documentation/bridge-acceptance.json": "b9bd2243a3d4a7670875170c7b21f7a3af271d21b87d2f6f91b34ba9427e010d",
+    "Documentation/camera-acceptance.json": "5a7152499f57fa2b1fc49fdc9e5b615b59df06392e5aecaf7c98d9f4b891a391",
+    "Documentation/host-acceptance.json": "91c9cd4fe0162d78c0728587768eb74687cdcef95484c54f13d7572825d47cfa",
+    "Documentation/host-input-acceptance.json": "12e071735c583dbe8a87767b55e637c1b0ee62ac20193f2d810f9d5224484363",
+    "Documentation/host-reset-acceptance.json": "54bb56c1302af6df0725cd1f5f9871c1b1e6cb343e005e13264185089ff007a6",
+    "Documentation/integration-acceptance.json": "dd02365c2c69a9ee2d57531fa5c88137f5e4078544861dc741ce88276cf78fd8",
+    "Documentation/live-acceptance.json": "0241d5d4a84be4541eef0fb0e5b3bc7bfac37f4a12f73b37062eb1a0ad2731bd",
+    "Documentation/package-acceptance.json": "603365950f5f73af6e3c641c98b59817a0bccce11e4ade27104ed46be9f91154",
+    "Documentation/ppc-acceptance.json": "dc79630e6d9897c3993f05454a1f156472a96ade791669c84a408e98de9b1a63",
+    "Documentation/timer-acceptance.json": "fc2c78e31238b3113734f90e1e3342ee819c688f60ae94e8569cc6c38a3ebd3d",
+    "Documentation/ui-acceptance.json": "a1a6b7bb7a321c4b6d33cb7fd7f8f0c0e383a3e4be2e45fcea77a35382388893"
+  },
+  "executableSHA256": "04b258c468772b2ff04fab8b61409af12d2018fbda9a44976058e7da474bec63",
+  "nativeLibrarySHA256": "a4c9076800ad09d79c160c1a55480017f9adb1239d7dd37ffd53742e5973deec",
+  "packageManifestSHA256": "52f68e35d138d0e74885bfabdd3828d28e473d6e3a26350bbace94e8c18fd17a",
+  "passed": true,
+  "scope": [
+    "Current core, package, host input, reset, visible UI and isolated live checks are bound above.",
+    "Camera selector investigation used the initial engine; current unassisted integration includes the camera routes and remains exactly equivalent.",
+    "Initial clean reproduction, sound-lifecycle and audit-only package-requalification records remain historical; no new clean-source rebuild is claimed.",
+    "Controller routing uses Apple synthetic gamepad values. Actual physical PS5 button actuation and physical Model 3 hardware equivalence are not established."
+  ],
+  "timer": {
+    "elapsedGainWhileHeld": 600,
+    "expiredEnableFrame": 6501,
+    "expiredEnableObservedFrames": 200,
+    "firstDecrementFrame": 2251,
+    "freezeFromBootPreservesInitializationFrames": 2250,
+    "freshStartsOff": true,
+    "heldZeroFrame": 6270,
+    "initialCounter": 3420,
+    "invalidValuesAndNullRejected": true,
+    "liveHeldCounter": 2970,
+    "liveHoldFrames": 600,
+    "originalZeroFrame": 5670,
+    "referenceEnableRejected": true,
+    "resetTurnsOff": true,
+    "resumedFirstCounter": 2969
+  },
+  "unassistedRegression": {
+    "allFourRouteResultsIdenticalToInitialRelease": true,
+    "frames": 22832,
+    "initialIntegrationReportSHA256": "6099f9d3b91a4922da75bbd36b34b697f6b6c79b4f2d1a133896e336bf6ff1fd",
+    "initialPrivateCommit": "a1612f55ea3927627a0ed4694c442c06a505028e",
+    "sampleFrames": 16781520
+  },
+  "version": "1.1"
+}

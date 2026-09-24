@@ -46,6 +46,7 @@ struct daytona2_context {
  uint64_t clockFrames=0;
  std::time_t clockBase=std::time(nullptr);
  uint32_t fault=0;
+ bool timerFrozen=false;
  bool loaded=false;
 };
 static daytona2_context* active=nullptr;
@@ -77,6 +78,16 @@ void daytona2_reference_probe_marker(){}
 #endif
 const char* daytona2_error(const daytona2_context* c){return c?c->error.c_str():createError.c_str();}
 uint32_t daytona2_fault_code(const daytona2_context* c){return c?c->fault:1;}
+bool daytona2_race_timer_frozen(){return active&&active->timerFrozen;}
+int daytona2_set_timer_frozen(daytona2_context* c,int enabled){
+ if(!c||c!=active||c->fault)return 0;
+ if(enabled!=0&&enabled!=1){c->error="Invalid timer-freeze setting";return 0;}
+#ifdef DAYTONA2_REFERENCE
+ if(enabled){c->error="Timer assistance requires the fixed native program";return 0;}
+#endif
+ c->timerFrozen=enabled!=0;return 1;
+}
+int daytona2_timer_frozen(const daytona2_context* c){return c&&c==active&&c->timerFrozen?1:0;}
 void daytona2_destroy(daytona2_context* c){
  if(!c||c!=active)return;
  if(c->gl)CGLSetCurrentContext(c->gl);
@@ -138,7 +149,7 @@ daytona2_context* daytona2_create(const char* assets,const char* saves){
 }
 int daytona2_reset(daytona2_context* c){
  if(!c||c!=active||c->fault)return 0;
- try{c->model->Reset();c->inputs->gearShift4->value=0;c->frame=0;c->audio.clear();return 1;}
+ try{c->model->Reset();c->inputs->gearShift4->value=0;c->frame=0;c->timerFrozen=false;c->audio.clear();return 1;}
  catch(const std::exception& e){c->error=e.what();c->fault=1;return 0;}
 }
 int daytona2_step(daytona2_context* c,float steering,float accelerator,float brake,uint32_t buttons){

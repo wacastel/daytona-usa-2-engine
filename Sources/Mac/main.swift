@@ -39,8 +39,9 @@ if arguments.contains("--help") {
     Flags: Coin1 Start2 View1=4 View2=8 View3=16 View4=32 Neutral64 Gear1=128 Gear2=256 Gear3=512 Gear4=1024.
     Steer: left stick / D-pad / Left-Right arrows. Accelerate: R2 / W / Up. Brake: L2 / S / Down.
     Shift up/down: R1/L1 or E/Q. Views1–4: right stick up/right/down/left, or F1–F4. Keys1–4 select a gear; N selects neutral.
-    Cross also selects view1; Square selects view2. Circle/C inserts a coin; Options/Return starts.
-    L3/P/Escape pauses the host.
+    Cross/Square cycle all four views. Right stick down/left selects close/distant external chase.
+    Circle/C inserts a coin; Options/Return starts. Triangle/T toggles race timer freeze.
+    Create/P/Escape pauses or resumes the host.
     Insert a coin and follow the original course and transmission selection screens.
     """)
     exit(0)
@@ -154,6 +155,7 @@ final class DaytonaApp: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMen
         app.addItem(menuItem("About Daytona USA 2", #selector(about))); app.addItem(.separator())
         app.addItem(menuItem("Quit Daytona USA 2", #selector(quit), "q"))
         game.addItem(menuItem("Pause", #selector(pause))); game.addItem(menuItem("Reset Game", #selector(reset), "r"))
+        game.addItem(menuItem("Freeze Race Timer", #selector(freezeTimer), "t"))
         game.addItem(menuItem("Mute", #selector(mute), "m"))
         window.addItem(menuItem("Enter Full Screen", #selector(fullscreen), "f"))
         help.addItem(menuItem("Controls", #selector(controls), "/"))
@@ -163,17 +165,19 @@ final class DaytonaApp: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMen
     func validateMenuItem(_ item: NSMenuItem) -> Bool {
         if item.action == #selector(pause) { item.title = scene?.pausedByHost == true ? "Resume" : "Pause" }
         if item.action == #selector(mute) { item.state = scene?.muted == true ? .on : .off }
+        if item.action == #selector(freezeTimer) { item.state = scene?.timerFrozen == true ? .on : .off }
         return true
     }
     @objc private func quit() { NSApp.terminate(nil) }
     @objc private func pause() { scene.togglePause() }
     @objc private func reset() { scene.resetGame(); window.makeFirstResponder(view) }
     @objc private func mute() { scene.muted.toggle() }
+    @objc private func freezeTimer() { scene.toggleTimerFreeze() }
     @objc private func fullscreen() { window.toggleFullScreen(nil) }
     @objc private func controls() {
         scene.setPaused(true)
         let alert = NSAlert(); alert.messageText = "Daytona USA 2 Controls"
-        alert.informativeText = "Steer: left stick / D-pad / Left–Right arrows\nAccelerate: R2 / W / Up\nBrake: L2 / S / Down\nShift up / down: R1 / L1 or E / Q\nViews1–4: right stick up / right / down / left, or F1–F4\nDirect gears1–4: keys1–4; neutral: N\nCross also selects view1; Square selects view2\n\nInsert coin: Circle / C\nStart: Options / Return\nPause: L3 / P / Escape\n\nInsert a coin and follow the original course and transmission selection screens.\n\nOne controller is active. Focus loss, sleep or controller disconnection pauses the app. Release held controls before resuming."
+        alert.informativeText = "Steer: left stick / D-pad / Left–Right arrows\nAccelerate: R2 / W / Up\nBrake: L2 / S / Down\nShift up / down: R1 / L1 or E / Q\nViews1–4: right stick up / right / down / left, or F1–F4\nDirect gears1–4: keys1–4; neutral: N\nCross/Square cycle all four views\nExternal car views: right stick down (close) / left (distant)\n\nInsert coin: Circle / C\nStart: Options / Return\nPause / resume: Create / P / Escape\nFreeze race timer: Triangle / T (indicator when on)\n\nInsert a coin and follow the original course and transmission selection screens.\n\nOne controller is active. Focus loss, sleep or controller disconnection pauses the app. Release held controls before resuming."
         alert.runModal(); window.makeFirstResponder(view)
     }
     @objc private func about() {

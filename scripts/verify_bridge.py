@@ -5,7 +5,7 @@ import ctypes as C, hashlib, json, os, tempfile
 from import_assets import ROOT, sha, write_json
 def main():
  libpath=ROOT/'build/native/libdaytona2.dylib';lib=C.CDLL(str(libpath));ptr=C.c_void_p
- definitions={'create':([C.c_char_p,C.c_char_p],ptr),'destroy':([ptr],None),'reset':([ptr],C.c_int),'step':([ptr,C.c_float,C.c_float,C.c_float,C.c_uint32],C.c_int),'frame_number':([ptr],C.c_uint64),'fault_code':([ptr],C.c_uint32),'audio_count':([ptr],C.c_int),'error':([ptr],C.c_char_p)}
+ definitions={'create':([C.c_char_p,C.c_char_p],ptr),'destroy':([ptr],None),'reset':([ptr],C.c_int),'set_timer_frozen':([ptr,C.c_int],C.c_int),'timer_frozen':([ptr],C.c_int),'step':([ptr,C.c_float,C.c_float,C.c_float,C.c_uint32],C.c_int),'frame_number':([ptr],C.c_uint64),'fault_code':([ptr],C.c_uint32),'audio_count':([ptr],C.c_int),'error':([ptr],C.c_char_p)}
  for name,(args,result) in definitions.items():f=getattr(lib,'daytona2_'+name);f.argtypes=args;f.restype=result
  checks=[]
  def check(name,value):
@@ -21,6 +21,12 @@ def main():
   check('changed media rejected',not lib.daytona2_create(os.fsencode(directory),os.fsencode(saves)))
   context=lib.daytona2_create(os.fsencode(ROOT/'build/assets'),os.fsencode(saves));check('canonical media accepted',bool(context))
   try:
+   check('timer assistance defaults off',lib.daytona2_timer_frozen(context)==0)
+   check('timer rejects null context',lib.daytona2_set_timer_frozen(None,1)==0)
+   check('timer rejects invalid setting',lib.daytona2_set_timer_frozen(context,2)==0)
+   check('invalid timer setting preserves off',lib.daytona2_timer_frozen(context)==0)
+   check('timer enable accepted',lib.daytona2_set_timer_frozen(context,1)==1 and lib.daytona2_timer_frozen(context)==1)
+   check('timer disable accepted',lib.daytona2_set_timer_frozen(context,0)==1 and lib.daytona2_timer_frozen(context)==0)
    check('second context rejected',not lib.daytona2_create(os.fsencode(ROOT/'build/assets'),os.fsencode(directory/'other')))
    for name,s,a,b,buttons in [('nan steering',float('nan'),0,0,0),('infinite accelerator',0,float('inf'),0,0),('low steering',-1.01,0,0,0),('high steering',1.01,0,0,0),('low accelerator',0,-.1,0,0),('high accelerator',0,1.1,0,0),('low brake',0,0,-.1,0),('high brake',0,0,1.1,0),('conflicting gear',0,0,0,128|256),('unexposed service bit',0,0,0,1<<16),('unknown bit',0,0,0,1<<31)]:
     check(name+' rejected',lib.daytona2_step(context,s,a,b,buttons)==0)
@@ -29,8 +35,10 @@ def main():
    check('one frame',lib.daytona2_frame_number(context)==1)
    check('735 stereo frames',lib.daytona2_audio_count(context)==735)
    check('no fault',lib.daytona2_fault_code(context)==0)
+   check('timer enabled before reset',lib.daytona2_set_timer_frozen(context,1)==1)
    check('reset succeeds',lib.daytona2_reset(context)==1)
    check('reset frame zero',lib.daytona2_frame_number(context)==0)
+   check('reset disables timer assistance',lib.daytona2_timer_frozen(context)==0)
   finally:lib.daytona2_destroy(context)
   check('cabinet state saved',(saves/'daytona2.nv').is_file())
   context=lib.daytona2_create(os.fsencode(ROOT/'build/assets'),os.fsencode(saves));check('recreate existing save',bool(context))

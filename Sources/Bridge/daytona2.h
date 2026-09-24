@@ -18,6 +18,11 @@ enum daytona2_button {
 daytona2_context* daytona2_create(const char* assets,const char* saves);
 void daytona2_destroy(daytona2_context*);
 int daytona2_reset(daytona2_context*);
+/* Optional race-countdown assistance. Defaults off; reset turns it off.
+ * Serialized with other context calls. Does not alter laps or elapsed time.
+ */
+int daytona2_set_timer_frozen(daytona2_context*,int enabled);
+int daytona2_timer_frozen(const daytona2_context*);
 const char* daytona2_error(const daytona2_context*);
 uint32_t daytona2_fault_code(const daytona2_context*);
 /* One video interval, steering[-1,1], pedals[0,1], mutually exclusive gear

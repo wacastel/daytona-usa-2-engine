@@ -6,6 +6,7 @@ import GameController
 final class DaytonaControls {
     var onTogglePause: (() -> Void)?
     var onResume: (() -> Void)?
+    var onToggleTimerFreeze: (() -> Void)?
     private(set) var activeController: GCController?
     private(set) var isActive = true
     private(set) var paused = false
@@ -13,15 +14,21 @@ final class DaytonaControls {
     private var pressed = Set<UInt16>(), pendingKeys = Set<UInt16>()
     private var pendingButtons: UInt32 = 0
     private var lastPause = false, lastUp = false, lastDown = false
+    private var lastFreeze = false, lastNextView = false, lastPreviousView = false
+    private var lastDirectView: Int?
     private var lastController = DaytonaInput()
     private var committedGear = 0
     private var pendingGear: Int?
+    private var committedView = 1
+    private var pendingView: Int?
     private var gearSerial: UInt64 = 0
     private struct ShiftUndo { let previous: Int?; let serial: UInt64 }
     private var keyboardShiftUndo: ShiftUndo?, controllerShiftUndo: ShiftUndo?
     var selectedGear: Int { pendingGear ?? committedGear }
-    private let gameKeys: Set<UInt16> = [8,36,76,122,120,99,118,13,1,123,124,125,126]
+    var selectedView: Int { pendingView ?? committedView }
+    private let gameKeys: Set<UInt16> = [8,36,76,13,1,123,124,125,126]
     private let gearKeys: [UInt16:Int] = [45:0,18:1,19:2,20:3,21:4]
+    private let viewKeys: [UInt16:Int] = [122:1,120:2,99:3,118:4]
 
     func refreshControllers(_ available: [GCController]) -> Bool {
         let usable = available.filter { $0.extendedGamepad != nil }
@@ -35,13 +42,15 @@ final class DaytonaControls {
         return lostActive
     }
     func clear() {
-        pressed.removeAll(); pendingKeys.removeAll(); pendingButtons = 0; pendingGear = nil
+        pressed.removeAll(); pendingKeys.removeAll(); pendingButtons = 0; pendingGear = nil; pendingView = nil
         keyboardShiftUndo = nil; controllerShiftUndo = nil
         needsNeutral = true; lastPause = false; lastUp = false; lastDown = false
+        lastFreeze = false; lastNextView = false; lastPreviousView = false
+        lastDirectView = nil
         lastController = DaytonaInput()
     }
     func clearKeyboard() { pressed.removeAll(); pendingKeys.removeAll(); keyboardShiftUndo = nil }
-    func resetGearSelector() { clear(); committedGear = 0 }
+    func resetGearSelector() { clear(); committedGear = 0; committedView = 1 }
     func setActive(_ value: Bool) { isActive = value; clear() }
     func setPaused(_ value: Bool) { paused = value; clear() }
     private func requestGear(_ gear: Int) {
@@ -68,6 +77,8 @@ final class DaytonaControls {
             if fresh && (code == 36 || code == 76) { onResume?() }
             return
         }
+        if code == 17 { if fresh { onToggleTimerFreeze?() }; return }
+        if let view = viewKeys[code] { if fresh { pendingView = view }; return }
         if let gear = gearKeys[code] { if fresh { requestGear(gear) }; return }
         if code == 12 || code == 14 {
             guard fresh else { return }
@@ -90,26 +101,39 @@ final class DaytonaControls {
         if abs(pad.dpad.xAxis.value) > 0.25 { input.steering = pad.dpad.xAxis.value < 0 ? -1 : 1 }
         if pad.buttonB.isPressed { input.buttons |= DaytonaButton.coin }
         if pad.buttonMenu.isPressed { input.buttons |= DaytonaButton.start }
-        if pad.buttonA.isPressed { input.buttons |= DaytonaButton.view1 }
-        if pad.buttonX.isPressed { input.buttons |= DaytonaButton.view2 }
+        let nextView = pad.buttonA.isPressed, previousView = pad.buttonX.isPressed
+        var directView: Int?
         let rx = pad.rightThumbstick.xAxis.value, ry = pad.rightThumbstick.yAxis.value
         if max(abs(rx), abs(ry)) > 0.6 {
-            if abs(ry) >= abs(rx) { input.buttons |= ry > 0 ? DaytonaButton.view1 : DaytonaButton.view3 }
-            else { input.buttons |= rx > 0 ? DaytonaButton.view2 : DaytonaButton.view4 }
+            if abs(ry) >= abs(rx) { directView = ry > 0 ? 1 : 3 }
+            else { directView = rx > 0 ? 2 : 4 }
         }
-        let pause = pad.leftThumbstickButton?.isPressed == true
+        let pause = pad.buttonOptions?.isPressed == true
+        let freeze = pad.buttonY.isPressed
         let up = pad.rightShoulder.isPressed, down = pad.leftShoulder.isPressed
         if needsNeutral {
-            if input.buttons == 0 && input.steering == 0 && input.accelerator < 0.03 && input.brake < 0.03 && !pause && !up && !down {
+            if input.buttons == 0 && input.steering == 0 && input.accelerator < 0.03 && input.brake < 0.03 && !pause && !up && !down && !freeze && !nextView && !previousView && directView == nil {
                 needsNeutral = false
             }
             lastPause = pause; lastUp = up; lastDown = down
+            lastFreeze = freeze; lastNextView = nextView; lastPreviousView = previousView
+            lastDirectView = directView
             lastController = DaytonaInput(); return
         }
         if pause && !lastPause { onTogglePause?(); lastPause = pause; lastController = DaytonaInput(); return }
         lastPause = pause
         if paused && input.buttons & DaytonaButton.start != 0 { onResume?(); lastController = DaytonaInput(); return }
         if !paused {
+            if freeze && !lastFreeze { onToggleTimerFreeze?() }
+            // Select one original VR input. Multiple quick taps replace the pending
+            // request rather than asserting several cabinet buttons at once.
+            if let directView {
+                if directView != lastDirectView { pendingView = directView }
+            }
+            else if nextView != previousView {
+                if nextView && !lastNextView { pendingView = selectedView % 4 + 1 }
+                else if previousView && !lastPreviousView { pendingView = (selectedView + 2) % 4 + 1 }
+            }
             if up && down { cancelUnconsumedShift(controllerShiftUndo); controllerShiftUndo = nil }
             else if up && !lastUp { controllerShiftUndo = shift(1) }
             else if down && !lastDown { controllerShiftUndo = shift(-1) }
@@ -117,6 +141,8 @@ final class DaytonaControls {
             pendingButtons |= input.buttons
         }
         lastUp = up; lastDown = down
+        lastFreeze = freeze; lastNextView = nextView; lastPreviousView = previousView
+        lastDirectView = directView
         lastController = input
     }
     func input() -> DaytonaInput {
@@ -124,11 +150,11 @@ final class DaytonaControls {
         let keys = pressed.union(pendingKeys)
         var result = lastController
         result.buttons |= pendingButtons
-        for (code, bit): (UInt16, UInt32) in [(8,DaytonaButton.coin),(36,DaytonaButton.start),(76,DaytonaButton.start),
-          (122,DaytonaButton.view1),(120,DaytonaButton.view2),(99,DaytonaButton.view3),(118,DaytonaButton.view4)] {
+        for (code, bit): (UInt16, UInt32) in [(8,DaytonaButton.coin),(36,DaytonaButton.start),(76,DaytonaButton.start)] {
             if keys.contains(code) { result.buttons |= bit }
         }
         if let gear = pendingGear { result.buttons |= DaytonaButton.gear(gear) }
+        if let view = pendingView { result.buttons |= DaytonaButton.view(view) }
         if !keys.isDisjoint(with: [123,124]) { result.steering = (keys.contains(124) ? 1 : 0) - (keys.contains(123) ? 1 : 0) }
         if !keys.isDisjoint(with: [13,126]) { result.accelerator = 1 }
         if !keys.isDisjoint(with: [1,125]) { result.brake = 1 }
@@ -146,8 +172,10 @@ final class DaytonaControls {
     func consumedFrame(_ consumed: DaytonaInput? = nil) {
         if let consumed {
             if let gear = consumed.requestedGear { committedGear = gear }
+            if let view = consumed.requestedView { committedView = view }
         } else if let gear = pendingGear { committedGear = gear }
-        pendingKeys.removeAll(); pendingButtons = 0; pendingGear = nil
+        if consumed == nil, let view = pendingView { committedView = view }
+        pendingKeys.removeAll(); pendingButtons = 0; pendingGear = nil; pendingView = nil
         keyboardShiftUndo = nil; controllerShiftUndo = nil
     }
 }

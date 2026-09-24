@@ -1,6 +1,11 @@
 # Native target and source boundaries
 
 The selected game is Daytona USA 2: Battle on the Edge, Revision A (`daytona2`).
+The current controller and optional countdown update has passed processor,
+timer, integration, package, host replay, reset and isolated live checks. The
+initial-release clean-reproduction, sound-lifecycle and package-requalification
+records remain historical evidence and do not bind the updated app.
+
 `Configuration/media.json` records 47 canonical file identities. The importer
 validates the supplied directory and creates a deterministic local ZIP plus a
 single-game `Games.xml`; the original supplied directories remain untouched.
@@ -52,7 +57,8 @@ The PowerPC generator includes supported starts in the static program, its
 RAM alias and the authenticated uploaded helper. Z80 execution covers every
 mapped ROM byte start. The sound compiler binds operation fields and extension
 words, and expands admitted SCSP programs into fixed operations. The original
-register, interrupt, exception, bus and device semantics remain. Details and
+register, interrupt, exception, bus and device semantics remain with optional
+countdown assistance disabled. Details and
 bounded fixture coverage are documented in [PowerPC/Z80](../Sources/Translated/ppc/README.md)
 and [sound](../Sources/Translated/sound/README.md). Uploaded-program observations
 establish coverage of exercised paths, not complete-game reachability.
@@ -64,21 +70,45 @@ frame, PCM block and stereo-frame count in independent processes with fresh
 isolated saves. Synthetic processor fixtures and negative instruction guards
 complement those integration comparisons. Reference parity is not physical-board
 equivalence, and the reference is an original-processor build with the stated
-shared host adaptations, not an untouched upstream application.
+shared host adaptations, not an untouched upstream application. Original-reference
+parity comparisons run with countdown assistance disabled; the reference build
+rejects enabling that option.
+
+The user-requested countdown option is implemented at one authenticated fixed
+PowerPC operation for this Revision A program. Its original PC and instruction
+identity, active race phase and caller state guard the substitution. When
+enabled with positive remaining time, it retains that countdown result while
+preserving the operation's original carry behavior and scheduling. Menu and
+pre-race initialization, elapsed race/lap time and checkpoint time extensions
+remain original. Disabling it resumes the next original decrement; enabling it
+after expiry does not revive the race. The option performs no ROM or save-file
+edits and introduces no decoder, runtime compiler or interpreter fallback.
+The [PowerPC record](ppc-acceptance.json) binds its exact guards and passes
+16,776 ordinary state comparisons plus 84 complete-state countdown cases.
+The [timer record](timer-acceptance.json) compares 6,700 disabled frames with the
+original reference and 9,400 enabled frames with a read-only lab using product
+objects. It verifies a 600-frame hold with 600 elapsed-time increments and an
+exact 600-frame delay to expiry after release, alongside initialization and
+late-enable checks. It does not exercise every checkpoint, course or finish state.
 
 The shared derived SCSP source resets its sound-CPU cycle overrun at board
 initialization. The upstream function-static overrun otherwise survives a
-destroy/create boundary. Two fresh 2,400-frame sessions now agree exactly with
-each other and the pre-fix first-session baseline; no PRNG reset or instruction
-semantics change is used.
+destroy/create boundary. The initial-release
+[sound lifecycle record](sound-lifecycle-acceptance.json) established exact
+agreement between two fresh 2,400-frame sessions and the pre-fix first-session
+baseline; no PRNG reset or instruction semantics change is used. That historical
+record does not bind the controller/timer update's new artifacts.
 
 `scripts/prepare_native.py` recreates the settings seed, captures all four route
 program identities, regenerates the fixed processors, builds native/reference
 libraries, runs CPU fixtures, integration comparisons and bridge validation,
-and prepares source notices. Native boot and original USA/single-cabinet startup
-work. Four routes across all three courses agree with the reference on every
-picture, PCM block and sample count over 22,832 frames. The live packaged host
-has separately passed an 80-second presentation and audio-device check. The
+and prepares source notices. Current native boot and original USA/single-cabinet
+startup pass, and four routes across all three courses agree with the reference
+on every picture, PCM block and sample count over 22,832 frames with assistance
+off. The current packaged host separately passes an 80-second presentation and
+audio-device check. The initial release's separate clean build reproduced its
+bounded gameplay and packaged-host results; that older reproduction does not
+claim a fresh reconstruction of this update. The
 [validation record](validation.md) distinguishes these bounded results from
 complete-game or physical-board accuracy claims.
 
@@ -89,12 +119,26 @@ step, accepts bounded steering/pedals and mutually exclusive absolute gear
 requests, and returns 496×384 top-down RGBA plus interleaved signed 16-bit stereo
 PCM. The bridge reports 60 steps per second and 44,100 audio samples per second.
 The host displays the picture at 4:3 and queries engine rates.
+The current [bridge acceptance](bridge-acceptance.json) passes 43 native-engine
+lifecycle, media, input-boundary and timer-option checks.
 
 AppKit, SpriteKit, AVFoundation and GameController provide the window, display,
 audio and input. Preferences and normal saves use `local.william.daytonausa2`;
 diagnostic runs default to temporary saves. Focus loss, sleep and assigned-pad
 disconnection pause the host and clear pending driving input. Committed gear
-selection survives pauses. Reset returns the host selector to neutral.
+selection survives pauses. Reset returns the host gear selector to neutral,
+camera selector to view 1 and countdown assistance to off.
+
+Cross and Square select the next and previous original camera selector across
+all four views. Right-stick up/right/down/left and F1–F4 select views directly;
+down/view 3 is close exterior chase, and left/view 4 is distant exterior chase.
+The [camera review](camera-acceptance.json) establishes those original input
+semantics using the accepted initial-release native engine, including persistence
+after a one-frame tap. It does not qualify the new host routing. Create toggles
+pause/resume, Options sends Start or resumes a paused host, and L3 is unassigned.
+Triangle/T toggles countdown assistance once per press during active input;
+the visible TIMER FROZEN indicator shows its enabled state. The option starts
+off, is not persisted, and reset clears it.
 
 One dedicated thread owns native context creation, every engine step, reset and
 destruction, keeping the CGL context on that same thread. It produces audio at
@@ -106,6 +150,15 @@ later events remain pending. Pause permits that single in-flight frame to finish
 but discards its PCM if the pause occurred before publication. Reset and shutdown
 wait for the engine thread without making synchronous calls to the main queue.
 
+Host reset destroys and recreates the native context on that same dedicated
+thread, saving and reloading the existing NVRAM directory. A CPU-only reset can
+leave an unsupported intermediate sound/DSP program during a mid-race restart;
+the host therefore starts fresh device contexts. The
+[reset acceptance](host-reset-acceptance.json) runs 3,060 frames, including 60
+with countdown assistance enabled, then verifies frame zero and assistance off
+after recreation. Its next 3,000 RGBA/PCM/count frames exactly match an independent
+fresh-process boot using the copied saved NVRAM, with no engine fault.
+
 Headless replay uses the real linked engine. It accepts sequential steps or
 ordered half-open event ranges, respecting the explicit route duration including
 neutral tails. It records per-frame picture/PCM hashes and counts; the aggregate
@@ -113,6 +166,23 @@ framed-audio hash also includes every block length. Host self-tests use the real
 input router without an engine stub. Synthetic controller checks qualify routing,
 not actual controller button actuation. GUI/audio observations and real-time
 throughput require separate evidence from headless replay.
+
+The current [input qualification](host-input-acceptance.json) passes 149 router
+checks, including held-stick behavior when multiple engine frames occur between
+display polls. The [packaged-host replay](host-acceptance.json) matches the
+9,500-frame manual route and two deterministic 2,400-frame sessions. A separate
+[visible UI check](ui-acceptance.json) observes timer freeze with the lap clock
+advancing, timer release, pause/resume and a mid-race reset followed by 2,672
+fault-free frames with assistance off. That concurrent UI run recorded two
+audio underruns and is excluded from isolated cadence/audio acceptance.
+
+The current [isolated live check](live-acceptance.json) records 4,802 game frames,
+4,777 presented snapshots and 4,804 display updates over 80 seconds: 60.025 game
+frames/s and 59.7125 presented snapshots/s. There are no engine faults, audio-open
+failures, underruns, discarded clock gaps or backlog recoveries; the 48 kHz
+output device's peak pending queue is 3,939 source sample frames. These are
+host presentation and audio-device counters, not physical scanout or subjective
+listening measurements.
 
 ## Packaging and publication
 
@@ -124,6 +194,10 @@ arm64 executable and native library, deployment target, system-only dependencies
 known decoder/diagnostic symbol boundaries, fixed-execution symbols, resource
 identities, source provenance and ad hoc signature. A symbol audit is not proof
 of all execution semantics. Gameplay and live-host acceptance remain separate.
+The retained [package requalification](package-requalification.json) concerns
+byte-identical initial-release app files after an auditor-only change. It is
+historical; the controller/countdown update has newly bound package, host, UI and
+live reports for its changed executable.
 
 `scripts/prepare_licenses.py` preserves the original GPLv3 document and manual,
 embedded copyright/license comments and the original Musashi copyright strings.

@@ -14,47 +14,48 @@
     "unpaused": true,
     "visibleWindow": true
   },
-  "frameCaptureSHA256": "54f0f13b91e7694e9c511a1b8f56e9a8919f7a8c3d8dba959cc2e1aea41bcc67",
+  "frameCaptureSHA256": "8a974fd7be3e4207ae49d80aa517b25fadb5f9d8b59c33c3c986adafbceb3d8e",
   "inputs": {
     "Configuration/replays/beginner-auto.json": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
-    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "5f52398a4200f3d8dd5d3b9d2862d66a43e7e57c56cfe625ca4f72b28ebc9f7a",
-    "build/package-manifest.json": "d88f4f3727e040f6c3e81eb01a9834cd0f582673d89ef1afd75bba67684fa05b",
+    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "04b258c468772b2ff04fab8b61409af12d2018fbda9a44976058e7da474bec63",
+    "build/package-manifest.json": "52f68e35d138d0e74885bfabdd3828d28e473d6e3a26350bbace94e8c18fd17a",
     "scripts/verify_live.py": "092c778ca0d37371734c5ecc01753c6203828bd09b13d82a47ef2329d282c4e2"
   },
-  "observedFramesPerSecond": 60.0375,
+  "observedFramesPerSecond": 60.025,
   "passed": true,
-  "presentedFramesPerSecond": 58.4375,
+  "presentedFramesPerSecond": 59.7125,
   "scope": "Visible AppKit/SpriteKit race and AVFoundation output-device counters. Keep the app focused and run without competing engine workloads. No subjective listening, physical button actuation or physical arcade-board accuracy claim.",
   "seconds": 80,
   "telemetry": {
     "automaticRecoveryCount": 0,
     "backlogRecoveryCount": 0,
     "discardedClockGaps": 0,
-    "displayUpdates": 4805,
+    "displayUpdates": 4804,
     "engineCallsOnDedicatedThread": true,
     "engineFailureCount": 0,
     "engineStartCount": 1,
     "engineTiming": {
-      "audioSeconds": 0.055275708276894875,
+      "audioSeconds": 0.05487912539683748,
       "engineMilliseconds": {
-        "maximum": 24.845749998348765,
-        "p50": 14.265041667385958,
-        "p95": 15.665791666833684
+        "maximum": 24.772375007160008,
+        "p50": 14.51204165641684,
+        "p95": 15.824958332814276
       },
-      "engineSeconds": 65.50948466683622,
-      "timingSamples": 4803
+      "engineSeconds": 66.11516216667951,
+      "timingSamples": 4802
     },
     "flushCounts": {
       "host": 1
     },
-    "gameFrames": 4803,
+    "gameFrames": 4802,
     "gameState": {
       "closed": false,
       "faultCode": 0,
-      "frame": 4803,
+      "frame": 4802,
       "framesPerSecond": 60,
       "height": 384,
       "sampleRate": 44100,
+      "timerFrozen": false,
       "width": 496
     },
     "isPlaying": true,
@@ -69,24 +70,25 @@
     "outputLatencySeconds": 0.059604166666666666,
     "outputSampleRate": 48000,
     "pausedByHost": false,
-    "peakPendingFrames": 3998,
-    "pendingFrames": 2881,
+    "peakPendingFrames": 3939,
+    "pendingFrames": 3351,
     "preferredDisplayFramesPerSecond": 60,
     "presentationTiming": {
-      "textureSeconds": 2.8040476251771906,
-      "timingSamples": 4805,
+      "textureSeconds": 2.864670082781231,
+      "timingSamples": 4804,
       "updateMilliseconds": {
-        "maximum": 8.410166672547348,
-        "p50": 0.6071250099921599,
-        "p95": 0.6528333324240521
+        "maximum": 7.103916665073484,
+        "p50": 0.6060000014258549,
+        "p95": 0.648458328214474
       },
-      "updateSeconds": 2.854062165992218
+      "updateSeconds": 2.9118912499543512
     },
-    "presentedFrames": 4675,
-    "renderedFrames": 3526589,
+    "presentedFrames": 4777,
+    "renderedFrames": 3526119,
     "scheduledFrames": 3529470,
     "selectedGear": 0,
     "sourceSampleRate": 44100,
+    "timerFrozen": false,
     "underrunCount": 0,
     "updatesOnMainThread": true,
     "windowOccluded": false,

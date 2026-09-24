@@ -1,36 +1,35 @@
 {
   "engineCallsOnDedicatedThread": true,
-  "executableSHA256": "5f52398a4200f3d8dd5d3b9d2862d66a43e7e57c56cfe625ca4f72b28ebc9f7a",
+  "executableSHA256": "04b258c468772b2ff04fab8b61409af12d2018fbda9a44976058e7da474bec63",
   "finalFaultCode": 0,
-  "method": "Bound native-app accessibility and screenshot observations with synthesized key events; temporary saves and muted output.",
+  "method": "Native app accessibility and screenshot observations with synthesized keyboard events, authored Beginner automatic driving replay, temporary saves and muted output.",
   "observations": [
     {
-      "action": "P",
-      "result": "Paused overlay and release-controls hint appeared."
+      "action": "T during start sequence",
+      "result": "Yellow TIMER FROZEN indicator appeared. Subsequent race screenshots showed countdown at 60 while original lap elapsed time advanced from 0.00 to 23.40 and the car continued driving."
     },
     {
-      "action": "Return",
-      "result": "Pause overlay disappeared and original startup animation resumed."
+      "action": "T again",
+      "result": "Timer indicator disappeared; ordinary countdown handling restored (exact next-step decrement separately verified in timer-acceptance.json)."
     },
     {
-      "action": "Command-R",
-      "result": "Picture cleared; original attract sequence returned; final game frame count is below total executed timing samples."
+      "action": "P then Return",
+      "result": "Accessibility showed Paused and Return/Create/Options hint; resume removed the visible overlay and racing continued."
     },
     {
-      "action": "C",
-      "result": "Original game entered selection flow from attract mode."
+      "action": "T then Command-R during lap 2",
+      "result": "Frame cleared and timer indicator disappeared. Final telemetry recorded 2672 post-reset frames, timer off and fault 0 on the dedicated worker thread. The independent host-reset check verifies the corresponding cold-reset path through 3000 restarted frames."
     },
     {
-      "action": "Up",
-      "result": "Original screen displayed CAR SELECTION COMPLETE; subsequent Beginner race rendered lap 1/8, car, scenery and readable HUD."
-    },
-    {
-      "action": "Command-Q",
-      "result": "Native app quit; process exited 0 and wrote telemetry."
+      "action": "Automatic quit after 150 seconds",
+      "result": "App exited 0 and wrote telemetry."
     }
   ],
+  "packageManifestSHA256": "52f68e35d138d0e74885bfabdd3828d28e473d6e3a26350bbace94e8c18fd17a",
   "passed": true,
+  "postResetFrames": 2672,
   "processExitCode": 0,
-  "scope": "Automated native keyboard routing, observed presentation and pause/resume/reset/quit lifecycle. This run competed with headless qualification workloads and had 5 audio underruns plus 1 backlog recovery; it is not a cadence or audio-quality acceptance test. Use live-acceptance.json for isolated 80-second playback evidence. Physical controller actuation was not tested.",
-  "telemetrySHA256": "ddb359d29cfd1b74b4f53115fb43c0a7b40ef3aa94284629a1cedbb65f410c4f"
+  "scope": "Observed keyboard routing, presentation and pause/resume/reset lifecycle in the final packaged executable. This concurrent qualification run had 2 audio underruns, 0 discarded clock gaps and 0 backlog recoveries; it is not the isolated cadence/audio acceptance. Physical PS5 actuation was not tested.",
+  "telemetrySHA256": "b87d3bb2f779ca534d5462e0d3a12d00a54b97bf1d3d5e346f0f5956761ba4a9",
+  "timerOffAfterReset": true
 }

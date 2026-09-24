@@ -1,5 +1,5 @@
 {
-  "elapsedSeconds": 139.76622605323792,
+  "elapsedSeconds": 138.4057970046997,
   "exactPictureAudioCountAgreement": true,
   "finalFaultCode": 0,
   "frames": 9500,
@@ -14,9 +14,9 @@
   },
   "inputs": {
     "Configuration/replays/beginner-manual.json": "3e3e48f899f15d2b45649ce117f385bc396bbaff663ee02c5cb60acef058e614",
-    "Documentation/integration-acceptance.json": "6099f9d3b91a4922da75bbd36b34b697f6b6c79b4f2d1a133896e336bf6ff1fd",
-    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "5f52398a4200f3d8dd5d3b9d2862d66a43e7e57c56cfe625ca4f72b28ebc9f7a",
-    "build/package-manifest.json": "d88f4f3727e040f6c3e81eb01a9834cd0f582673d89ef1afd75bba67684fa05b",
+    "Documentation/integration-acceptance.json": "dd02365c2c69a9ee2d57531fa5c88137f5e4078544861dc741ce88276cf78fd8",
+    "build/Daytona USA 2.app/Contents/MacOS/DaytonaUSA2": "04b258c468772b2ff04fab8b61409af12d2018fbda9a44976058e7da474bec63",
+    "build/package-manifest.json": "52f68e35d138d0e74885bfabdd3828d28e473d6e3a26350bbace94e8c18fd17a",
     "scripts/verify_host.py": "76cdc0a299c4974caadf8db396d0f3126d01fc30152ad6660faa758a60c7a868"
   },
   "passed": true,

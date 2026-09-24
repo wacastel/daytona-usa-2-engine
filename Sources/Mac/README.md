@@ -10,6 +10,8 @@ destruction. It clocks audio independently of SpriteKit and hands immutable
 latest-frame snapshots to the main-thread presenter. Input is reserved under
 the same routing lock used by UI events; later taps survive an in-flight frame.
 Each worker iteration drains an autorelease pool for long sessions.
+Reset saves cabinet NVRAM and recreates the native context on that same thread,
+clearing timer assistance and initializing fresh sound/DSP state.
 
 `scripts/build_host.sh --typecheck` checks the real host. `--self-test` runs the
 input router with Apple synthetic gamepads and no engine. `--test-link-guard`
@@ -44,10 +46,21 @@ tail after the last event; events must fit within that declared duration.
 | Direct gear / neutral | Sequential selection | 1–4 / N |
 | Insert coin | Circle | C |
 | Start / resume | Options | Return |
-| Camera views | Right-stick directions; Cross / Square for 1 / 2 | F1–F4 |
-| Pause | L3 | P / Escape |
+| Next / previous camera | Cross / Square cycles all four views | F1–F4 select directly |
+| Close / distant exterior car view | Right stick down / left | F3 / F4 |
+| Freeze / unfreeze race timer | Triangle | T |
+| Pause / resume | Create (small button left of the touchpad) | P / Escape |
+
+Right stick up / right selects view 1 / 2. Cross and Square include both
+exterior chase views in their cycle. Clicking either stick has no assigned action;
+Options remains the original Start button and also resumes a paused app.
 
 Focus loss, sleep and active-controller disconnection pause the app and clear
 driving input. Connected controls must return to neutral before resuming.
-Committed gears survive a pause; resetting returns the host selector to neutral.
-Short button taps survive display polls that produce no engine frame.
+Committed gears and camera selections survive a pause; resetting returns the
+host selectors to neutral and view 1. Triangle and camera-cycle buttons act once
+per press. Triangle is ignored while paused or inactive. Short button taps survive
+display polls that produce no engine frame; a later camera request replaces an
+unconsumed request so the game receives a single original view selector.
+Direct right-stick selections are sent when the direction changes, preventing
+a held direction from generating repeated camera presses between display polls.

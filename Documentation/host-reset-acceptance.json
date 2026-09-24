@@ -1,0 +1,84 @@
+{
+  "baselineUsesCopiedCabinetNVRAMOnly": true,
+  "exactPostResetRGBA_PCM_CountAgreement": true,
+  "executableSHA256": "69d2e4de5372b25734f91841fcc2144e85435793edde618d368c58082d677860",
+  "framesAfterReset": 3000,
+  "framesBeforeReset": 3060,
+  "framesInIndependentFreshBoot": 3000,
+  "fresh": {
+    "afterReset": {},
+    "audioSHA256": "d6da00253d167fa1453dbd79d71f137296cebd9b939df275ec401bd9e23101a1",
+    "beforeReset": {},
+    "engineCallsOnDedicatedThread": true,
+    "finalState": {
+      "closed": false,
+      "faultCode": 0,
+      "frame": 3000,
+      "framesPerSecond": 60,
+      "height": 384,
+      "sampleRate": 44100,
+      "timerFrozen": false,
+      "width": 496
+    },
+    "frames": 3000,
+    "mode": "fresh",
+    "passed": true,
+    "pictureSHA256": "5a47899861296b9575a55d9a735ea279de1905ef12dfdc7f0a36ae373a751fc9",
+    "sampleFrames": 2205000
+  },
+  "harnessSHA256": "ba5bfbb55649a548d6524dc1268d11d7fe8b975db7e096d36b970c86816fd5d3",
+  "inputs": {
+    "Configuration/replays/beginner-auto.json": "7d919fc04c89a2823edd6b2c286a17819cf1eea21d65ad0f76b100f8dd0b59d4",
+    "Sources/Mac/Input.swift": "309116807f847cf96908a646690be78df598c62f62cfe3fed7c507266ea033ea",
+    "Sources/Mac/Media.swift": "69c580d58f4394427f8c8fe7a3f3f11266b4696797be39fb5c2eef72ccdf0971",
+    "Sources/Mac/NativeGame.swift": "d9c592e1d99ca581915896f121d159402796b78422dbaa268db3129acc9a02aa",
+    "build/native/engine-build-manifest.json": "706e2aab431af9bacf1e85680bbe45b52bb548da7a844c8dea1ea1621c1f27ea",
+    "build/native/libdaytona2.a": "2fd359ae2e7be5493731922e242696d18ec6e4457516f1b3be4f33a63585c494",
+    "scripts/verify_host_reset.py": "9217738c2325510e6fb7ce0c1a560a5c6eff149875df2811517a53459946598c"
+  },
+  "passed": true,
+  "postResetTraceSHA256": "8325e133a6a5c95a0e4cf373ba138953ab57ba638c5aa9e52ceeeaaed4c5d14c",
+  "reset": {
+    "afterReset": {
+      "closed": false,
+      "faultCode": 0,
+      "frame": 0,
+      "framesPerSecond": 60,
+      "height": 384,
+      "sampleRate": 44100,
+      "timerFrozen": false,
+      "width": 496
+    },
+    "audioSHA256": "d6da00253d167fa1453dbd79d71f137296cebd9b939df275ec401bd9e23101a1",
+    "beforeReset": {
+      "closed": false,
+      "faultCode": 0,
+      "frame": 3060,
+      "framesPerSecond": 60,
+      "height": 384,
+      "sampleRate": 44100,
+      "timerFrozen": true,
+      "width": 496
+    },
+    "engineCallsOnDedicatedThread": true,
+    "finalState": {
+      "closed": false,
+      "faultCode": 0,
+      "frame": 3000,
+      "framesPerSecond": 60,
+      "height": 384,
+      "sampleRate": 44100,
+      "timerFrozen": false,
+      "width": 496
+    },
+    "frames": 3000,
+    "mode": "reset",
+    "passed": true,
+    "pictureSHA256": "5a47899861296b9575a55d9a735ea279de1905ef12dfdc7f0a36ae373a751fc9",
+    "sampleFrames": 2205000
+  },
+  "sameSaveDirectoryAcrossReset": true,
+  "scope": "Actual Swift DaytonaGame reset on a dedicated thread saves cabinet settings, destroys and recreates the native context after racing with timer assistance, then matches every picture, PCM block and sample count from an independent fresh process loaded with the same saved NVRAM. No GUI, physical controller or complete-game claim.",
+  "timerFrozenBeforeReset": true,
+  "timerOffAndFrameZeroAfterReset": true
+}

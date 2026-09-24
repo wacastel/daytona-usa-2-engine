@@ -7,10 +7,12 @@ enum DaytonaUSA2Error: LocalizedError {
 enum DaytonaButton {
     static let coin: UInt32 = 1, start: UInt32 = 2
     static let view1: UInt32 = 4, view2: UInt32 = 8, view3: UInt32 = 16, view4: UInt32 = 32
+    static let viewMask: UInt32 = view1 | view2 | view3 | view4
     static let neutral: UInt32 = 64, gear1: UInt32 = 128, gear2: UInt32 = 256
     static let gear3: UInt32 = 512, gear4: UInt32 = 1024, all: UInt32 = 2047
     static let gearMask: UInt32 = neutral | gear1 | gear2 | gear3 | gear4
     static func gear(_ value: Int) -> UInt32 { UInt32(64) << value }
+    static func view(_ value: Int) -> UInt32 { UInt32(4) << (value - 1) }
 }
 struct DaytonaInput: Codable, Equatable {
     var steering: Float = 0, accelerator: Float = 0, brake: Float = 0
@@ -37,6 +39,11 @@ struct DaytonaInput: Codable, Equatable {
         let bits = buttons & DaytonaButton.gearMask
         guard bits.nonzeroBitCount == 1 else { return nil }
         return bits.trailingZeroBitCount - 6
+    }
+    var requestedView: Int? {
+        let bits = buttons & DaytonaButton.viewMask
+        guard bits.nonzeroBitCount == 1 else { return nil }
+        return bits.trailingZeroBitCount - 1
     }
     var diagnostic: [String: Any] {
         let value: [String: Any] = ["steering": steering, "accelerator": accelerator, "brake": brake, "buttons": buttons]

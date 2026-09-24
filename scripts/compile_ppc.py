@@ -19,6 +19,34 @@ ROM_FILES = [
     ("epr-20861a.17", 0x89BA8E78),
 ]
 
+# Revision A's original phase dispatcher and countdown load/decrement/store.
+# Authenticate these ROM contexts offline, before generating the opt-in assist.
+TIMER_PC = 0x1b060
+TIMER_WORD = 0x3000ffff
+TIMER_CONTEXTS = [
+    (0x1b000, 0x74, "9ed98e3e1f2d0196c4c562c7f8a9cd7b562f5ce7e44d6931fd9c6337f1288d01"),
+    (0x1adfc, 60, "b08517f0a8b0e8cf37d9c156b12029a7fbaf685bde3fc6e7dd9c63aa79cbd140"),
+    (0xaeca4, 4, "45648092981b9ffabc28467afc359d8d32005633086d6dc8bfa0cdbff0000e8b"),
+    (0x1afb8, 20, "63c6996ac714b1e1ce702c1c3a920df664a9e7bce41db52dc15285537e097afc"),
+]
+
+
+def verify_timer_contexts(rom: bytes) -> dict:
+    contexts = []
+    for pc, size, expected in TIMER_CONTEXTS:
+        actual = hashlib.sha256(rom[0x600000 + pc:0x600000 + pc + size]).hexdigest()
+        if actual != expected:
+            raise ValueError(f"Original race timer context changed at {pc:08x}")
+        contexts.append({"pc": f"0x{pc:08x}", "bytes": size, "sha256": actual})
+    if struct.unpack_from(">I", rom, 0x600000 + TIMER_PC)[0] != TIMER_WORD:
+        raise ValueError("Original race timer decrement identity changed")
+    return {"implemented": True, "pc": f"0x{TIMER_PC:08x}",
+            "originalOpcode": f"0x{TIMER_WORD:08x}", "contexts": contexts,
+            "countdownAddress": "0x00105010", "elapsedAddress": "0x0010500c",
+            "currentPhaseAddress": "0x00105004", "currentPhase": 17,
+            "callerStateAddress": "0x007350ee", "callerState": 13,
+            "scope": "Optional positive active-race decrement only. Execute original addic, preserving carry and timing; restore only positive r0 when enabled at the authenticated PC, base register and original phase. No game RAM or ROM patches."}
+
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -168,9 +196,24 @@ def native_source(source: str, executor: str, operations: str, cpu: Path, out: P
     operations = operations.replace("(rs << sh) | (rs >> (32-sh))", "(rs << sh) | (rs >> ((32-sh) & 31))")
     if re.search(r"\bppc_\w+\(op\)", operations):
         raise ValueError("Unspecialized instruction call remains")
-    generated = [operations, "\nstruct Daytona2PPCOperation { UINT32 word; void (*run)(); };\n",
+    timer = verify_timer_contexts(rom)
+    assist = '''
+extern "C" bool daytona2_race_timer_frozen();
+static void daytona2_ppc_race_countdown() {
+ const UINT32 original = ppc.r[0];
+ const bool hold = ppc.pc == 0x0001b060 && ppc.r[9] == 0x00100000
+     && INT32(original) > 0 && daytona2_race_timer_frozen()
+     && READ8(0x00105004) == 0x11 && READ8(0x007350ee) == 0x0d;
+ ppc_addic<0x3000ffffU>();
+ // Keep the original carry and every other CPU side effect. Only the positive
+ // decrement result is held; the game's following store/control flow is intact.
+ if (hold) ppc.r[0] = original;
+}
+'''
+    generated = [operations, assist, "\nstruct Daytona2PPCOperation { UINT32 word; void (*run)(); };\n",
                  "static const Daytona2PPCOperation daytona2_ppc_operations[] = {\n{0,nullptr},\n"]
-    generated += [f"{{0x{word:08x}U, &{handler(tables, word)}<0x{word:08x}U>}},\n" for word in unique]
+    generated += [f"{{0x{word:08x}U, &daytona2_ppc_race_countdown}},\n" if word == TIMER_WORD else
+                  f"{{0x{word:08x}U, &{handler(tables, word)}<0x{word:08x}U>}},\n" for word in unique]
     generated.append("};\n")
     if static_words:
         generated.append("static const UINT32 daytona2_ppc_program[524288] = {\n")
@@ -241,7 +284,8 @@ def native_source(source: str, executor: str, operations: str, cpu: Path, out: P
     (out / "ppc.cpp").write_text(source)
     return {"fixedOperations": len(unique), "staticProgramWords": len(static_words),
             "observedAddresses": len(observations), "observedVariants": sum(map(len, observations.values())),
-            "extraVariants": len(chains) - 1, "extraPages": len(pages), "templateHandlers": count}
+            "extraVariants": len(chains) - 1, "extraPages": len(pages), "templateHandlers": count,
+            "timerFreeze": timer}
 
 
 def main() -> None:

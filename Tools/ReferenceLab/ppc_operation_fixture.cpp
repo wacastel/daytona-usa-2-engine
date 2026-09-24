@@ -3,7 +3,11 @@
 #include <cstdarg>
 #include <vector>
 #include <cmath>
+#include <cstring>
 #include "FIXTURE_CORE"
+
+static bool timerFrozen = false;
+extern "C" bool daytona2_race_timer_frozen() { return timerFrozen; }
 
 void DebugLog(const char *, ...) {}
 void InfoLog(const char *, ...) {}
@@ -11,7 +15,13 @@ Result ErrorLog(const char *, ...) { return Result::FAIL; }
 
 struct FixtureBus: IBus {
   UINT64 writes=0;
-  UINT8 Read8(UINT32 a) override { return UINT8((a*13)^0x5a); }
+  bool timerState = false;
+  UINT8 phase = 17, callerState = 13;
+  UINT8 Read8(UINT32 a) override {
+    if (timerState && a == 0x105004) return phase;
+    if (timerState && a == 0x7350ee) return callerState;
+    return UINT8((a*13)^0x5a);
+  }
   UINT16 Read16(UINT32 a) override { return UINT16(Read8(a))<<8|Read8(a+1); }
   UINT32 Read32(UINT32 a) override { return UINT32(Read16(a))<<16|Read16(a+2); }
   UINT64 Read64(UINT32 a) override { return UINT64(Read32(a))<<32|Read32(a+4); }
@@ -67,5 +77,36 @@ int main(int argc,char **argv) {
   try { daytona2_ppc_fixed(0x00800000,word); } catch(const std::runtime_error &) { ++rejected; }
   try { daytona2_ppc_fixed(address,word^1); } catch(const std::runtime_error &) { ++rejected; }
   if(rejected!=2)return 5;
+  // Compare the complete CPU structure against the original addic semantics,
+  // allowing only the selected positive countdown result to remain unchanged.
+  unsigned timerChecks = 0;
+  for (UINT32 initial : {0U, 1U, 2U, 3420U, 0x7fffffffU, 0x80000000U, 0xffffffffU})
+    for (UINT32 carry : {0U, UINT32(XER_CA)})
+      for (unsigned guard = 0; guard != 6; ++guard) {
+        bus.timerState = true; bus.phase = guard == 4 ? 5 : 17;
+        bus.callerState = guard == 5 ? 12 : 13;
+        timerFrozen = guard != 1;
+        ppc.pc = guard == 2 ? 0x11a30 : 0x1b060;
+        ppc.npc = ppc.pc + 4; ppc.r[0] = initial;
+        ppc.r[9] = guard == 3 ? 0x730000 : 0x100000;
+        ppc.xer = 0x80000055 | carry; ppc.fatalError = false;
+        const auto before = ppc;
+        ppc_addic<0x3000ffffU>();
+        auto expected = ppc;
+        if (guard == 0 && INT32(initial) > 0) expected.r[0] = initial;
+        ppc = before;
+        daytona2_ppc_fixed(ppc.pc, 0x3000ffffU);
+        if (std::memcmp(&ppc, &expected, sizeof(ppc))) return 6;
+        ++timerChecks;
+      }
+  if (timerChecks != 84) return 7;
+  unsigned timerRejections = 0;
+  for (UINT32 changed : {0x30000000U, 0x3000fffeU}) {
+    ppc.pc = 0x1b060; ppc.r[0] = 3420; ppc.r[9] = 0x100000;
+    timerFrozen = true; bus.phase = 17; bus.callerState = 13;
+    try { daytona2_ppc_fixed(ppc.pc, changed); }
+    catch (const std::runtime_error &) { ++timerRejections; }
+  }
+  if (timerRejections != 2) return 8;
 #endif
 }

@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "game": "daytona2",
+  "revision": "Battle on the Edge Revision A",
+  "course": "Beginner",
+  "car": "Normal",
+  "transmission": "automatic",
+  "scope": "Original camera-selector behavior through the native C ABI, visually inspected from RGBA captures. This is not acceptance of the updated controller router or timer assistance.",
+  "engine": {
+    "path": "build/native/libdaytona2.dylib",
+    "sha256": "944067c3c20a86fd0b88a690b6799d1ec6d108de882186cd27d3021a263acb13",
+    "qualification": "initial-release native engine"
+  },
+  "settings": {
+    "path": "build/assets/default.nv",
+    "sha256": "7b975663dfded27bd6ed6ac2172258dd47b70cbd08afa22a7e7c044ace52fef0",
+    "cabinet": "USA / SINGLE"
+  },
+  "method": {
+    "bootstrapRoute": "Configuration/replays/beginner-auto.json",
+    "bootstrapFrames": 2100,
+    "brakingFramesBeforeSelectors": 120,
+    "entryPoint": "daytona2_step",
+    "clockEpoch": 946684800,
+    "selectorTest": "One-frame selector presses, 30-frame released observations, 45-frame holds and further released observations; separate VR2 runs observe 120 released frames between single-frame presses.",
+    "totalFrames": 7674,
+    "runs": [
+      {
+        "reportPath": "build/camera-review/report.json",
+        "reportSHA256": "584b48cd7ffe90c1d70aebdd97686c0d181cce4b3f2c7bdfb55f143344ea7d13",
+        "frames": 2750
+      },
+      {
+        "reportPath": "build/camera-review/vr2-transition/report.json",
+        "reportSHA256": "95a217c7e3bccd701ac10a40324c890c2d434bc50aff8cb4c916ed9e0bf8edf3",
+        "frames": 2341
+      },
+      {
+        "reportPath": "build/camera-review/vr2-repeat/report.json",
+        "reportSHA256": "1e76052a75912ab6a579f93e30137170f6a5628213524d241b2a1cdec910dbff",
+        "frames": 2583
+      }
+    ]
+  },
+  "views": [
+    {
+      "originalView": 1,
+      "buttonBit": 4,
+      "observedView": "forward road / bumper; player car not visible",
+      "screenshots": [
+        {
+          "stage": "image",
+          "path": "build/camera-review/002357-vr1-released-30.png",
+          "sha256": "66deeb53bd4e28ba2f4ba91853b09203f95509fc29dae43d9f7e1c7467713ae2"
+        },
+        {
+          "stage": "heldImage",
+          "path": "build/camera-review/002402-vr1-held-45.png",
+          "sha256": "61bdc250ed3cae2df2067837f9c973ed52e1cee9316a796b273c10f1437b5d65"
+        }
+      ]
+    },
+    {
+      "originalView": 2,
+      "buttonBit": 8,
+      "observedView": "hood; consecutive additional one-frame presses toggle cockpit, then hood",
+      "screenshots": [
+        {
+          "stage": "image",
+          "path": "build/camera-review/vr2-repeat/002341-vr2-released-120.png",
+          "sha256": "fabbe8fe206e2a50f1837835628aeca3502b82c2b4125442d9c39628fd4c23d2"
+        },
+        {
+          "stage": "secondPressImage",
+          "path": "build/camera-review/vr2-repeat/002462-vr2-tap-2-released-120.png",
+          "sha256": "16e6c9612f17dcdd96542e8a83f01b207bfff152f192da1a1d28d1ebd9a98663"
+        },
+        {
+          "stage": "thirdPressImage",
+          "path": "build/camera-review/vr2-repeat/002583-vr2-tap-3-released-120.png",
+          "sha256": "aa1f0a7f66986cf865b8d43b701d2c5dc3ed4f70f1a2dcb3fc5b0243d8e9ffdf"
+        }
+      ]
+    },
+    {
+      "originalView": 3,
+      "buttonBit": 16,
+      "observedView": "close exterior chase",
+      "screenshots": [
+        {
+          "stage": "image",
+          "path": "build/camera-review/002569-vr3-released-30.png",
+          "sha256": "c2bae6bcaa220e883314893d8dee8bfbe5b70b573e085376242406491663fbaa"
+        },
+        {
+          "stage": "heldImage",
+          "path": "build/camera-review/002614-vr3-held-45.png",
+          "sha256": "362a4c1bfac8166398a163b619bc64f10498444523fc199a09172167abaade82"
+        }
+      ]
+    },
+    {
+      "originalView": 4,
+      "buttonBit": 32,
+      "observedView": "distant exterior chase",
+      "screenshots": [
+        {
+          "stage": "image",
+          "path": "build/camera-review/002675-vr4-released-30.png",
+          "sha256": "5c5e1a2131a8b95d274f9b0f4d7500ccd2f316f005b6bc647cbbcbafc61053f1"
+        },
+        {
+          "stage": "heldImage",
+          "path": "build/camera-review/002720-vr4-held-45.png",
+          "sha256": "74e29343a9a8bee187502a9493f2b3e00f86d5e731d93d5a8684542495b346e7"
+        },
+        {
+          "stage": "releasedAfterHoldImage",
+          "path": "build/camera-review/002750-vr4-released-again.png",
+          "sha256": "3d062753d1d51fb956869f23740649e3831aa3d32e3f2d86c4fe338cf51c40da"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "VR3 and VR4 select close and distant exterior chase views.",
+    "One-frame presses select persistent views; VR3 and VR4 remain selected through 45-frame holds and after release.",
+    "VR2 first press remains hood after 120 released frames; a second one-frame press selects cockpit and a third returns to hood.",
+    "The previous Cross=VR1 and Square=VR2 mapping did not reach the exterior selectors."
+  ],
+  "limits": [
+    "The diagnostic engine has the exact initial-release SHA256 recorded above; a later build at the same path is not implied to be that artifact.",
+    "No physical DualSense actuation, new host-cycle routing, countdown assistance, hardware equivalence or complete-game coverage is claimed.",
+    "Screenshots and raw diagnostic reports remain local and excluded from publication; only their paths, hashes and observations are recorded here."
+  ]
+}

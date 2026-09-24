@@ -23,6 +23,7 @@ final class DaytonaEngineWorker {
     private var frameNumber = 0
     private var lastInput = DaytonaInput()
     private var replay: DaytonaReplay?
+    private var freezeTimer = false
     private var audio: DaytonaAudioOutput?
     private(set) var sampleRate = 44100
     private(set) var framesPerSecond = 60.0
@@ -51,6 +52,14 @@ final class DaytonaEngineWorker {
     func setReplay(_ value: DaytonaReplay?) {
         condition.lock(); replay = value; condition.unlock()
     }
+    var timerFrozen: Bool {
+        condition.lock(); defer { condition.unlock() }; return freezeTimer
+    }
+    func toggleTimerFrozen() {
+        condition.lock(); defer { condition.unlock() }
+        guard failure == nil, !stopping, !finished else { return }
+        freezeTimer.toggle()
+    }
     func setPaused(_ value: Bool) {
         condition.lock(); defer { condition.unlock() }
         if !value && (failure != nil || stopping || finished) { return }
@@ -65,6 +74,7 @@ final class DaytonaEngineWorker {
             condition.unlock(); throw DaytonaUSA2Error.message(error)
         }
         paused = true; epoch &+= 1; audio?.flush()
+        freezeTimer = false
         resetRequested = true; resetError = nil; condition.broadcast()
         while resetRequested && !finished { condition.wait() }
         let error = resetError
@@ -91,7 +101,7 @@ final class DaytonaEngineWorker {
             "p50": sorted[sorted.count / 2] * 1000,
             "p95": sorted[min(sorted.count - 1, sorted.count * 95 / 100)] * 1000,
             "maximum": sorted.last! * 1000]
-        return ["gameState": gameState, "gameFrames": frameNumber,
+        return ["gameState": gameState, "gameFrames": frameNumber, "timerFrozen": freezeTimer,
                 "lastInput": lastInput.diagnostic, "discardedClockGaps": discardedClockGaps,
                 "engineCallsOnDedicatedThread": callsOnDedicatedThread,
                 "engineTiming": ["engineSeconds": engineSeconds, "audioSeconds": audioSeconds,
@@ -138,6 +148,7 @@ final class DaytonaEngineWorker {
                 }
                 let stepEpoch = epoch
                 let override = replay?.input(frame: game.frameCount)
+                let frozen = freezeTimer
                 condition.unlock()
 
                 // Reserve pending one-shot controls atomically for this frame.
@@ -145,6 +156,7 @@ final class DaytonaEngineWorker {
                 let input = inputForFrame(game.frameCount, override)
                 let started = ProcessInfo.processInfo.systemUptime
                 do {
+                    try game.setTimerFrozen(frozen)
                     let samples = try game.advance(input)
                     let duration = ProcessInfo.processInfo.systemUptime - started
                     condition.lock()
